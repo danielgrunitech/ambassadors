@@ -18,7 +18,7 @@ export const App: React.FC = () => {
   const [isSubmissionsOpen, setIsSubmissionsOpen] = useState(false);
   const [submissions, setSubmissions] = useState<SubmissionRecord[]>([]);
 
-  // Check if current visitor is admin (accessed via ?admin=true or #admin)
+  // Check if admin mode (?admin=true or #admin)
   const [isAdmin] = useState<boolean>(() => {
     return window.location.search.includes('admin') || window.location.hash.includes('admin');
   });
@@ -32,11 +32,17 @@ export const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#F8FAFD] text-gray-800 font-sans relative selection:bg-[#346BF1] selection:text-white">
-      {/* Background Subtle Watermark Pattern */}
-      <div className="fixed inset-0 pointer-events-none opacity-40 z-0 gemini-bg-pattern" />
+    <div className="min-h-screen bg-[#E8F0FE]/60 font-sans text-gray-800 overflow-x-hidden relative flex flex-col selection:bg-[#346BF1] selection:text-white">
+      {/* Background Watermark matching geministudentambassador.com */}
+      <div
+        className="fixed inset-0 z-0 pointer-events-none opacity-40"
+        style={{
+          backgroundImage:
+            'repeating-linear-gradient(-45deg, transparent, transparent 4px, rgba(52, 107, 241, 0.05) 4px, rgba(52, 107, 241, 0.05) 5px)'
+        }}
+      />
 
-      {/* Main Page Layout */}
+      {/* Main Content Layout */}
       <div className="relative z-10 flex flex-col min-h-screen">
         <Navbar
           onOpenApply={() => setIsApplyOpen(true)}
@@ -50,7 +56,7 @@ export const App: React.FC = () => {
           <MissionBanner />
           <PersonaCards onOpenApply={() => setIsApplyOpen(true)} />
           <Eligibility onOpenApply={() => setIsApplyOpen(true)} />
-          <RewardsSection onOpenApply={() => setIsApplyOpen(true)} />
+          <RewardsSection />
           <ProgramTimeline />
           <FaqSection />
         </main>
@@ -65,7 +71,7 @@ export const App: React.FC = () => {
         onSubmissionSuccess={handleSubmissionSuccess}
       />
 
-      {/* Submissions Management / Review Panel (Only accessible if Admin) */}
+      {/* Admin Panel (Only if accessed with ?admin=true) */}
       {isAdmin && (
         <SubmissionsDrawer
           isOpen={isSubmissionsOpen}
