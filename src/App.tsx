@@ -18,6 +18,11 @@ export const App: React.FC = () => {
   const [isSubmissionsOpen, setIsSubmissionsOpen] = useState(false);
   const [submissions, setSubmissions] = useState<SubmissionRecord[]>([]);
 
+  // Check if current visitor is admin (accessed via ?admin=true or #admin)
+  const [isAdmin] = useState<boolean>(() => {
+    return window.location.search.includes('admin') || window.location.hash.includes('admin');
+  });
+
   useEffect(() => {
     setSubmissions(getSubmissions());
   }, []);
@@ -37,6 +42,7 @@ export const App: React.FC = () => {
           onOpenApply={() => setIsApplyOpen(true)}
           onOpenSubmissions={() => setIsSubmissionsOpen(true)}
           submissionsCount={submissions.length}
+          isAdmin={isAdmin}
         />
 
         <main className="flex-1">
@@ -59,12 +65,14 @@ export const App: React.FC = () => {
         onSubmissionSuccess={handleSubmissionSuccess}
       />
 
-      {/* Submissions Management / Review Panel */}
-      <SubmissionsDrawer
-        isOpen={isSubmissionsOpen}
-        onClose={() => setIsSubmissionsOpen(false)}
-        submissions={submissions}
-      />
+      {/* Submissions Management / Review Panel (Only accessible if Admin) */}
+      {isAdmin && (
+        <SubmissionsDrawer
+          isOpen={isSubmissionsOpen}
+          onClose={() => setIsSubmissionsOpen(false)}
+          submissions={submissions}
+        />
+      )}
     </div>
   );
 };

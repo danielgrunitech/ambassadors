@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { GeminiLogo } from './GeminiLogo';
 import { Sparkles, ClipboardList, Menu, X, ArrowLeft } from 'lucide-react';
 
@@ -6,14 +6,16 @@ interface NavbarProps {
   onOpenApply: () => void;
   onOpenSubmissions: () => void;
   submissionsCount: number;
+  isAdmin: boolean;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
   onOpenApply,
   onOpenSubmissions,
-  submissionsCount
+  submissionsCount,
+  isAdmin
 }) => {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
 
   const navLinks = [
     { label: 'על התוכנית', href: '#about' },
@@ -71,19 +73,21 @@ export const Navbar: React.FC<NavbarProps> = ({
 
           {/* Actions */}
           <div className="flex items-center gap-3">
-            {/* Submissions Admin Trigger */}
-            <button
-              onClick={onOpenSubmissions}
-              title="צפייה במועמדויות שהוגשו (מנהל/בוחן)"
-              className="relative p-2.5 rounded-full text-gray-600 hover:text-blue-600 hover:bg-blue-50 transition-colors border border-gray-200"
-            >
-              <ClipboardList className="w-5 h-5" />
-              {submissionsCount > 0 && (
-                <span className="absolute -top-1 -left-1 bg-red-500 text-white text-[10px] font-bold rounded-full w-5 h-5 flex items-center justify-center ring-2 ring-white">
-                  {submissionsCount}
-                </span>
-              )}
-            </button>
+            {/* Admin Panel Trigger (ONLY visible in Admin mode, hidden from public visitors) */}
+            {isAdmin && (
+              <button
+                onClick={onOpenSubmissions}
+                title="פאנל ניהול ובקרה (גלוי רק למנהל)"
+                className="relative p-2.5 rounded-full text-blue-700 bg-blue-50 hover:bg-blue-100 transition-colors border border-blue-200"
+              >
+                <ClipboardList className="w-5 h-5" />
+                {submissionsCount > 0 && (
+                  <span className="absolute -top-1 -left-1 bg-red-500 text-white text-[10px] font-bold rounded-full w-5 h-5 flex items-center justify-center ring-2 ring-white">
+                    {submissionsCount}
+                  </span>
+                )}
+              </button>
+            )}
 
             {/* Apply CTA Button */}
             <button
@@ -130,15 +134,17 @@ export const Navbar: React.FC<NavbarProps> = ({
                   <Sparkles className="w-4 h-4 text-yellow-300" />
                   <span>הגשת מועמדות לשגרירות</span>
                 </button>
-                <button
-                  onClick={() => {
-                    setMobileMenuOpen(false);
-                    onOpenSubmissions();
-                  }}
-                  className="w-full text-center text-xs text-gray-500 py-2 hover:text-gray-800"
-                >
-                  צפייה ברשימת המועמדים ({submissionsCount})
-                </button>
+                {isAdmin && (
+                  <button
+                    onClick={() => {
+                      setMobileMenuOpen(false);
+                      onOpenSubmissions();
+                    }}
+                    className="w-full text-center text-xs text-blue-600 font-bold py-2 hover:text-blue-800"
+                  >
+                    פאנל מנהל: צפייה במועמדים ({submissionsCount})
+                  </button>
+                )}
               </div>
             </div>
           </div>
