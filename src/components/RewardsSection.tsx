@@ -1,212 +1,164 @@
 import React from 'react';
+import { Sparkles, Award, GraduationCap, Zap, CheckCircle2, ExternalLink } from 'lucide-react';
+import { PROGRAM_BENEFITS } from '../data/content';
 
 export const RewardsSection: React.FC = () => {
-  const swagItems = [
-    { src: '/sling-bag.png', name: 'תיק צד Sling Bag' },
-    { src: '/premium-diary.png', name: 'מחברת פרימיום ועט' },
-    { src: '/matt-black-bottle.png', name: 'בקבוק Matt Black' },
-    { src: '/vasity-jacket.png', name: 'ג\'קט נבחרת Varsity' },
-    { src: '/laptop-bag.png', name: 'תיק מחשב Laptop Bag' },
-    { src: '/pixel-10a.png', name: 'Pixel Phone 10a' },
-    { src: '/pixel-buds-2a.png', name: 'Pixel Buds 2a' }
-  ];
+  const benefitIcons: Record<string, React.ReactNode> = {
+    'gemini-advanced': <Sparkles className="w-6 h-6 text-[#346BF1]" />,
+    'certification': <Award className="w-6 h-6 text-[#EA4335]" />,
+    'weekly-seminars': <GraduationCap className="w-6 h-6 text-[#D97706]" />,
+    'surprises-and-access': <Zap className="w-6 h-6 text-[#34A853]" />
+  };
+
+  const benefitColorClasses: Record<
+    string,
+    { border: string; iconBg: string; badgeBg: string; pillBg: string }
+  > = {
+    'gemini-advanced': {
+      border: 'hover:border-[#346BF1]/40',
+      iconBg: 'bg-blue-50 text-[#346BF1]',
+      badgeBg: 'bg-[#E8F0FE] text-[#346BF1] border-blue-200/60',
+      pillBg: 'bg-[#346BF1]'
+    },
+    'certification': {
+      border: 'hover:border-[#EA4335]/40',
+      iconBg: 'bg-red-50 text-[#EA4335]',
+      badgeBg: 'bg-red-50 text-[#EA4335] border-red-200/60',
+      pillBg: 'bg-[#EA4335]'
+    },
+    'weekly-seminars': {
+      border: 'hover:border-[#FBBC04]/50',
+      iconBg: 'bg-amber-50 text-[#D97706]',
+      badgeBg: 'bg-amber-50 text-amber-800 border-amber-200/60',
+      pillBg: 'bg-[#D97706]'
+    },
+    'surprises-and-access': {
+      border: 'hover:border-[#34A853]/40',
+      iconBg: 'bg-emerald-50 text-[#34A853]',
+      badgeBg: 'bg-[#E6F4EA] text-[#137333] border-emerald-200/60',
+      pillBg: 'bg-[#34A853]'
+    }
+  };
 
   return (
-    <section id="rewards" className="pt-4 pb-20 px-4 relative z-10">
-      {/* What You Earn Section (Exact reference styling) */}
-      <div className="max-w-5xl mx-auto mb-20">
-        <div className="bg-white rounded-[2rem] shadow-sm border border-gray-100 overflow-hidden p-8 md:p-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-6 text-gray-800">
-            מה שאתם{' '}
-            <span className="text-[#FBBC04]">מ</span>
-            <span className="text-[#34A853]">ר</span>
-            <span className="text-[#EA4335]">ו</span>
-            <span className="text-[#346BF1]">ו</span>
-            <span className="text-[#FBBC04]">י</span>
-            <span className="text-[#34A853]">ח</span>
-            <span className="text-[#EA4335]">י</span>
-            <span className="text-[#346BF1]">ם</span>
-          </h2>
-          <p className="text-center text-gray-600 max-w-xl mx-auto mb-10 text-base">
-            הטבות בלעדיות, ציוד ממותג Google Gemini, מכשירי Pixel והכרה רשמית למובילי הנבחרת
-          </p>
+    <section id="benefits" className="pt-8 pb-20 px-4 relative z-10 text-right">
+      {/* Target anchor for backwards compatibility if linked via #rewards */}
+      <div id="rewards" className="absolute -top-20" />
 
-          <div className="flex flex-wrap justify-center gap-4 sm:gap-6">
-            {swagItems.map((item, idx) => (
+      <div className="max-w-6xl mx-auto relative">
+        {/* Decorative Floating Emoticon */}
+        <img
+          src="/speaker-emoticon.png"
+          alt="Announcement"
+          className="absolute -top-12 -left-4 sm:left-4 w-20 h-20 md:w-28 md:h-28 object-contain opacity-90 drop-shadow-xl pointer-events-none hidden sm:block"
+        />
+
+        {/* Section Header */}
+        <div className="text-center max-w-3xl mx-auto mb-14">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-blue-100 text-[#346BF1] text-xs font-semibold shadow-xs mb-4">
+            <span>מה מקבלים השגרירים</span>
+            <span className="w-1.5 h-1.5 rounded-full bg-[#346BF1]" />
+            <span>תוכנית ישראל 2026</span>
+          </div>
+
+          <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-4 tracking-tight">
+            מה מקבלים{' '}
+            <span style={{ backgroundImage: "linear-gradient(to right, #EA4335, #FBBC04, #34A853, #346BF1)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
+              שגרירי Google Gemini?
+            </span>
+          </h2>
+
+          <p className="text-gray-600 text-base md:text-lg leading-relaxed">
+            התוכנית בישראל מתמקדת בהעצמת מנהיגות טכנולוגית אקדמית.
+            שגרירי הנבחרת זוכים במעטפת למידה יוקרתית, מנוי מלא, הכשרות עומק ישירות מ-Google והכרה מקצועית.
+          </p>
+        </div>
+
+        {/* 4 Core Benefits Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+          {PROGRAM_BENEFITS.map((benefit) => {
+            const colors = benefitColorClasses[benefit.id] || benefitColorClasses['gemini-advanced'];
+            const icon = benefitIcons[benefit.id] || <Sparkles className="w-6 h-6 text-[#346BF1]" />;
+
+            return (
               <div
-                key={idx}
-                className="w-[calc(50%-0.5rem)] sm:w-[calc(33.333%-1rem)] md:w-[calc(20%-1.2rem)] flex flex-col group hover:-translate-y-1 transition-transform duration-300 mt-10 sm:mt-12"
+                key={benefit.id}
+                className={`bg-white rounded-[2rem] p-8 md:p-10 border border-gray-100 shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-1 flex flex-col justify-between ${colors.border}`}
               >
-                <div className="bg-white rounded-2xl shadow-sm flex flex-col relative pt-16 sm:pt-20 h-full border border-gray-100">
-                  <div className="absolute -top-10 sm:-top-12 left-0 right-0 h-28 sm:h-32 flex items-center justify-center px-4 pointer-events-none">
-                    <img
-                      src={item.src}
-                      alt={item.name}
-                      className="w-full h-full object-contain drop-shadow-md group-hover:scale-110 transition-transform duration-300 pointer-events-auto"
-                    />
-                  </div>
-                  <div className="bg-[#346BF1] text-white text-center py-3 px-2 text-xs sm:text-sm font-medium rounded-b-2xl flex-1 flex items-center justify-center mt-auto">
-                    {item.name}
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* Ambassador Tiered Reward Structure (Exact reference table) */}
-      <div className="max-w-5xl mx-auto relative z-10 bg-white rounded-[2rem] shadow-sm border border-gray-100 overflow-hidden text-right">
-        {/* Blue Header with Artwork */}
-        <div className="bg-[#346BF1] text-white p-8 md:p-12 text-center relative overflow-hidden rounded-t-[2rem]">
-          <div className="absolute inset-0 overflow-hidden pointer-events-none z-0 rounded-t-[2rem] flex justify-center pt-6">
-            <img
-              src="/rewards-header.png"
-              alt="Header Graphic"
-              className="w-full max-w-2xl h-full object-contain object-top opacity-90"
-            />
-          </div>
-          <h2 className="text-3xl md:text-5xl font-bold mb-4 tracking-tight relative z-10 mt-16 md:mt-24">
-            Ambassador Tiered Reward Structure
-          </h2>
-          <p className="text-blue-50 text-base md:text-xl font-light relative z-10">
-            מדרגות התקדמות מבוססות נקודות שנצברו לאורך תקופת התוכנית
-          </p>
-        </div>
-
-        {/* Table */}
-        <div className="overflow-x-auto bg-white">
-          <table className="w-full text-center border-collapse min-w-[750px]">
-            <thead>
-              <tr className="bg-[#346BF1] text-white text-sm sm:text-base">
-                <th className="py-4 px-6 border border-white/20 font-semibold text-right w-1/4">
-                  דרגת שגריר
-                </th>
-                <th className="py-4 px-4 border border-white/20 font-semibold w-1/6">
-                  נקודות
-                </th>
-                <th className="py-4 px-4 border border-white/20 font-semibold w-1/3">
-                  שוברים ופרסים פיזיים
-                </th>
-                <th className="py-4 px-6 border border-white/20 font-semibold w-1/4">
-                  פרסים דיגיטליים והכרה
-                </th>
-              </tr>
-            </thead>
-            <tbody className="text-gray-800 text-sm sm:text-base">
-              {/* Explorer */}
-              <tr className="bg-white">
-                <td className="py-5 px-6 border border-gray-200 font-semibold text-right text-gray-700">
-                  The Explorer (ארד)
-                </td>
-                <td className="py-5 px-4 border border-gray-200 font-bold text-gray-800">
-                  600
-                </td>
-                <td className="py-5 px-4 border border-gray-200">
-                  <div className="font-bold text-base text-gray-800">₪ 200</div>
-                  <div className="text-xs sm:text-sm text-gray-500 mt-0.5">שובר מתנה + מחברת פרימיום</div>
-                </td>
-                <td className="py-5 px-6 border border-gray-200 text-sm text-gray-600">
-                  Digital Badge, תעודת השתתפות
-                </td>
-              </tr>
-
-              {/* Navigator */}
-              <tr className="bg-[#F4F7FC]">
-                <td className="py-5 px-6 border border-gray-200 font-semibold text-right text-gray-700">
-                  The Navigator (כסף)
-                </td>
-                <td className="py-5 px-4 border border-gray-200 font-bold text-gray-800">
-                  1200
-                </td>
-                <td className="py-5 px-4 border border-gray-200">
-                  <div className="font-bold text-base text-gray-800">₪ 350</div>
-                  <div className="text-xs sm:text-sm text-gray-500 mt-0.5">שובר מתנה + תיק צד Sling Bag</div>
-                </td>
-                <td className="py-5 px-6 border border-gray-200 text-sm text-gray-600">
-                  Digital Badge
-                </td>
-              </tr>
-
-              {/* Architect */}
-              <tr className="bg-white">
-                <td className="py-5 px-6 border border-gray-200 font-semibold text-right text-gray-700">
-                  The Architect (זהב)
-                </td>
-                <td className="py-5 px-4 border border-gray-200 font-bold text-gray-800">
-                  1800
-                </td>
-                <td className="py-5 px-4 border border-gray-200">
-                  <div className="font-bold text-base text-gray-800">₪ 500</div>
-                  <div className="text-xs sm:text-sm text-gray-500 mt-0.5">שובר מתנה + בקבוק Matt Black</div>
-                </td>
-                <td className="py-5 px-6 border border-gray-200 text-sm text-gray-600">
-                  Digital Badge + Certificate of Recognition
-                </td>
-              </tr>
-
-              {/* Visionary */}
-              <tr className="bg-[#F4F7FC]">
-                <td className="py-5 px-6 border border-gray-200 font-semibold text-right text-gray-700">
-                  The Visionary (ספיר)
-                </td>
-                <td className="py-5 px-4 border border-gray-200 font-bold text-gray-800">
-                  2600
-                </td>
-                <td className="py-5 px-4 border border-gray-200">
-                  <div className="font-bold text-base text-gray-800">₪ 750</div>
-                  <div className="text-xs sm:text-sm text-gray-500 mt-0.5">שובר מתנה + ג'קט נבחרת Varsity</div>
-                </td>
-                <td className="py-5 px-6 border border-gray-200 text-sm text-gray-600">
-                  Digital Badge + סשן מנטורינג אישי מ-Google
-                </td>
-              </tr>
-
-              {/* Titan */}
-              <tr className="bg-white">
-                <td className="py-5 px-6 border border-gray-200 font-semibold text-right text-gray-700">
-                  The Titan (פלטינה)
-                </td>
-                <td className="py-5 px-4 border border-gray-200 font-bold text-gray-800">
-                  3400
-                </td>
-                <td className="py-5 px-4 border border-gray-200">
-                  <div className="font-bold text-base text-gray-800">₪ 1,000</div>
-                  <div className="text-xs sm:text-sm text-gray-500 mt-0.5">שובר מתנה + תיק Laptop Bag ממותג</div>
-                </td>
-                <td className="py-5 px-6 border border-gray-200 text-sm text-gray-600">
-                  Digital Badge + הזמנה ל-Google Campus
-                </td>
-              </tr>
-
-              {/* Catalyst (Top 10) */}
-              <tr className="bg-blue-50/70 font-semibold">
-                <td className="py-5 px-6 border border-gray-200 text-right text-gray-900">
-                  <div className="flex items-center gap-2 justify-end">
-                    <span>The Catalyst (Celestial)</span>
-                    <span className="text-[10px] bg-red-500 text-white font-bold px-2 py-0.5 rounded-full">
-                      טופ 10 ארצי
+                <div>
+                  {/* Card Header with Icon & Badge */}
+                  <div className="flex items-center justify-between gap-4 mb-6">
+                    <div className={`w-14 h-14 rounded-2xl flex items-center justify-center ${colors.iconBg} shadow-xs`}>
+                      {icon}
+                    </div>
+                    <span className={`text-xs font-semibold px-3 py-1 rounded-full border ${colors.badgeBg}`}>
+                      {benefit.badge}
                     </span>
                   </div>
-                </td>
-                <td className="py-5 px-4 border border-gray-200">
-                  <div className="text-gray-900 font-bold">4200</div>
-                  <div className="text-xs text-gray-500">(טופ 10 שגרירים)</div>
-                </td>
-                <td className="py-5 px-4 border border-gray-200 font-bold text-lg text-blue-700">
-                  Pixel Phone 10a + Pixel Buds 2a
-                </td>
-                <td className="py-5 px-6 border border-gray-200 text-sm text-gray-700">
-                  Digital Badge + Ambassador Spotlight Post בינלאומי
-                </td>
-              </tr>
-            </tbody>
-          </table>
+
+                  {/* Title & Subtitle */}
+                  <h3 className="text-2xl font-bold text-gray-900 mb-1">
+                    {benefit.title}
+                  </h3>
+                  <p className="text-xs font-medium text-gray-400 mb-4 tracking-wider uppercase">
+                    {benefit.subtitle}
+                  </p>
+
+                  {/* Description */}
+                  <p className="text-gray-600 text-sm md:text-base mb-6 leading-relaxed">
+                    {benefit.description}
+                  </p>
+
+                  {/* Bullet points list */}
+                  <div className="space-y-3 pt-2 border-t border-gray-50 mb-6">
+                    {benefit.details.map((point, pIdx) => (
+                      <div key={pIdx} className="flex items-start gap-3">
+                        <CheckCircle2 className="w-5 h-5 text-[#34A853] shrink-0 mt-0.5" />
+                        <span className="text-sm text-gray-700 leading-snug">
+                          {point}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Optional Action / Link */}
+                {benefit.link && (
+                  <div className="pt-4 border-t border-gray-100">
+                    <a
+                      href={benefit.link.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 text-sm font-semibold text-[#346BF1] hover:text-blue-700 transition-colors group"
+                    >
+                      <span>{benefit.link.text}</span>
+                      <ExternalLink className="w-4 h-4 group-hover:translate-x-[-2px] transition-transform" />
+                    </a>
+                  </div>
+                )}
+              </div>
+            );
+          })}
         </div>
 
-        {/* Note bar */}
-        <div className="bg-[#346BF1] text-white text-sm py-3 px-6 text-right font-medium rounded-b-[2rem]">
-          הערה: תעודות רשמיות יוענקו עם סיום מוצלח של התוכנית.
+        {/* Bottom Banner: Learning & Campus Focus */}
+        <div className="mt-12 bg-white rounded-[2rem] p-8 md:p-10 border border-blue-100/70 shadow-xs flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="space-y-2 text-center md:text-right">
+            <h4 className="text-xl font-bold text-gray-900">
+              למידה מעשית, נטוורקינג ומנהיגות בקמפוס
+            </h4>
+            <p className="text-sm text-gray-600 max-w-2xl leading-relaxed">
+              התוכנית מיועדת לסטודנטים שרוצים להשאיר חותם: לרכוש ידע מתקדם ישירות מחוקרי ומהנדסי Google, לבנות כלים עם Gemini API, ולהוביל קהילה טכנולוגית במוסד הלימודים.
+            </p>
+          </div>
+          <div className="flex items-center gap-3 shrink-0">
+            <div className="px-4 py-2 rounded-xl bg-[#E8F0FE] text-[#346BF1] font-semibold text-sm border border-blue-100">
+              ללא עלות
+            </div>
+            <div className="px-4 py-2 rounded-xl bg-[#E6F4EA] text-[#137333] font-semibold text-sm border border-emerald-100">
+              הסמכה רשמית
+            </div>
+          </div>
         </div>
       </div>
     </section>

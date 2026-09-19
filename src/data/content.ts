@@ -1,4 +1,4 @@
-import { Persona, RewardTier, SwagItem, FaqItem } from '../types';
+import { Persona, FaqItem } from '../types';
 
 export const ISRAELI_INSTITUTIONS = [
   "הטכניון - מכון טכנולוגי לישראל",
@@ -115,113 +115,89 @@ export const PERSONAS: Persona[] = [
   }
 ];
 
-export const REWARD_TIERS: RewardTier[] = [
-  {
-    id: 'explorer',
-    name: 'The Explorer (ארד)',
-    level: 'ברונזה',
-    points: 600,
-    physicalReward: 'שובר מתנה + ערכת מחברת ועט פרימיום ממותגים של Google Gemini',
-    digitalReward: 'תג דיגיטלי רשמי (Digital Badge) לפרופיל ה-LinkedIn',
-    color: '#CD7F32'
-  },
-  {
-    id: 'navigator',
-    name: 'The Navigator (כסף)',
-    level: 'כסף',
-    points: 1200,
-    physicalReward: 'שובר מתנה + תיק צד מעוצב (Sling Bag) של Google Gemini',
-    digitalReward: 'תג דיגיטלי כסף + גישה מוקדמת לסדנאות AI פנימיות',
-    color: '#9E9E9E'
-  },
-  {
-    id: 'architect',
-    name: 'The Architect (זהב)',
-    level: 'זהב',
-    points: 1800,
-    physicalReward: 'שובר מתנה + בקבוק תרמי פרימיום Matt Black ממותג Google AI',
-    digitalReward: 'תג דיגיטלי זהב + תעודת הערכה והצטיינות מ-Google',
-    color: '#FFB300'
-  },
-  {
-    id: 'visionary',
-    name: 'The Visionary (ספיר)',
-    level: 'ספיר',
-    points: 2600,
-    physicalReward: 'ג\'קט נבחרת יוקרתי (Varsity Jacket) של שגרירי Google Gemini',
-    digitalReward: 'תג דיגיטלי ספיר + סשן מנטורינג אישי עם מהנדס/ת Google',
-    color: '#1E88E5'
-  },
-  {
-    id: 'titan',
-    name: 'The Titan (פלטינה)',
-    level: 'פלטינה',
-    points: 3400,
-    physicalReward: 'תיק גב יוקרתי למחשב (Laptop Bag) ממותג Google + מארז VIP',
-    digitalReward: 'תג דיגיטלי טיטאן + הזמנה לאירוע חדשנות שנתי במשרדי Google ת"א',
-    color: '#7B1FA2'
-  },
-  {
-    id: 'catalyst',
-    name: 'The Catalyst (טופ 10 שגרירים ארצי)',
-    level: 'טופ ארצי',
-    points: 4200,
-    physicalReward: 'מכשיר Google Pixel חדש + אוזניות Pixel Buds Pro + חבילת מתנות על',
-    digitalReward: 'Ambassador Spotlight בינלאומי בערוצי Google + המלצה מקצועית',
-    color: '#E91E63',
-    isTopTier: true
-  }
-];
+export interface ProgramBenefit {
+  id: string;
+  title: string;
+  subtitle: string;
+  badge: string;
+  badgeColor: string;
+  description: string;
+  details: string[];
+  link?: {
+    url: string;
+    text: string;
+  };
+}
 
-export const SWAG_ITEMS: SwagItem[] = [
+export const PROGRAM_BENEFITS: ProgramBenefit[] = [
   {
-    name: 'Google Pixel Smartphone',
-    category: 'טכנולוגיית קצה',
-    tag: 'פרס הטופ 10',
-    description: 'מכשיר הדגל של Google עם יכולות Gemini AI מובנות בחומרה',
-    icon: 'Smartphone',
-    color: 'from-blue-500 to-indigo-600'
+    id: 'gemini-advanced',
+    title: 'מנוי Gemini לסטודנטים בחינם',
+    subtitle: 'Gemini for Students Access',
+    badge: 'גישה מלאה',
+    badgeColor: 'bg-blue-100 text-[#346BF1]',
+    description: 'שגרירי התוכנית מקבלים גישה מלאה לחבילת Gemini לסטודנטים ללא תשלום, עם המודלים המתקדמים והעוצמתיים ביותר של Google.',
+    details: [
+      'גישה למודלי 1.5 Pro ו-2.0 החדישים ביותר',
+      'חלון הקשר עצום של עד 2 מיליון טוקנים לניתוח מסמכים ומחקר',
+      'אינטגרציה חלקה עם Google Workspace (Docs, Sheets, Drive)',
+      'יצירת Gems מותאמים אישית ללמידה ולפרויקטים'
+    ],
+    link: {
+      url: 'https://gemini.google/students/',
+      text: 'למידע על תוכנית הסטודנטים הרשמית של Gemini'
+    }
   },
   {
-    name: 'ג\'קט נבחרת Google Gemini',
-    category: 'מרצ\'נדייז בלעדי',
-    tag: 'דרגת ספיר ומעלה',
-    description: 'Varsity Jacket איכותי ומעוצב לצוות שגרירי ה-AI המובילים',
-    icon: 'Shirt',
-    color: 'from-purple-500 to-pink-600'
+    id: 'certification',
+    title: 'תעודת שגריר/ה רשמית מ-Google',
+    subtitle: 'Formal Ambassador Certification',
+    badge: 'הכרה מקצועית',
+    badgeColor: 'bg-amber-100 text-amber-800',
+    description: 'תעודת הסמכה והערכה רשמית מבית Google המעידה על מנהיגות טכנולוגית, הובלת קהילה ומומחיות ביישומי AI.',
+    details: [
+      'תעודת סיום רשמית ויוקרתית (Certificate of Recognition)',
+      'Digital Badge מאומת לפרופיל ה-LinkedIn שלכם',
+      'תוספת משמעותית ומבדלת לקורות החיים להשתלבות בהייטק',
+      'מכתב המלצה רשמי למצטייני התוכנית'
+    ]
   },
   {
-    name: 'Google Pixel Buds Pro',
-    category: 'סאונד מתקדם',
-    tag: 'פרס מיוחד',
-    description: 'אוזניות אלחוטיות מתקדמות עם סינון רעשים אקטיבי ותרגום בזמן אמת',
-    icon: 'Headphones',
-    color: 'from-emerald-500 to-teal-600'
+    id: 'weekly-seminars',
+    title: 'סמינרים והכשרות שבועיות',
+    subtitle: 'Weekly Learning Seminars',
+    badge: 'העשרת עומק',
+    badgeColor: 'bg-purple-100 text-purple-800',
+    description: 'מפגשי למידה שבועיים בלעדיים בהנחיית מהנדסי AI, מנהלי מוצר וחוקרים ממרכז הפיתוח של Google ישראל והעולם.',
+    details: [
+      'סדנאות Hands-on מתקדמות ב-Prompt Engineering',
+      'היכרות מעמיקה עם סוכני AI ופיתוח אפליקציות מעשיות',
+      'חיבור ל-Google AI Studio ושימוש ב-Gemini API',
+      'מפגשי שאלות-תשובות פתוחים וייעוץ מקצועי לפרויקטים אישיים'
+    ]
   },
   {
-    name: 'תיק גב למחשב פרימיום',
-    category: 'ציוד שגרירים',
-    tag: 'דרגת טיטאן',
-    description: 'תיק עמיד ומרופד לנשיאת מחשב וציוד טכנולוגי בעיצוב נקי',
-    icon: 'Briefcase',
-    color: 'from-amber-500 to-orange-600'
-  },
-  {
-    name: 'תעודה רשמית מ-Google',
-    category: 'הכרה מקצועית',
-    tag: 'לכל הבוגרים',
-    description: 'Certificate of Recognition רשמי חתום ע"י מנהלי קהילות Google AI',
-    icon: 'Award',
-    color: 'from-blue-600 to-cyan-500'
+    id: 'surprises-and-access',
+    title: 'הפתעות והזדמנויות בלעדיות',
+    subtitle: 'Exclusive Access & Surprises',
+    badge: 'רק לשגרירים',
+    badgeColor: 'bg-emerald-100 text-emerald-800',
+    description: 'דלת פתוחה לאירועים מיוחדים, גישה מוקדמת לחידושים טכנולוגיים לפני שהם נפתחים לקהל הרחב, והפתעות שונות לאורך השנה.',
+    details: [
+      "הזמנות לאירועים וכנסי חדשנות סגורים ב-Google Campus",
+      "גישה מוקדמת (Beta / Early Access) לפיצ'רים חדשים ב-Gemini",
+      "חיבור ונטוורקינג ישיר עם קהילת השגרירים ומפתחי Google בישראל",
+      "הפתעות מיוחדות ומשאבי למידה בלעדיים לאורך שנת הפעילות"
+    ]
   }
 ];
 
 export const ELIGIBILITY_POINTS = [
-  "סטודנט/ית פעיל/ה לתואר ראשון או שני באוניברסיטה או מכללה מוכרת בישראל (שנת סיום 2026 ואילך).",
-  "סקרנות ותשוקה עמוקה לעולם ה-AI, ושימוש יומיומי או שבועי ב-Gemini.",
-  "רצון ונכונות להוביל יוזמות, סדנאות, הרצאות או האקתונים לסטודנטים בקמפוס שלכם.",
-  "נוכחות פעילה ברשתות חברתיות או מקצועיות (LinkedIn, GitHub, Instagram, קבוצות לימוד).",
-  "נכונות להקדיש בממוצע 3-5 שעות שבועיות לפעילות השגרירות, מפגשי הכשרה וקהילה.",
+  "סטודנט/ית פעיל/ה לתואר ראשון או שני באוניברסיטה או מכללה מוכרת בישראל.",
+  "סקרנות ותשוקה עמוקה לעולם ה-AI, ושימוש קבוע ב-Gemini בלימודים או ביומיום.",
+  "רצון ונכונות להוביל יוזמות, סדנאות, הרצאות או מפגשי למידה לסטודנטים בקמפוס שלכם.",
+  "נוכחות פעילה ברשתות חברתיות או מקצועיות (LinkedIn, קבוצות סטודנטים, GitHub).",
+  "נכונות להקדיש בממוצע 3-5 שעות שבועיות להשתתפות בסמינרים השבועיים ופעילות בקמפוס.",
   "יחסי אנוש מעולים, יכולת הנעה והתלהבות לחלוק ידע עם אחרים."
 ];
 
@@ -247,25 +223,30 @@ export const PROGRAM_STEPS = [
   {
     step: '03',
     title: 'כנס הפתיחה (Kickoff Summit)',
-    description: 'מפגש חגיגי (אונליין ופיזי) עם נבחרת השגרירים בישראל, קבלת ערכת שגריר והדרכות מקצועיות.'
+    description: 'מפגש חגיגי עם נבחרת השגרירים בישראל, פתיחת מנוי ה-Gemini והתנעת הסמינרים.'
   },
   {
     step: '04',
-    title: 'הובלת פעילות ואיסוף נקודות',
-    description: 'העברת סדנאות Gemini, סיוע לסטודנטים, הפקת אירועים וצבירת נקודות במדרגות ההטבות.'
+    title: 'סמינרים שבועיים ופעילות בקמפוס',
+    description: 'השתתפות בסמינרי עומק שבועיים, העברת סדנאות Gemini והובלת קהילת ה-AI במוסד שלכם.'
   },
   {
     step: '05',
-    title: 'אירוע סיום והענקת פרסים',
-    description: 'טקס סיום חגיגי במשרדי Google, קבלת תעודות רשמיות וחלוקת פרסי ה-Catalyst המובילים.'
+    title: 'אירוע סיום והענקת תעודות הסמכה',
+    description: 'טקס סיום חגיגי במשרדי Google, קבלת תעודות הסמכה רשמיות וצירוף לרשת בוגרי התוכנית.'
   }
 ];
 
 export const FAQ_ITEMS: FaqItem[] = [
   {
     category: 'general',
-    question: 'מהי בדיוק תוכנית Google Gemini Student Ambassador?',
-    answer: 'זוהי תוכנית מנהיגות סטודנטיאלית יוקרתית שמובילה Google במטרה להכשיר את דור מנהיגי ה-AI הבא באקדמיה. השגרירים מייצגים את Gemini בקמפוס שלהם, זוכים להכשרות עומק Hands-on ישירות ממהנדסי Google, מנהלים פעילויות קהילתיות, ומקבלים מנטורינג ופרסים מיוחדים.'
+    question: 'מהי בדיוק תוכנית Google Gemini Student Ambassador בישראל?',
+    answer: 'זוהי תוכנית מנהיגות סטודנטיאלית יוקרתית שמובילה Google במטרה להכשיר את דור מנהיגי ה-AI הבא באקדמיה הישראלית. השגרירים מייצגים את Gemini בקמפוס שלהם, זוכים להכשרות עומק Hands-on שבועיות ישירות ממהנדסי Google, מנהלים פעילויות קהילתיות, ומקבלים מנוי Gemini חינם ותעודת הסמכה רשמית.'
+  },
+  {
+    category: 'benefits',
+    question: 'מה מקבלים השגרירים במסגרת התוכנית?',
+    answer: 'השגרירים בישראל זוכים למנוי Gemini לסטודנטים בחינם (gemini.google/students), תעודת שגריר רשמית מ-Google (Formal Certification) לפרופיל ה-LinkedIn ולקורות החיים, סמינרים והכשרות מקצועיות שבועיות עם מהנדסי וחוקרי AI, והפתעות והזדמנויות בלעדיות לאורך השנה.'
   },
   {
     category: 'eligibility',
@@ -275,21 +256,16 @@ export const FAQ_ITEMS: FaqItem[] = [
   {
     category: 'time',
     question: 'כמה שעות שבועיות דורשת התוכנית?',
-    answer: 'ההתחייבות היא גמישה ומותאמת ללוח המבחנים של הסטודנטים — כ-3 עד 5 שעות בשבוע בממוצע. אתם קובעים את קצב הפעילות שלכם ואת מועדי הסדנאות שתרצו להרים.'
-  },
-  {
-    category: 'benefits',
-    question: 'אילו הטבות והזדמנויות מקבלים השגרירים?',
-    answer: 'השגרירים מקבלים ערכות Swag מקוריות ובלעדיות של Google Gemini, תגים דיגיטליים מאומתים ל-LinkedIn, תעודת הצטיינות רשמית מ-Google, גישה מוקדמת (Beta Access) לחידושים האחרונים של Gemini, מנטורינג ממהנדסים ופרסים מובילים כולל מכשירי Google Pixel למובילי הנבחרת.'
+    answer: 'ההתחייבות היא גמישה ומותאמת ללוח הבחינות של הסטודנטים — כ-3 עד 5 שעות בשבוע בממוצע. שעות אלו כוללות את הסמינר השבועי והובלת פעילויות או סדנאות בקמפוס בקצב שלכם.'
   },
   {
     category: 'general',
-    question: 'כיצד מנוהל תהליך צבירת הנקודות בדרגות?',
-    answer: 'על כל פעילות (העברת סדנה בקמפוס, כתיבת פוסט מקצועי על מקרה בוחן ב-Gemini, עזרה לסטודנטים להשתמש ב-AI בלמידה) תצברו נקודות שמעלות אתכם בדרגות (The Explorer, Navigator, Architect, Visionary, Titan, Catalyst) ופותחות מתנות יקרות ערך.'
+    question: 'כיצד מתקיימים הסמינרים השבועיים?',
+    answer: 'הסמינרים השבועיים מתקיימים במתכונת היברידית — מפגשים חיים אונליין עם מומחי ומהנדסי Google, לצד מפגשים וסדנאות פיזיות במרכז הפיתוח של Google. כל הסמינרים מלווים בהתנסות מעשית (Hands-on) ובחומרי לימוד ייחודיים.'
   },
   {
     category: 'eligibility',
     question: 'מתי נסגרת הגשת המועמדות ואיך מתבצע המיון?',
-    answer: 'הגשת המועמדות נבחנת במתכונת Rolling Admissions (כל הקודם זוכה). אנו ממליצים להגיש בהקדם. מועמדים מתאימים יקבלו זימון לשיחת היכרות קצרה תוך מספר ימים לאחר הגשת השאלון.'
+    answer: 'הגשת המועמדות נבחנת במתכונת Rolling Admissions (כל הקודם זוכה). מועמדים מתאימים יקבלו זימון לשיחת היכרות קצרה תוך מספר ימים לאחר הגשת השאלון.'
   }
 ];

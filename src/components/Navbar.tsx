@@ -19,7 +19,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   const navLinks = [
     { label: 'על התוכנית', href: '#about' },
     { label: 'למי זה מתאים?', href: '#personas' },
-    { label: 'הטבות ופרסים', href: '#rewards' },
+    { label: 'מה מקבלים?', href: '#benefits' },
     { label: 'תנאי סף', href: '#eligibility' },
     { label: 'שלבי התוכנית', href: '#timeline' },
     { label: 'שאלות נפוצות', href: '#faq' },

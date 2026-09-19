@@ -14,7 +14,7 @@ export const ProgramTimeline: React.FC = () => {
             </span>
           </h2>
           <p className="text-gray-600 text-base">
-            מהגשת השאלון ועד לקבלת הפרסים וסיום שנת הפעילות
+            מהגשת השאלון, דרך הסמינרים השבועיים ועד לקבלת תעודת ההסמכה הרשמית
           </p>
         </div>
 

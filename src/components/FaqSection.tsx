@@ -11,7 +11,7 @@ export const FaqSection: React.FC = () => {
     { id: 'general', label: 'כללי על התוכנית' },
     { id: 'eligibility', label: 'תנאי קבלה והתאמה' },
     { id: 'time', label: 'השקעת זמן ולימודים' },
-    { id: 'benefits', label: 'תגמולים ופרסים' },
+    { id: 'benefits', label: 'הטבות והכשרות' },
   ];
 
   const filteredFaqs = selectedCategory === 'all'
