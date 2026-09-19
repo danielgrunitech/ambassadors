@@ -1,0 +1,91 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    font-family: 'Heebo', 'Rubik', 'Assistant', system-ui, -apple-system, sans-serif;
+    color: #202124;
+    background-color: #F8FAFD;
+  }
+}
+
+/* Reference site background diagonal micro-pattern */
+.gemini-bg-pattern {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    transparent,
+    transparent 4px,
+    rgba(52, 107, 241, 0.04) 4px,
+    rgba(52, 107, 241, 0.04) 5px
+  );
+}
+
+/* Google Quad Color Gradient Text */
+.text-google-gradient {
+  background: linear-gradient(135deg, #EA4335 0%, #FBBC04 35%, #34A853 70%, #346BF1 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Gemini Sparkle AI Gradient */
+.text-gemini-gradient {
+  background: linear-gradient(135deg, #1A73E8 0%, #7C4DFF 50%, #E91E63 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.bg-gemini-gradient {
+  background: linear-gradient(135deg, #1A73E8 0%, #7C4DFF 55%, #673AB7 100%);
+}
+
+.border-gemini-gradient {
+  border-image: linear-gradient(135deg, #1A73E8, #7C4DFF, #EA4335) 1;
+}
+
+/* Glowing animations */
+@keyframes floatSlow {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(1deg);
+  }
+}
+
+.animate-float {
+  animation: floatSlow 6s ease-in-out infinite;
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(52, 107, 241, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 35px rgba(124, 77, 255, 0.55);
+  }
+}
+
+.animate-glow {
+  animation: pulseGlow 4s ease-in-out infinite;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #F1F3F4;
+}
+::-webkit-scrollbar-thumb {
+  background: #C4C7C5;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #9AA0A6;
+}
