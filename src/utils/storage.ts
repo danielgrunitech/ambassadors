@@ -93,11 +93,13 @@ const SAMPLE_SUBMISSIONS: SubmissionRecord[] = [
   }
 ];
 
+export const DEFAULT_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbyKg-JtzKV7T6RAEbLhKVSwf1rt_lsIb9icFC1LxfntAOpaU4MKz1piWne_BefdIzzrXw/exec';
+
 export const getWebhookUrl = (): string => {
   try {
-    return localStorage.getItem(WEBHOOK_KEY) || (import.meta as any).env?.VITE_GOOGLE_SHEETS_WEBHOOK_URL || '';
+    return localStorage.getItem(WEBHOOK_KEY) || (import.meta as any).env?.VITE_GOOGLE_SHEETS_WEBHOOK_URL || DEFAULT_WEBHOOK_URL;
   } catch (e) {
-    return '';
+    return DEFAULT_WEBHOOK_URL;
   }
 };
 
