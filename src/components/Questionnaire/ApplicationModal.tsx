@@ -165,6 +165,9 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
       if (!formData.proposedFirstEvent.trim()) {
         newErrors.proposedFirstEvent = 'נא להציע רעיון לפעילות או סדנה ראשונה בקמפוס';
       }
+      if (!formData.videoPitchUrl?.trim()) {
+        newErrors.videoPitchUrl = 'נא לצרף קישור לסרטון ההיכרות (עד 2 דקות)';
+      }
     }
 
     if (step === 5) {
@@ -356,6 +359,19 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
           ) : (
             /* Multi-step Form */
             <form onSubmit={handleSubmit} className="space-y-6">
+              {/* Notice Banner: 2-minute video requirement */}
+              <div className="bg-gradient-to-r from-red-50/90 via-amber-50/70 to-blue-50/80 border border-red-200/80 rounded-2xl p-4 flex items-start gap-3 text-right">
+                <Video className="w-5 h-5 text-[#EA4335] shrink-0 mt-0.5" />
+                <div className="text-xs text-gray-800 leading-relaxed">
+                  <span className="font-bold text-red-950 block mb-0.5">
+                    דרישת חובה מקדימה: הקלטת סרטון היכרות (עד 2 דקות)
+                  </span>
+                  <span>
+                    לפני הגשת השאלון, יש להקליט סרטון קצר של עד 2 דקות שבו תציגו את עצמכם ותסבירו כיצד אתם משתמשים ב-Gemini ביומיום או בלימודים. בשלב 4 של השאלון תתבקשו לצרף קישור לצפייה בסרטון (Loom, Google Drive, YouTube).
+                  </span>
+                </div>
+              </div>
+
               {/* ================= STEP 1: Personal & Academic Info ================= */}
               {currentStep === 1 && (
                 <div className="space-y-5 animate-in fade-in duration-150">
@@ -711,23 +727,29 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                   </div>
 
                   {/* Video Pitch */}
-                  <div className="bg-[#F8FAFC] p-4 rounded-2xl border border-gray-200">
-                    <label className="block text-xs font-bold text-gray-800 mb-1 flex items-center justify-between">
+                  <div className="bg-[#FEF7E0]/60 p-4 sm:p-5 rounded-2xl border border-[#FBBC04]/80">
+                    <label className="block text-xs font-bold text-gray-900 mb-1 flex items-center justify-between">
                       <span className="flex items-center gap-1.5">
-                        <Video className="w-3.5 h-3.5 text-[#346BF1]" />
-                        <span>סרטון היכרות קצר של 60 שניות (אופציונלי - יתרון גדול)</span>
+                        <Video className="w-4 h-4 text-[#EA4335]" />
+                        <span>קישור לסרטון היכרות (עד 2 דקות) <span className="text-red-500">*</span></span>
+                      </span>
+                      <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-red-100 text-[#EA4335] border border-red-200">
+                        דרישת חובה
                       </span>
                     </label>
-                    <p className="text-[11px] text-gray-500 mb-2">
-                      קישור לסרטון קצר (Loom, YouTube, Google Drive) שבו אתם מציגים את עצמכם ואת התשוקה שלכם ל-AI.
+                    <p className="text-[11px] text-gray-600 mb-2.5 leading-relaxed">
+                      סרטון של עד 2 דקות שבו אתם מציגים את עצמכם ומסבירים מקרה שימוש מעשי (Use-case) או דרך שבה אתם נעזרים ב-Gemini בשגרה (קישור פתוח לצפייה מ-Loom, Google Drive, YouTube וכו').
                     </p>
                     <input
                       type="url"
                       value={formData.videoPitchUrl || ''}
                       onChange={(e) => handleChange('videoPitchUrl', e.target.value)}
-                      placeholder="https://www.loom.com/share/... או YouTube link"
-                      className="w-full px-4 py-2.5 rounded-xl border border-gray-200 bg-white focus:outline-none focus:border-[#346BF1] text-sm"
+                      placeholder="https://www.loom.com/share/... או קישור ל-Google Drive / YouTube"
+                      className="w-full px-4 py-2.5 rounded-xl border border-gray-300 bg-white focus:outline-none focus:border-[#346BF1] focus:ring-2 focus:ring-blue-100 text-sm"
                     />
+                    {errors.videoPitchUrl && (
+                      <p className="text-xs text-red-500 mt-1.5 font-medium">{errors.videoPitchUrl}</p>
+                    )}
                   </div>
                 </div>
               )}
@@ -757,6 +779,19 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                       <div className="pt-2 text-gray-700">
                         <span className="font-semibold text-gray-500">חוזקות שנבחרו: </span>
                         {formData.primaryStrengths.join(', ')}
+                      </div>
+                    )}
+                    {formData.videoPitchUrl && (
+                      <div className="pt-2 text-gray-700">
+                        <span className="font-semibold text-gray-500">סרטון היכרות (2 דק'): </span>
+                        <a
+                          href={formData.videoPitchUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-[#346BF1] underline text-xs"
+                        >
+                          קישור לסרטון שהוזן
+                        </a>
                       </div>
                     )}
                   </div>
