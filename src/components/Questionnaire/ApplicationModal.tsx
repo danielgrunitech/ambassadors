@@ -13,7 +13,9 @@ import {
   Heart,
   Coffee,
   Mic,
-  Send
+  Send,
+  Maximize2,
+  Minimize2
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { ApplicationFormData, SubmissionRecord } from '../../types';
@@ -54,6 +56,7 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const [submittedRecord, setSubmittedRecord] = useState<SubmissionRecord | null>(null);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+  const [isFullscreen, setIsFullscreen] = useState<boolean>(false);
 
   useEffect(() => {
     if (isOpen) {
@@ -63,6 +66,24 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
       setCurrentStep(1);
     }
   }, [isOpen]);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        if (isFullscreen) {
+          setIsFullscreen(false);
+        } else {
+          onClose();
+        }
+      }
+    };
+    if (isOpen) {
+      window.addEventListener('keydown', handleKeyDown);
+    }
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isOpen, isFullscreen, onClose]);
 
   const handleChange = (field: keyof ApplicationFormData, value: any) => {
     setFormData((prev) => {
@@ -191,89 +212,128 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-gray-900/40 backdrop-blur-xs overflow-y-auto">
-      <div className="bg-white w-full max-w-3xl rounded-[2.5rem] shadow-2xl border border-gray-100 my-6 overflow-hidden relative text-right flex flex-col max-h-[90vh]">
+    <div
+      className={`fixed inset-0 z-50 flex items-center justify-center transition-all duration-200 ${
+        isFullscreen
+          ? 'p-0 bg-white'
+          : 'p-2 sm:p-4 md:p-6 bg-gray-900/50 backdrop-blur-xs overflow-y-auto'
+      }`}
+    >
+      <div
+        className={`bg-white text-right flex flex-col transition-all duration-200 overflow-hidden ${
+          isFullscreen
+            ? 'w-full h-full max-w-none max-h-none rounded-none border-0 shadow-none'
+            : 'w-full max-w-4xl rounded-[2.5rem] shadow-2xl border border-gray-100 my-auto max-h-[92vh]'
+        }`}
+      >
         {/* Header */}
-        <div className="bg-[#E8F0FE] p-6 sm:p-7 relative shrink-0 border-b border-blue-100/70">
-          <button
-            onClick={onClose}
-            className="absolute top-5 left-5 p-2 rounded-full hover:bg-blue-100/80 text-gray-500 transition-colors"
-            aria-label="סגירה"
-          >
-            <X className="w-5 h-5" />
-          </button>
-
-          <div className="flex items-center gap-2 mb-1.5">
-            <span className="bg-[#346BF1] text-white text-[11px] font-bold px-2.5 py-0.5 rounded-full">
-              #TeamGemini
-            </span>
-            <span className="text-xs font-semibold text-gray-600">
-              שגרירי הסטודנטים של Google בישראל 2026
-            </span>
+        <div className="bg-[#E8F0FE] p-5 sm:p-7 relative shrink-0 border-b border-blue-100/70">
+          {/* Header Action Buttons (Fullscreen & Close) */}
+          <div className="absolute top-4 left-4 sm:top-5 sm:left-5 flex items-center gap-2 z-10">
+            <button
+              type="button"
+              onClick={() => setIsFullscreen(!isFullscreen)}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/90 hover:bg-white text-gray-700 hover:text-[#346BF1] border border-blue-200/80 shadow-2xs transition-all text-xs font-semibold cursor-pointer"
+              title={isFullscreen ? 'חזרה לתצוגה רגילה' : 'מסך מלא'}
+              aria-label={isFullscreen ? 'חזרה לתצוגה רגילה' : 'מסך מלא'}
+            >
+              {isFullscreen ? (
+                <>
+                  <Minimize2 className="w-3.5 h-3.5 text-gray-600" />
+                  <span className="hidden sm:inline">תצוגה רגילה</span>
+                </>
+              ) : (
+                <>
+                  <Maximize2 className="w-3.5 h-3.5 text-[#346BF1]" />
+                  <span className="hidden sm:inline">מסך מלא</span>
+                </>
+              )}
+            </button>
+            <button
+              type="button"
+              onClick={onClose}
+              className="p-1.5 sm:p-2 rounded-full bg-white/80 hover:bg-white text-gray-500 hover:text-gray-800 border border-blue-100/80 transition-colors cursor-pointer"
+              aria-label="סגירה"
+              title="סגירה"
+            >
+              <X className="w-4 h-4 sm:w-5 sm:h-5" />
+            </button>
           </div>
 
-          <h3 className="text-2xl sm:text-3xl font-extrabold text-gray-900 tracking-tight">
-            שאלון הגשת מועמדות
-          </h3>
-
-          {/* Stepper Tabs */}
-          {!submittedRecord && (
-            <div className="mt-5">
-              <div className="grid grid-cols-3 gap-2 text-center mb-2.5">
-                {STEP_DEFINITIONS.map((def) => {
-                  const isPassed = currentStep > def.step;
-                  const isCurrent = currentStep === def.step;
-                  return (
-                    <button
-                      key={def.step}
-                      type="button"
-                      onClick={() => {
-                        if (def.step < currentStep) setCurrentStep(def.step);
-                      }}
-                      className={`flex flex-col items-center gap-1 transition-all ${
-                        isPassed ? 'cursor-pointer' : 'cursor-default'
-                      }`}
-                    >
-                      <div
-                        className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition-all ${
-                          isCurrent
-                            ? 'bg-[#346BF1] text-white ring-4 ring-blue-100'
-                            : isPassed
-                            ? 'bg-emerald-500 text-white'
-                            : 'bg-white/80 text-gray-400 border border-gray-200'
-                        }`}
-                      >
-                        {isPassed ? <Check className="w-4 h-4 stroke-[3]" /> : def.step}
-                      </div>
-                      <span
-                        className={`text-xs font-bold transition-colors ${
-                          isCurrent
-                            ? 'text-gray-900'
-                            : isPassed
-                            ? 'text-emerald-700'
-                            : 'text-gray-400'
-                        }`}
-                      >
-                        {def.subtitle}
-                      </span>
-                    </button>
-                  );
-                })}
-              </div>
-
-              {/* Progress Bar */}
-              <div className="w-full bg-blue-200/50 h-1.5 rounded-full overflow-hidden">
-                <div
-                  className="bg-[#346BF1] h-full transition-all duration-300 rounded-full"
-                  style={{ width: `${(currentStep / TOTAL_STEPS) * 100}%` }}
-                />
-              </div>
+          <div className={isFullscreen ? 'max-w-4xl mx-auto w-full pl-28 sm:pl-36' : 'pl-24 sm:pl-32'}>
+            <div className="flex items-center gap-2 mb-1.5">
+              <span className="bg-[#346BF1] text-white text-[11px] font-bold px-2.5 py-0.5 rounded-full">
+                #TeamGemini
+              </span>
+              <span className="text-xs font-semibold text-gray-600">
+                שגרירי הסטודנטים של Google בישראל 2026
+              </span>
             </div>
-          )}
+
+            <h3 className="text-2xl sm:text-3xl font-extrabold text-gray-900 tracking-tight">
+              שאלון הגשת מועמדות
+            </h3>
+
+            {/* Stepper Tabs */}
+            {!submittedRecord && (
+              <div className="mt-5">
+                <div className="grid grid-cols-3 gap-2 text-center mb-2.5">
+                  {STEP_DEFINITIONS.map((def) => {
+                    const isPassed = currentStep > def.step;
+                    const isCurrent = currentStep === def.step;
+                    return (
+                      <button
+                        key={def.step}
+                        type="button"
+                        onClick={() => {
+                          if (def.step < currentStep) setCurrentStep(def.step);
+                        }}
+                        className={`flex flex-col items-center gap-1 transition-all ${
+                          isPassed ? 'cursor-pointer' : 'cursor-default'
+                        }`}
+                      >
+                        <div
+                          className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition-all ${
+                            isCurrent
+                              ? 'bg-[#346BF1] text-white ring-4 ring-blue-100'
+                              : isPassed
+                              ? 'bg-emerald-500 text-white'
+                              : 'bg-white/80 text-gray-400 border border-gray-200'
+                          }`}
+                        >
+                          {isPassed ? <Check className="w-4 h-4 stroke-[3]" /> : def.step}
+                        </div>
+                        <span
+                          className={`text-xs font-bold transition-colors ${
+                            isCurrent
+                              ? 'text-gray-900'
+                              : isPassed
+                              ? 'text-emerald-700'
+                              : 'text-gray-400'
+                          }`}
+                        >
+                          {def.subtitle}
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
+
+                {/* Progress Bar */}
+                <div className="w-full bg-blue-200/50 h-1.5 rounded-full overflow-hidden">
+                  <div
+                    className="bg-[#346BF1] h-full transition-all duration-300 rounded-full"
+                    style={{ width: `${(currentStep / TOTAL_STEPS) * 100}%` }}
+                  />
+                </div>
+              </div>
+            )}
+          </div>
         </div>
 
         {/* Modal Scrollable Body */}
-        <div id="modal-scroll-area" className="p-6 sm:p-8 overflow-y-auto flex-1 space-y-6">
+        <div id="modal-scroll-area" className="p-6 sm:p-8 md:p-10 overflow-y-auto flex-1 space-y-6">
+          <div className={isFullscreen ? 'max-w-4xl mx-auto w-full' : 'w-full'}>
           {submittedRecord ? (
             /* Success Screen */
             <div className="text-center py-8 space-y-5">
@@ -903,6 +963,7 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
               </div>
             </form>
           )}
+          </div>
         </div>
       </div>
     </div>
