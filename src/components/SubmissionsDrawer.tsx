@@ -187,52 +187,137 @@ export const SubmissionsDrawer: React.FC<SubmissionsDrawerProps> = ({
                     </a>
                   </div>
                 )}
+                {selectedSubmission.tiktokUrl && (
+                  <div className="flex items-center gap-2">
+                    <ExternalLink className="w-4 h-4 text-pink-500" />
+                    <a
+                      href={selectedSubmission.tiktokUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-pink-600 underline font-medium truncate"
+                    >
+                      TikTok
+                    </a>
+                  </div>
+                )}
+                {selectedSubmission.instagramUrl && (
+                  <div className="flex items-center gap-2">
+                    <ExternalLink className="w-4 h-4 text-purple-500" />
+                    <a
+                      href={selectedSubmission.instagramUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-purple-600 underline font-medium truncate"
+                    >
+                      Instagram
+                    </a>
+                  </div>
+                )}
               </div>
 
               {/* Answers */}
               <div className="space-y-4 text-sm">
-                <div className="p-4 bg-blue-50/50 rounded-xl border border-blue-100">
-                  <div className="font-bold text-blue-900 mb-1">מדוע רוצה להיות שגריר/ת Gemini?</div>
-                  <p className="text-gray-700 leading-relaxed whitespace-pre-wrap">{selectedSubmission.whyAmbassador}</p>
-                </div>
-
-                <div className="p-4 bg-gray-50 rounded-xl border border-gray-200">
-                  <div className="font-bold text-gray-900 mb-1">כיצד משתמש/ת ב-Gemini כיום?</div>
-                  <p className="text-gray-700 leading-relaxed whitespace-pre-wrap">{selectedSubmission.currentGeminiUsage}</p>
-                </div>
-
-                <div className="p-4 bg-gray-50 rounded-xl border border-gray-200">
-                  <div className="font-bold text-gray-900 mb-1">במה הכי טוב/ה? חוזקות שנבחרו:</div>
-                  <div className="flex flex-wrap gap-2 mt-2">
-                    {selectedSubmission.primaryStrengths.map((str, i) => (
-                      <span key={i} className="px-3 py-1 bg-white border border-blue-200 text-blue-800 rounded-full text-xs font-semibold">
-                        ✓ {str}
-                      </span>
-                    ))}
+                {/* חלק 1: תחביבים ותחומי עניין */}
+                {selectedSubmission.hobbiesAndInterests && (
+                  <div className="p-4 bg-amber-50/50 rounded-xl border border-amber-200">
+                    <div className="font-bold text-amber-900 mb-1">חלק 1: תחביבים ותחומי עניין ☕</div>
+                    <p className="text-gray-700 leading-relaxed whitespace-pre-wrap">{selectedSubmission.hobbiesAndInterests}</p>
+                    {selectedSubmission.preferredPlatforms && selectedSubmission.preferredPlatforms.length > 0 && (
+                      <div className="flex flex-wrap gap-1.5 mt-2">
+                        {selectedSubmission.preferredPlatforms.map((p, i) => (
+                          <span key={i} className="px-2.5 py-0.5 bg-white border border-amber-200 text-amber-800 rounded-full text-xs font-semibold">
+                            {p}
+                          </span>
+                        ))}
+                      </div>
+                    )}
                   </div>
-                </div>
+                )}
 
-                <div className="p-4 bg-gray-50 rounded-xl border border-gray-200">
-                  <div className="font-bold text-gray-900 mb-1">ניסיון עבר או מיזם שהובל/ה:</div>
-                  <p className="text-gray-700 leading-relaxed whitespace-pre-wrap">{selectedSubmission.pastLeadershipExperience}</p>
-                </div>
+                {/* אתגר 1: Gemini Canvas */}
+                {(selectedSubmission.canvasCampusProblem || selectedSubmission.canvasSolutionDetails) && (
+                  <div className="p-4 bg-blue-50/50 rounded-xl border border-blue-200">
+                    <div className="font-bold text-blue-900 mb-1.5">אתגר 1: חוקרי ג'מיניי (Gemini Canvas) 🤖</div>
+                    {selectedSubmission.canvasCampusProblem && (
+                      <div className="mb-2">
+                        <span className="font-semibold text-gray-700">הבעיה או הצורך בקמפוס: </span>
+                        <p className="text-gray-700 leading-relaxed mt-0.5">{selectedSubmission.canvasCampusProblem}</p>
+                      </div>
+                    )}
+                    {selectedSubmission.canvasSolutionDetails && (
+                      <div>
+                        <span className="font-semibold text-gray-700">הפתרון ב-Canvas ולמה מתאים: </span>
+                        <p className="text-gray-700 leading-relaxed mt-0.5">{selectedSubmission.canvasSolutionDetails}</p>
+                      </div>
+                    )}
+                  </div>
+                )}
 
-                <div className="p-4 bg-emerald-50/50 rounded-xl border border-emerald-100">
-                  <div className="font-bold text-emerald-900 mb-1">רעיון לאירוע / סדנה ראשונה בקמפוס:</div>
-                  <p className="text-gray-700 leading-relaxed whitespace-pre-wrap">{selectedSubmission.proposedFirstEvent}</p>
-                </div>
+                {/* אתגר 2: בדיקת וייב ויראלי */}
+                {(selectedSubmission.viralContentUrl || selectedSubmission.viralContentDescription) && (
+                  <div className="p-4 bg-purple-50/50 rounded-xl border border-purple-200">
+                    <div className="font-bold text-purple-900 mb-1.5">אתגר 2: בדיקת וייב ויראלי (יוצרי התוכן) 📲</div>
+                    {selectedSubmission.viralContentUrl && (
+                      <div className="mb-1.5">
+                        <a href={selectedSubmission.viralContentUrl} target="_blank" rel="noreferrer" className="text-purple-600 underline font-medium text-xs break-all">
+                          {selectedSubmission.viralContentUrl}
+                        </a>
+                      </div>
+                    )}
+                    {selectedSubmission.viralContentDescription && (
+                      <p className="text-gray-700 leading-relaxed whitespace-pre-wrap">{selectedSubmission.viralContentDescription}</p>
+                    )}
+                  </div>
+                )}
 
+                {/* אתגר 3: בוני הקהילה */}
+                {(selectedSubmission.communityLeadershipStory || selectedSubmission.pastLeadershipExperience) && (
+                  <div className="p-4 bg-emerald-50/50 rounded-xl border border-emerald-200">
+                    <div className="font-bold text-emerald-900 mb-1">אתגר 3: בוני הקהילה (מחברי הקמפוס) 🤝</div>
+                    <p className="text-gray-700 leading-relaxed whitespace-pre-wrap">
+                      {selectedSubmission.communityLeadershipStory || selectedSubmission.pastLeadershipExperience}
+                    </p>
+                  </div>
+                )}
+
+                {/* אתגר 4: ניצוץ בקמפוס */}
+                {(selectedSubmission.campusPopUpIdea || selectedSubmission.proposedFirstEvent) && (
+                  <div className="p-4 bg-amber-50/50 rounded-xl border border-amber-200">
+                    <div className="font-bold text-amber-900 mb-1">אתגר 4: ניצוץ בקמפוס (פופ-אפ אירוע) 💡</div>
+                    <p className="text-gray-700 leading-relaxed whitespace-pre-wrap">
+                      {selectedSubmission.campusPopUpIdea || selectedSubmission.proposedFirstEvent}
+                    </p>
+                  </div>
+                )}
+
+                {/* אתגר 5: מד האהבה לגוגל */}
+                {(selectedSubmission.whyGoogleGeminiAmbassador || selectedSubmission.whyAmbassador) && (
+                  <div className="p-4 bg-rose-50/50 rounded-xl border border-rose-200">
+                    <div className="font-bold text-rose-900 mb-1">אתגר 5: מד האהבה לגוגל (מספרי הסיפורים) 💙</div>
+                    <p className="text-gray-700 leading-relaxed whitespace-pre-wrap">
+                      {selectedSubmission.whyGoogleGeminiAmbassador || selectedSubmission.whyAmbassador}
+                    </p>
+                  </div>
+                )}
+
+                {/* חלק 3: סרטון הפיץ' */}
                 {selectedSubmission.videoPitchUrl && (
-                  <div className="p-4 bg-purple-50/50 rounded-xl border border-purple-100">
-                    <div className="font-bold text-purple-900 mb-1">קישור לסרטון היכרות:</div>
+                  <div className="p-4 bg-indigo-50/50 rounded-xl border border-indigo-200">
+                    <div className="font-bold text-indigo-900 mb-1">חלק 3: סרטון פיץ' (60–90 שניות) 🎙️</div>
                     <a
                       href={selectedSubmission.videoPitchUrl}
                       target="_blank"
                       rel="noreferrer"
-                      className="text-purple-600 underline font-medium"
+                      className="text-[#346BF1] underline font-medium text-xs break-all"
                     >
                       {selectedSubmission.videoPitchUrl}
                     </a>
+                    {selectedSubmission.studyHackSummary && (
+                      <div className="mt-2 text-xs text-gray-700">
+                        <span className="font-semibold">תקציר Study Hack: </span>
+                        {selectedSubmission.studyHackSummary}
+                      </div>
+                    )}
                   </div>
                 )}
               </div>

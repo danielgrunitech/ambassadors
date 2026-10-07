@@ -1,17 +1,16 @@
 /**
  * Google Apps Script לקליטת מועמדויות שגרירי Google Gemini ישראל 2026
  * 
- * הוראות התקנה ב-Google Sheets (לוקח 2 דקות):
- * 1. פתח גוגל שיט חדש (sheets.new) ותן לו שם, למשל: "Gemini Ambassador Israel 2026 - Submissions"
+ * הוראות התקנה ב-Google Sheets:
+ * 1. פתח גוגל שיט חדש (sheets.new) מחשבון Google הרצוי
  * 2. בתפריט העליון לחץ על: תוספים (Extensions) -> Apps Script
  * 3. מחק את מה שכתוב שם, והדבק את כל הקוד הזה במקומו.
- * 4. לחץ על "Deploy" (פריסה) בפינה הימנית/שמאלית למעלה -> "New deployment" (פריסה חדשה).
+ * 4. לחץ על "Deploy" (פריסה) -> "New deployment" (פריסה חדשה).
  * 5. בחר סוג (Select type): "Web app" (אפליקציית אינטרנט).
  * 6. בהגדרות:
  *    - Execute as: "Me" (אני)
- *    - Who has access: "Anyone" (כולם / כל אחד - כולל אנונימי, כדי שסטודנטים יוכלו לשלוח את הטופס ללא צורך בהתחברות).
- * 7. לחץ על "Deploy", אשר הרשאות לחשבון הגוגל שלך, והעתק את ה-"Web app URL" (מתחיל ב-https://script.google.com/macros/s/...).
- * 8. הדבק את ה-URL הזה בקובץ .env או בפרויקט (משתנה VITE_GOOGLE_SHEETS_WEBHOOK_URL).
+ *    - Who has access: "Anyone" (כולם / כל אחד).
+ * 7. לחץ על "Deploy", אשר הרשאות, והעתק את ה-"Web app URL".
  */
 
 function doPost(e) {
@@ -21,7 +20,7 @@ function doPost(e) {
   try {
     var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
     
-    // Parse incoming data (supports both JSON payload and FormData)
+    // Parse incoming data
     var data = {};
     if (e.postData && e.postData.contents) {
       try {
@@ -33,33 +32,35 @@ function doPost(e) {
       data = e.parameter;
     }
 
-    // Set up headers if first time
+    // Set up headers matching the 2026 TeamGemini application challenges
     var headers = [
       "Timestamp",
       "Candidate ID",
       "שם מלא",
-      "אימייל",
-      "טלפון",
-      "עיר",
-      "מוסד אקדמי",
-      "תואר",
-      "תחום לימודים",
-      "שנת לימוד",
+      "טלפון (WhatsApp)",
+      "דוא\"ל",
+      "מוסד לימודים",
+      "שנת לימודים",
+      "חוג / פקולטה",
+      "תחביבים ותחומי עניין",
+      "פלטפורמות דיגיטליות",
       "LinkedIn",
-      "מדוע רוצה להיות שגריר/ה?",
-      "שימוש נוכחי ב-Gemini",
-      "פיצ'ר אהוב ב-Gemini",
-      "חוזקות נבחרות",
-      "ניסיון ויוזמות עבר",
-      "כישורים טכניים",
-      "רעיון לאירוע ראשון בקמפוס",
-      "אסטרטגיה לקהל לא-טכנולוגי",
-      "היקף שעות שבועי",
-      "סרטון היכרות (Pitch)"
+      "TikTok",
+      "Instagram",
+      "YouTube / אחר",
+      "אתגר 1: בעיה בקמפוס (Canvas)",
+      "אתגר 1: פתרון ב-Canvas ולמה מתאים",
+      "אתגר 2: קישור לתוכן ויראלי",
+      "אתגר 2: פירוט והצלחה של התוכן",
+      "אתגר 3: הובלת קהילה/יוזמה מאפס",
+      "אתגר 4: רעיון פופ-אפ בקמפוס (Gemini + NotebookLM)",
+      "אתגר 5: למה שגריר/ת Google Gemini?",
+      "סרטון פיץ' (60-90 שניות)",
+      "תקציר Study Hack"
     ];
 
     if (sheet.getLastRow() === 0) {
-      var headerRange = sheet.appendRow(headers);
+      sheet.appendRow(headers);
       sheet.getRange(1, 1, 1, headers.length)
         .setBackground("#1A73E8")
         .setFontColor("#FFFFFF")
@@ -68,53 +69,38 @@ function doPost(e) {
     }
 
     var timestamp = new Date();
-    var strengthsStr = Array.isArray(data.primaryStrengths) ? data.primaryStrengths.join(", ") : (data.primaryStrengths || "");
-    var techSkillsStr = Array.isArray(data.technicalSkills) ? data.technicalSkills.join(", ") : (data.technicalSkills || "");
-    var institutionStr = data.institution === "מוסד אקדמי אחר..." && data.customInstitution ? data.customInstitution : data.institution;
+    var institutionStr = data.institution === "מוסד לימודים אחר..." && data.customInstitution 
+      ? data.customInstitution 
+      : (data.institution || "");
+    var platformsStr = Array.isArray(data.preferredPlatforms) ? data.preferredPlatforms.join(", ") : (data.preferredPlatforms || "");
 
     var newRow = [
       timestamp,
       data.id || ("IL-GEMINI-2026-" + Math.floor(1000 + Math.random() * 9000)),
       data.fullName || "",
-      data.email || "",
       data.phone || "",
-      data.city || "",
-      institutionStr || "",
-      data.degree || "",
-      data.fieldOfStudy || "",
+      data.email || "",
+      institutionStr,
       data.currentYear || "",
+      data.fieldOfStudy || "",
+      data.hobbiesAndInterests || "",
+      platformsStr,
       data.linkedInUrl || "",
-      data.whyAmbassador || "",
-      data.currentGeminiUsage || "",
-      data.favoriteGeminiFeature || "",
-      strengthsStr,
-      data.pastLeadershipExperience || "",
-      techSkillsStr,
-      data.proposedFirstEvent || "",
-      data.nonTechOutreachStrategy || "",
-      data.weeklyCommitmentHours || "",
-      data.videoPitchUrl || ""
+      data.tiktokUrl || "",
+      data.instagramUrl || "",
+      data.youtubeUrl || data.youtubeOrOtherUrl || "",
+      data.canvasCampusProblem || "",
+      data.canvasSolutionDetails || "",
+      data.viralContentUrl || "",
+      data.viralContentDescription || "",
+      data.communityLeadershipStory || data.pastLeadershipExperience || "",
+      data.campusPopUpIdea || data.proposedFirstEvent || "",
+      data.whyGoogleGeminiAmbassador || data.whyAmbassador || "",
+      data.videoPitchUrl || "",
+      data.studyHackSummary || ""
     ];
 
     sheet.appendRow(newRow);
-
-    // Optional: Send automated confirmation email to candidate
-    if (data.email && data.email.indexOf("@") > -1) {
-      try {
-        var subject = "אישור קבלת מועמדות | שגרירי Google Gemini בישראל 2026";
-        var body = "שלום " + (data.fullName || "") + ",\n\n" +
-          "שמחנו לקבל את מועמדותך לתוכנית שגרירי Google Gemini בישראל לשנת 2026!\n\n" +
-          "מספר המועמדות שלך למעקב: " + (data.id || "התקבל") + "\n" +
-          "מוסד לימודים: " + institutionStr + "\n\n" +
-          "צוות התוכנית בוחן את הפניות בימים אלה. מועמדים מתאימים יוזמנו לשיחת היכרות קצרה (Zoom).\n\n" +
-          "בהצלחה רבה!\n" +
-          "צוות תוכנית שגרירי Google Gemini ישראל 2026";
-        
-        MailApp.sendEmail(data.email, subject, body);
-      } catch (mailErr) {
-        Logger.log("Email auto-response error: " + mailErr.toString());
-      }
-    }
 
     return ContentService.createTextOutput(JSON.stringify({
       status: "success",
@@ -128,5 +114,39 @@ function doPost(e) {
     })).setMimeType(ContentService.MimeType.JSON);
   } finally {
     lock.releaseLock();
+  }
+}
+
+function doGet(e) {
+  try {
+    var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+    var values = sheet.getDataRange().getValues();
+    if (values.length <= 1) {
+      return ContentService.createTextOutput(JSON.stringify({
+        status: "success",
+        submissions: []
+      })).setMimeType(ContentService.MimeType.JSON);
+    }
+    
+    var headers = values[0];
+    var submissions = [];
+    for (var i = 1; i < values.length; i++) {
+      var row = values[i];
+      var item = {};
+      for (var j = 0; j < headers.length; j++) {
+        item[headers[j]] = row[j];
+      }
+      submissions.push(item);
+    }
+    
+    return ContentService.createTextOutput(JSON.stringify({
+      status: "success",
+      submissions: submissions
+    })).setMimeType(ContentService.MimeType.JSON);
+  } catch (err) {
+    return ContentService.createTextOutput(JSON.stringify({
+      status: "error",
+      message: err.toString()
+    })).setMimeType(ContentService.MimeType.JSON);
   }
 }

@@ -4,24 +4,23 @@ import {
   ArrowRight,
   ArrowLeft,
   Check,
-  Clock,
-  User,
   Sparkles,
-  Award,
-  BookOpen,
-  GraduationCap,
-  Briefcase,
-  ExternalLink,
+  Bot,
   Video,
-  FileCheck
+  Smartphone,
+  Users,
+  Lightbulb,
+  Heart,
+  Coffee,
+  Mic,
+  Send
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { ApplicationFormData, SubmissionRecord } from '../../types';
 import {
   ISRAELI_INSTITUTIONS,
-  FIELDS_OF_STUDY,
-  STRENGTH_OPTIONS,
-  TECHNICAL_SKILL_OPTIONS
+  STUDY_YEARS,
+  DIGITAL_PLATFORMS
 } from '../../data/content';
 import {
   getDraft,
@@ -37,44 +36,12 @@ interface ApplicationModalProps {
   onSubmissionSuccess: () => void;
 }
 
-const TOTAL_STEPS = 5;
+const TOTAL_STEPS = 3;
 
 const STEP_DEFINITIONS = [
-  { step: 1, title: 'פרטים אישיים', icon: User },
-  { step: 2, title: 'מוטיבציה ו-AI', icon: Sparkles },
-  { step: 3, title: 'חוזקות וכישורים', icon: Award },
-  { step: 4, title: 'חזון בקמפוס', icon: BookOpen },
-  { step: 5, title: 'סיכום והגשה', icon: FileCheck },
-];
-
-const STUDY_YEARS = [
-  "שנה א'",
-  "שנה ב'",
-  "שנה ג'",
-  "שנה ד'",
-  "תואר שני"
-];
-
-const COMMITMENT_OPTIONS = [
-  {
-    id: '2-3 שעות שבועיות',
-    title: '2-3 שעות',
-    subtitle: 'השתתפות גמישה',
-    badge: 'בסיסי'
-  },
-  {
-    id: '3-5 שעות שבועיות (מומלץ)',
-    title: '3-5 שעות',
-    subtitle: 'היקף אידיאלי לסדנאות וקהילה',
-    badge: 'מומלץ ★',
-    recommended: true
-  },
-  {
-    id: '6+ שעות שבועיות',
-    title: '6+ שעות',
-    subtitle: 'הובלת פרויקטים אינטנסיבית',
-    badge: 'מנהיגות'
-  }
+  { step: 1, title: 'חלק 1', subtitle: 'נעים להכיר ☕' },
+  { step: 2, title: 'חלק 2', subtitle: 'הניצוץ שלכם ✨' },
+  { step: 3, title: 'חלק 3', subtitle: 'רגע הפיץ\' 🎙️' },
 ];
 
 export const ApplicationModal: React.FC<ApplicationModalProps> = ({
@@ -113,13 +80,13 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
     }
   };
 
-  const toggleArrayItem = (field: 'primaryStrengths' | 'technicalSkills', item: string) => {
+  const togglePlatform = (platform: string) => {
     setFormData((prev) => {
-      const currentList = prev[field] || [];
-      const updatedList = currentList.includes(item)
-        ? currentList.filter((i) => i !== item)
-        : [...currentList, item];
-      const updated = { ...prev, [field]: updatedList };
+      const currentList = prev.preferredPlatforms || [];
+      const updatedList = currentList.includes(platform)
+        ? currentList.filter((p) => p !== platform)
+        : [...currentList, platform];
+      const updated = { ...prev, preferredPlatforms: updatedList };
       saveDraft(updated);
       return updated;
     });
@@ -130,47 +97,49 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
 
     if (step === 1) {
       if (!formData.fullName.trim()) newErrors.fullName = 'נא להזין שם מלא';
+      if (!formData.phone.trim()) {
+        newErrors.phone = 'נא להזין מספר טלפון נייד (לוואטסאפ)';
+      }
       if (!formData.email.trim()) {
-        newErrors.email = 'נא להזין כתובת אימייל';
+        newErrors.email = 'נא להזין כתובת דוא"ל';
       } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-        newErrors.email = 'כתובת אימייל אינה תקינה';
+        newErrors.email = 'כתובת דוא"ל אינה תקינה';
       }
-      if (!formData.phone.trim()) newErrors.phone = 'נא להזין מספר טלפון';
-      if (!formData.institution) newErrors.institution = 'נא לבחור מוסד אקדמי';
-      if (formData.institution === 'מוסד אקדמי אחר...' && !formData.customInstitution?.trim()) {
-        newErrors.customInstitution = 'נא לציין את שם המוסד';
+      if (!formData.institution) newErrors.institution = 'נא לבחור מוסד לימודים';
+      if (formData.institution === 'מוסד לימודים אחר...' && !formData.customInstitution?.trim()) {
+        newErrors.customInstitution = 'נא לציין את שם מוסד הלימודים';
       }
-      if (!formData.fieldOfStudy) newErrors.fieldOfStudy = 'נא לבחור תחום לימודים';
+      if (!formData.fieldOfStudy.trim()) newErrors.fieldOfStudy = 'נא לציין חוג / פקולטה';
+      if (!formData.hobbiesAndInterests.trim()) {
+        newErrors.hobbiesAndInterests = 'ספרו לנו קצת על התחביבים ותחומי העניין שלכם!';
+      }
     }
 
     if (step === 2) {
-      if (!formData.whyAmbassador.trim() || formData.whyAmbassador.trim().length < 20) {
-        newErrors.whyAmbassador = 'נא לפרט לפחות 20 תווים מדוע תרצו להיות שגרירי Gemini';
+      if (!formData.canvasCampusProblem.trim()) {
+        newErrors.canvasCampusProblem = 'נא לתאר את הבעיה או הצורך בקמפוס (אתגר 1)';
       }
-      if (!formData.currentGeminiUsage.trim()) {
-        newErrors.currentGeminiUsage = 'נא לספר על השימוש שלכם ב-Gemini כיום';
+      if (!formData.canvasSolutionDetails.trim()) {
+        newErrors.canvasSolutionDetails = 'נא להסביר כיצד הכלי ב-Canvas יעבוד (אתגר 1)';
+      }
+      if (!formData.viralContentDescription.trim()) {
+        newErrors.viralContentDescription = 'נא לפרט מה הפך את התוכן למוצלח ואיזה ערך הקהל קיבל (אתגר 2)';
+      }
+      if (!formData.communityLeadershipStory.trim()) {
+        newErrors.communityLeadershipStory = 'נא לספר על מיזם או פרויקט שהובלתם מאפס (אתגר 3)';
+      }
+      if (!formData.campusPopUpIdea.trim()) {
+        newErrors.campusPopUpIdea = 'נא להציע רעיון לפעילות פופ-אפ בקמפוס (אתגר 4)';
+      }
+      if (!formData.whyGoogleGeminiAmbassador.trim()) {
+        newErrors.whyGoogleGeminiAmbassador = 'ספרו לנו למה אתם באמת רוצים להיות שגרירי Gemini (אתגר 5)';
       }
     }
 
     if (step === 3) {
-      if (formData.primaryStrengths.length === 0) {
-        newErrors.primaryStrengths = 'נא לבחור לפחות תחום חוזק אחד';
+      if (!formData.videoPitchUrl.trim()) {
+        newErrors.videoPitchUrl = 'נא לצרף קישור לסרטון הפיץ\' (60–90 שניות)';
       }
-      if (!formData.pastLeadershipExperience.trim()) {
-        newErrors.pastLeadershipExperience = 'נא לתאר בקצרה ניסיון קודם או יוזמה שהובלתם';
-      }
-    }
-
-    if (step === 4) {
-      if (!formData.proposedFirstEvent.trim()) {
-        newErrors.proposedFirstEvent = 'נא להציע רעיון לפעילות או סדנה ראשונה בקמפוס';
-      }
-      if (!formData.videoPitchUrl?.trim()) {
-        newErrors.videoPitchUrl = 'נא לצרף קישור לסרטון ההיכרות (עד 2 דקות)';
-      }
-    }
-
-    if (step === 5) {
       if (!formData.agreedToTerms) {
         newErrors.agreedToTerms = 'יש לאשר את תנאי התוכנית להגשת המועמדות';
       }
@@ -200,7 +169,7 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!validateStep(5)) return;
+    if (!validateStep(3)) return;
 
     setIsSubmitting(true);
     setTimeout(() => {
@@ -211,8 +180,8 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
 
       try {
         confetti({
-          particleCount: 90,
-          spread: 70,
+          particleCount: 100,
+          spread: 75,
           origin: { y: 0.6 }
         });
       } catch (err) {}
@@ -223,8 +192,8 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-gray-900/40 backdrop-blur-xs overflow-y-auto">
-      <div className="bg-white w-full max-w-2xl rounded-[2.5rem] shadow-2xl border border-gray-100 my-6 overflow-hidden relative text-right flex flex-col max-h-[90vh]">
-        {/* Minimal Google Header */}
+      <div className="bg-white w-full max-w-3xl rounded-[2.5rem] shadow-2xl border border-gray-100 my-6 overflow-hidden relative text-right flex flex-col max-h-[90vh]">
+        {/* Header */}
         <div className="bg-[#E8F0FE] p-6 sm:p-7 relative shrink-0 border-b border-blue-100/70">
           <button
             onClick={onClose}
@@ -236,10 +205,10 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
 
           <div className="flex items-center gap-2 mb-1.5">
             <span className="bg-[#346BF1] text-white text-[11px] font-bold px-2.5 py-0.5 rounded-full">
-              2026
+              #TeamGemini
             </span>
             <span className="text-xs font-semibold text-gray-600">
-              Google Student Ambassador | שגרירות ישראל
+              שגרירי הסטודנטים של Google בישראל 2026
             </span>
           </div>
 
@@ -247,11 +216,10 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
             שאלון הגשת מועמדות
           </h3>
 
-          {/* Elevated Stepper Header */}
+          {/* Stepper Tabs */}
           {!submittedRecord && (
             <div className="mt-5">
-              {/* Stepper Tabs */}
-              <div className="grid grid-cols-5 gap-1 text-center mb-2.5">
+              <div className="grid grid-cols-3 gap-2 text-center mb-2.5">
                 {STEP_DEFINITIONS.map((def) => {
                   const isPassed = currentStep > def.step;
                   const isCurrent = currentStep === def.step;
@@ -267,7 +235,7 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                       }`}
                     >
                       <div
-                        className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold transition-all ${
+                        className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition-all ${
                           isCurrent
                             ? 'bg-[#346BF1] text-white ring-4 ring-blue-100'
                             : isPassed
@@ -275,10 +243,10 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                             : 'bg-white/80 text-gray-400 border border-gray-200'
                         }`}
                       >
-                        {isPassed ? <Check className="w-3.5 h-3.5 stroke-[3]" /> : def.step}
+                        {isPassed ? <Check className="w-4 h-4 stroke-[3]" /> : def.step}
                       </div>
                       <span
-                        className={`text-[10px] hidden sm:inline-block font-semibold transition-colors ${
+                        className={`text-xs font-bold transition-colors ${
                           isCurrent
                             ? 'text-gray-900'
                             : isPassed
@@ -286,7 +254,7 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                             : 'text-gray-400'
                         }`}
                       >
-                        {def.title}
+                        {def.subtitle}
                       </span>
                     </button>
                   );
@@ -294,9 +262,9 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
               </div>
 
               {/* Progress Bar */}
-              <div className="w-full h-1.5 bg-blue-100 rounded-full overflow-hidden">
+              <div className="w-full bg-blue-200/50 h-1.5 rounded-full overflow-hidden">
                 <div
-                  className="h-full bg-[#346BF1] transition-all duration-300 rounded-full"
+                  className="bg-[#346BF1] h-full transition-all duration-300 rounded-full"
                   style={{ width: `${(currentStep / TOTAL_STEPS) * 100}%` }}
                 />
               </div>
@@ -321,30 +289,15 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                   תודה רבה, {submittedRecord.fullName}!
                 </h4>
                 <p className="text-gray-600 max-w-md mx-auto text-sm leading-relaxed">
-                  השאלון שלך התקבל בנבחרת שגרירי Google Gemini בישראל ונשמר בטבלת המועמדים. נחזור אליך במייל ובטלפון בהקדם.
+                  השאלון שלך התקבל בנבחרת שגרירי Google Gemini בישראל ונשמר במערכת. נחזור אליך בהקדם בוואטסאפ ובמייל.
                 </p>
               </div>
 
-              {/* Unique ID Box */}
               <div className="bg-[#F8FAFC] border border-gray-200 rounded-2xl p-4 max-w-md mx-auto">
                 <div className="text-xs text-gray-500 mb-1 font-medium">מספר מועמדות למעקב:</div>
-                <div className="font-mono text-xl font-extrabold text-[#346BF1] tracking-wider">
+                <div className="font-mono text-lg font-bold text-[#346BF1] tracking-wider">
                   {submittedRecord.id}
                 </div>
-                <div className="text-xs text-gray-500 mt-1">
-                  מוסד אקדמי: {submittedRecord.institution}
-                </div>
-              </div>
-
-              {/* What Happens Next Card */}
-              <div className="bg-gray-50 rounded-2xl p-4 max-w-md mx-auto text-right text-xs sm:text-sm text-gray-600 space-y-2 border border-gray-100">
-                <div className="font-bold text-gray-800 flex items-center gap-1.5">
-                  <Clock className="w-4 h-4 text-[#346BF1]" />
-                  <span>מה השלבים הבאים?</span>
-                </div>
-                <p>1. הצוות יבחן את השאלון, החוזקות והרעיונות שהצגת.</p>
-                <p>2. מועמדים מתאימים יוזמנו לשיחת היכרות קצרה (Zoom).</p>
-                <p>3. פרטי אירוע הפתיחה וערכות השגריר יישלחו לקראת ההשקה.</p>
               </div>
 
               <div className="pt-3">
@@ -359,27 +312,37 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
           ) : (
             /* Multi-step Form */
             <form onSubmit={handleSubmit} className="space-y-6">
-              {/* Notice Banner: 2-minute video requirement */}
-              <div className="bg-gradient-to-r from-red-50/90 via-amber-50/70 to-blue-50/80 border border-red-200/80 rounded-2xl p-4 flex items-start gap-3 text-right">
-                <Video className="w-5 h-5 text-[#EA4335] shrink-0 mt-0.5" />
-                <div className="text-xs text-gray-800 leading-relaxed">
-                  <span className="font-bold text-red-950 block mb-0.5">
-                    דרישת חובה מקדימה: הקלטת סרטון היכרות (עד 2 דקות)
-                  </span>
-                  <span>
-                    לפני הגשת השאלון, יש להקליט סרטון קצר של עד 2 דקות שבו תציגו את עצמכם ותסבירו כיצד אתם משתמשים ב-Gemini ביומיום או בלימודים. בשלב 4 של השאלון תתבקשו לצרף קישור לצפייה בסרטון (Loom, Google Drive, YouTube).
-                  </span>
+              {/* Welcome Banner */}
+              {currentStep === 1 && (
+                <div className="bg-gradient-to-r from-blue-50/90 via-indigo-50/70 to-purple-50/80 border border-blue-200/80 rounded-2xl p-5 text-right shadow-xs">
+                  <div className="flex items-center gap-2 mb-1.5">
+                    <span className="text-sm font-bold text-[#346BF1]">#TeamGemini</span>
+                    <span className="text-xs text-gray-400">•</span>
+                    <span className="text-xs font-semibold text-gray-600">הגשת מועמדות 2026</span>
+                  </div>
+                  <h4 className="text-base sm:text-lg font-extrabold text-gray-900 mb-1.5">
+                    היי לכל השגרירים לעתיד של #TeamGemini! 🚀
+                  </h4>
+                  <p className="text-xs sm:text-sm text-gray-600 leading-relaxed mb-2">
+                    מוכנים להוביל, לחדש ולחבר קהילה שלמה של חובבי טכנולוגיה ו-AI? אם אתם עפים על העולמות של Google ושל בינה מלאכותית, ורוצים להביא את האנרגיה הזו ישירות לקמפוס שלכם – הגעתם בדיוק למקום הנכון!
+                  </p>
+                  <p className="text-xs text-gray-500">
+                    אנחנו מחפשים את הטיפוסים שמזיזים עניינים, יזמים בנשמה ומובילי דעה שמוכנים לצלול לעומק ה-AI ולהביא את היצירתיות הייחודית שלהם לקדמת הבמה.
+                  </p>
                 </div>
-              </div>
+              )}
 
-              {/* ================= STEP 1: Personal & Academic Info ================= */}
+              {/* ================= חלק 1: נעים להכיר ☕ ================= */}
               {currentStep === 1 && (
                 <div className="space-y-5 animate-in fade-in duration-150">
-                  <div className="border-b border-gray-100 pb-3">
-                    <h4 className="text-lg font-bold text-gray-900">
-                      פרטים אישיים ואקדמיים
-                    </h4>
-                    <p className="text-xs text-gray-500">ספרו לנו מי אתם והיכן אתם לומדים</p>
+                  <div className="border-b border-gray-100 pb-3 flex items-center justify-between">
+                    <div>
+                      <h4 className="text-lg font-bold text-gray-900 flex items-center gap-2">
+                        <Coffee className="w-5 h-5 text-amber-600" />
+                        <span>חלק 1: נעים להכיר ☕ (קצת עליכם!)</span>
+                      </h4>
+                      <p className="text-xs text-gray-500">פרטי קשר, לימודים ותחומי עניין</p>
+                    </div>
                   </div>
 
                   <div className="grid sm:grid-cols-2 gap-4">
@@ -398,25 +361,10 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                       {errors.fullName && <p className="text-xs text-red-500 mt-1 font-medium">{errors.fullName}</p>}
                     </div>
 
-                    {/* Email */}
-                    <div>
-                      <label className="block text-xs font-bold text-gray-700 mb-1.5">
-                        כתובת אימייל <span className="text-red-500">*</span>
-                      </label>
-                      <input
-                        type="email"
-                        value={formData.email}
-                        onChange={(e) => handleChange('email', e.target.value)}
-                        placeholder="name@campus.ac.il"
-                        className="w-full px-4 py-3 rounded-2xl border border-gray-200 bg-[#F8FAFC] focus:bg-white focus:outline-none focus:border-[#346BF1] focus:ring-2 focus:ring-blue-100 text-sm transition-all"
-                      />
-                      {errors.email && <p className="text-xs text-red-500 mt-1 font-medium">{errors.email}</p>}
-                    </div>
-
                     {/* Phone */}
                     <div>
                       <label className="block text-xs font-bold text-gray-700 mb-1.5">
-                        טלפון נייד <span className="text-red-500">*</span>
+                        מספר טלפון נייד (לעדכוני WhatsApp) <span className="text-red-500">*</span>
                       </label>
                       <input
                         type="tel"
@@ -428,438 +376,497 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                       {errors.phone && <p className="text-xs text-red-500 mt-1 font-medium">{errors.phone}</p>}
                     </div>
 
-                    {/* City */}
-                    <div>
+                    {/* Email */}
+                    <div className="sm:col-span-2">
                       <label className="block text-xs font-bold text-gray-700 mb-1.5">
-                        עיר מגורים
+                        כתובת דוא"ל (עדיפות למייל אקדמי) <span className="text-red-500">*</span>
+                      </label>
+                      <input
+                        type="email"
+                        value={formData.email}
+                        onChange={(e) => handleChange('email', e.target.value)}
+                        placeholder="name@campus.ac.il"
+                        className="w-full px-4 py-3 rounded-2xl border border-gray-200 bg-[#F8FAFC] focus:bg-white focus:outline-none focus:border-[#346BF1] focus:ring-2 focus:ring-blue-100 text-sm transition-all"
+                      />
+                      {errors.email && <p className="text-xs text-red-500 mt-1 font-medium">{errors.email}</p>}
+                    </div>
+
+                    {/* Institution */}
+                    <div className="sm:col-span-2">
+                      <CustomSelect
+                        label="מוסד לימודים"
+                        required
+                        searchable
+                        options={ISRAELI_INSTITUTIONS}
+                        value={formData.institution}
+                        onChange={(val) => handleChange('institution', val)}
+                        placeholder="בחרו את מוסד הלימודים שלכם..."
+                        error={errors.institution}
+                      />
+
+                      {formData.institution === 'מוסד לימודים אחר...' && (
+                        <div className="mt-2.5">
+                          <input
+                            type="text"
+                            value={formData.customInstitution || ''}
+                            onChange={(e) => handleChange('customInstitution', e.target.value)}
+                            placeholder="הזינו את שם המוסד האקדמי שלכם..."
+                            className="w-full px-4 py-2.5 rounded-xl border border-gray-200 bg-white focus:outline-none focus:border-[#346BF1] text-sm"
+                          />
+                          {errors.customInstitution && (
+                            <p className="text-xs text-red-500 mt-1 font-medium">{errors.customInstitution}</p>
+                          )}
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Current Year */}
+                    <div className="sm:col-span-2">
+                      <label className="block text-xs font-bold text-gray-700 mb-2">
+                        שנת לימודים נוכחית <span className="text-red-500">*</span>
+                      </label>
+                      <div className="grid grid-cols-3 sm:grid-cols-6 gap-2">
+                        {STUDY_YEARS.map((yr) => (
+                          <button
+                            key={yr}
+                            type="button"
+                            onClick={() => handleChange('currentYear', yr)}
+                            className={`py-2 px-3 rounded-xl text-xs font-medium border transition-all ${
+                              formData.currentYear === yr
+                                ? 'bg-[#346BF1] text-white border-[#346BF1] shadow-xs'
+                                : 'bg-[#F8FAFC] text-gray-700 border-gray-200 hover:bg-gray-100'
+                            }`}
+                          >
+                            {yr}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Field of Study */}
+                    <div className="sm:col-span-2">
+                      <label className="block text-xs font-bold text-gray-700 mb-1.5">
+                        חוג / פקולטה <span className="text-red-500">*</span>
                       </label>
                       <input
                         type="text"
-                        value={formData.city}
-                        onChange={(e) => handleChange('city', e.target.value)}
-                        placeholder="תל אביב / חיפה / ירושלים..."
+                        value={formData.fieldOfStudy}
+                        onChange={(e) => handleChange('fieldOfStudy', e.target.value)}
+                        placeholder="למשל: מדעי המחשב, משפטים, פסיכולוגיה, הנדסת תעשייה וניהול..."
                         className="w-full px-4 py-3 rounded-2xl border border-gray-200 bg-[#F8FAFC] focus:bg-white focus:outline-none focus:border-[#346BF1] focus:ring-2 focus:ring-blue-100 text-sm transition-all"
                       />
+                      {errors.fieldOfStudy && <p className="text-xs text-red-500 mt-1 font-medium">{errors.fieldOfStudy}</p>}
                     </div>
 
-                    {/* Institution (Custom Searchable Dropdown) */}
-                    <div className="sm:col-span-2">
-                      <CustomSelect
-                        label="מוסד אקדמי"
-                        required
-                        value={formData.institution}
-                        onChange={(val) => handleChange('institution', val)}
-                        options={ISRAELI_INSTITUTIONS}
-                        placeholder="בחרו את האוניברסיטה או המכללה שלכם"
-                        searchable
-                        icon={<GraduationCap className="w-4 h-4" />}
-                        error={errors.institution}
-                      />
-                    </div>
-
-                    {/* Custom Institution (if 'other' selected) */}
-                    {formData.institution === 'מוסד אקדמי אחר...' && (
-                      <div className="sm:col-span-2">
-                        <label className="block text-xs font-bold text-gray-700 mb-1.5">
-                          ציינו את שם המוסד האקדמי <span className="text-red-500">*</span>
-                        </label>
-                        <input
-                          type="text"
-                          value={formData.customInstitution || ''}
-                          onChange={(e) => handleChange('customInstitution', e.target.value)}
-                          placeholder="שם המכללה או המוסד"
-                          className="w-full px-4 py-3 rounded-2xl border border-gray-200 bg-[#F8FAFC] focus:bg-white focus:outline-none focus:border-[#346BF1] text-sm"
-                        />
-                        {errors.customInstitution && <p className="text-xs text-red-500 mt-1 font-medium">{errors.customInstitution}</p>}
-                      </div>
-                    )}
-
-                    {/* Field of Study (Custom Dropdown) */}
-                    <div className="sm:col-span-2">
-                      <CustomSelect
-                        label="תחום לימודים / חוג"
-                        required
-                        value={formData.fieldOfStudy}
-                        onChange={(val) => handleChange('fieldOfStudy', val)}
-                        options={FIELDS_OF_STUDY}
-                        placeholder="בחרו תחום לימודים"
-                        searchable
-                        icon={<Briefcase className="w-4 h-4" />}
-                        error={errors.fieldOfStudy}
-                      />
-                    </div>
-
-                    {/* Current Year - Modern Segmented Control */}
+                    {/* Hobbies and Interests */}
                     <div className="sm:col-span-2">
                       <label className="block text-xs font-bold text-gray-700 mb-1.5">
-                        שנת לימודים נוכחית
+                        תחביבים ותחומי עניין (מעבר לספרי הלימוד!) <span className="text-red-500">*</span>
                       </label>
-                      <div className="grid grid-cols-5 gap-1.5 p-1.5 bg-[#F1F5F9] rounded-2xl">
-                        {STUDY_YEARS.map((year) => {
-                          const isSelected = formData.currentYear === year;
+                      <p className="text-[11px] text-gray-400 mb-2">
+                        מה עושה לכם את זה? בינג' סדרות, פרויקטים של קוד לתוך הלילה, יצירת תוכן ב-TikTok, או אימונים במכון? בא לנו לדעת!
+                      </p>
+                      <textarea
+                        rows={3}
+                        value={formData.hobbiesAndInterests}
+                        onChange={(e) => handleChange('hobbiesAndInterests', e.target.value)}
+                        placeholder="ספרו לנו קצת על מה שאתם אוהבים לעשות..."
+                        className="w-full p-4 rounded-2xl border border-gray-200 bg-[#F8FAFC] focus:bg-white focus:outline-none focus:border-[#346BF1] focus:ring-2 focus:ring-blue-100 text-sm leading-relaxed transition-all"
+                      />
+                      {errors.hobbiesAndInterests && (
+                        <p className="text-xs text-red-500 mt-1 font-medium">{errors.hobbiesAndInterests}</p>
+                      )}
+                    </div>
+
+                    {/* Digital Platforms */}
+                    <div className="sm:col-span-2">
+                      <label className="block text-xs font-bold text-gray-700 mb-1.5">
+                        איפה אתם הכי אוהבים לשתף מחשבות ויצירות שלכם ברשת?
+                        <span className="text-xs text-gray-400 font-normal mr-1.5">(Totally optional, but we're curious!)</span>
+                      </label>
+                      <p className="text-[11px] text-gray-400 mb-2.5">
+                        בלוג, YouTube, LinkedIn, Instagram, TikTok, GitHub, אתר אישי או כל מקום אחר שבו הנוכחות הדיגיטלית שלכם בולטת.
+                      </p>
+                      <div className="flex flex-wrap gap-2">
+                        {DIGITAL_PLATFORMS.map((plat) => {
+                          const isSelected = formData.preferredPlatforms?.includes(plat);
                           return (
                             <button
-                              key={year}
+                              key={plat}
                               type="button"
-                              onClick={() => handleChange('currentYear', year)}
-                              className={`py-2 text-xs font-bold rounded-xl transition-all ${
+                              onClick={() => togglePlatform(plat)}
+                              className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all ${
                                 isSelected
-                                  ? 'bg-white text-[#346BF1] shadow-xs'
-                                  : 'text-gray-500 hover:text-gray-900'
+                                  ? 'bg-[#346BF1] text-white shadow-xs'
+                                  : 'bg-[#F1F5F9] text-gray-600 hover:bg-gray-200'
                               }`}
                             >
-                              {year}
+                              {isSelected ? `✓ ${plat}` : `+ ${plat}`}
                             </button>
                           );
                         })}
                       </div>
                     </div>
 
-                    {/* LinkedIn URL */}
-                    <div className="sm:col-span-2">
-                      <label className="block text-xs font-bold text-gray-700 mb-1.5 flex items-center justify-between">
-                        <span>פרופיל LinkedIn (מומלץ מאוד)</span>
-                        <ExternalLink className="w-3.5 h-3.5 text-gray-400" />
+                    {/* Social Media Links */}
+                    <div className="sm:col-span-2 pt-2 border-t border-gray-100">
+                      <label className="block text-xs font-bold text-gray-700 mb-2">
+                        קישורים לפרופילים ברשתות החברתיות (מומלץ):
                       </label>
-                      <input
-                        type="url"
-                        value={formData.linkedInUrl}
-                        onChange={(e) => handleChange('linkedInUrl', e.target.value)}
-                        placeholder="https://linkedin.com/in/yourprofile"
-                        className="w-full px-4 py-3 rounded-2xl border border-gray-200 bg-[#F8FAFC] focus:bg-white focus:outline-none focus:border-[#346BF1] focus:ring-2 focus:ring-blue-100 text-sm transition-all"
-                      />
+                      <div className="grid sm:grid-cols-2 gap-3">
+                        <input
+                          type="url"
+                          value={formData.linkedInUrl || ''}
+                          onChange={(e) => handleChange('linkedInUrl', e.target.value)}
+                          placeholder="קישור לפרופיל LinkedIn"
+                          className="w-full px-3.5 py-2.5 rounded-xl border border-gray-200 text-xs bg-[#F8FAFC] focus:bg-white focus:outline-none focus:border-[#346BF1]"
+                        />
+                        <input
+                          type="url"
+                          value={formData.tiktokUrl || ''}
+                          onChange={(e) => handleChange('tiktokUrl', e.target.value)}
+                          placeholder="קישור ל-TikTok"
+                          className="w-full px-3.5 py-2.5 rounded-xl border border-gray-200 text-xs bg-[#F8FAFC] focus:bg-white focus:outline-none focus:border-[#346BF1]"
+                        />
+                        <input
+                          type="url"
+                          value={formData.instagramUrl || ''}
+                          onChange={(e) => handleChange('instagramUrl', e.target.value)}
+                          placeholder="קישור ל-Instagram"
+                          className="w-full px-3.5 py-2.5 rounded-xl border border-gray-200 text-xs bg-[#F8FAFC] focus:bg-white focus:outline-none focus:border-[#346BF1]"
+                        />
+                        <input
+                          type="url"
+                          value={formData.youtubeUrl || ''}
+                          onChange={(e) => handleChange('youtubeUrl', e.target.value)}
+                          placeholder="קישור ל-YouTube / GitHub / אתר אישי"
+                          className="w-full px-3.5 py-2.5 rounded-xl border border-gray-200 text-xs bg-[#F8FAFC] focus:bg-white focus:outline-none focus:border-[#346BF1]"
+                        />
+                      </div>
                     </div>
                   </div>
                 </div>
               )}
 
-              {/* ================= STEP 2: Motivation & Passion ================= */}
+              {/* ================= חלק 2: הניצוץ שלכם ✨ ================= */}
               {currentStep === 2 && (
-                <div className="space-y-5 animate-in fade-in duration-150">
+                <div className="space-y-6 animate-in fade-in duration-150">
                   <div className="border-b border-gray-100 pb-3">
-                    <h4 className="text-lg font-bold text-gray-900">
-                      תשוקה ומוטיבציה לשגרירות
+                    <h4 className="text-lg font-bold text-gray-900 flex items-center gap-2">
+                      <Sparkles className="w-5 h-5 text-[#FBBC04]" />
+                      <span>חלק 2: תראו לנו את הניצוץ שלכם! ✨</span>
                     </h4>
-                    <p className="text-xs text-gray-500">מה החיבור שלכם ל-Google Gemini ולמה חשוב לכם להוביל</p>
+                    <p className="text-xs text-gray-500">
+                      בלי חפירות ומאמרים ארוכים – תראו לנו את הניסיון, היכולות והחשיבה המקורית שלכם דרך האתגרים הבאים:
+                    </p>
                   </div>
 
-                  {/* Why Ambassador */}
-                  <div>
-                    <label className="block text-xs font-bold text-gray-700 mb-1.5">
-                      מדוע את/ה רוצה להיות שגריר/ת Google Gemini בקמפוס שלך? <span className="text-red-500">*</span>
-                    </label>
-                    <p className="text-[11px] text-gray-400 mb-2">
-                      ספרו מה מניע אתכם, איזה חותם תרצו להשאיר וכיצד התפקיד יתרום להתפתחותכם.
-                    </p>
-                    <textarea
-                      rows={4}
-                      value={formData.whyAmbassador}
-                      onChange={(e) => handleChange('whyAmbassador', e.target.value)}
-                      placeholder="התשוקה שלי לבינה מלאכותית התחילה כאשר... אני רוצה להוביל את התוכנית בקמפוס כי..."
-                      className="w-full p-4 rounded-2xl border border-gray-200 bg-[#F8FAFC] focus:bg-white focus:outline-none focus:border-[#346BF1] focus:ring-2 focus:ring-blue-100 text-sm leading-relaxed transition-all"
-                    />
-                    {errors.whyAmbassador && <p className="text-xs text-red-500 mt-1 font-medium">{errors.whyAmbassador}</p>}
+                  {/* אתגר 1: חוקרי ג'מיניי (Gemini Canvas) */}
+                  <div className="bg-blue-50/40 p-5 rounded-2xl border border-blue-200/80 space-y-4">
+                    <div className="flex items-start gap-3">
+                      <div className="w-9 h-9 rounded-xl bg-blue-100 text-[#346BF1] flex items-center justify-center shrink-0">
+                        <Bot className="w-5 h-5" />
+                      </div>
+                      <div>
+                        <h5 className="font-bold text-sm text-gray-900">
+                          אתגר 1: חוקרי ג'מיניי (חובבי ה-AI) 🤖
+                        </h5>
+                        <p className="text-xs text-gray-600 leading-relaxed mt-1">
+                          ל-Gemini יש פיצ'ר סופר חזק שנקרא <strong>Gemini Canvas</strong> – מרחב עבודה אינטראקטיבי שבו אפשר לבנות מסמכים דינמיים, שאלונים, כלי עבודה או "אפליקציות פשוטות" רק באמצעות פרומפטים בטקסט פשוט (ללא שום צורך ברקע בטכנולוגיה או בקוד!).
+                        </p>
+                        <p className="text-xs text-blue-800 font-semibold mt-1">
+                          המשימה שלכם: דמיינו שאתם רוצים לפתור בעיה או ליצור כלי עזר קטן ביום-יום של הסטודנטים בקמפוס שלכם בלחיצת כפתור.
+                        </p>
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-bold text-gray-800 mb-1">
+                        1. מה הבעיה או הצורך בקמפוס שאתם רוצים לפתור? <span className="text-red-500">*</span>
+                      </label>
+                      <p className="text-[11px] text-gray-500 mb-2">
+                        (לדוגמה: מחולל סימולציות מבחן למשפטים/רפואה, מפת דרכים לסיכום מאמרים אקדמיים, כלי הרשמה מהיר לאירוע חברתי, או לוח משימות אינטראקטיבי לעבודה קבוצתית).
+                      </p>
+                      <textarea
+                        rows={2}
+                        value={formData.canvasCampusProblem}
+                        onChange={(e) => handleChange('canvasCampusProblem', e.target.value)}
+                        placeholder="הבעיה שאני רוצה לפתור היא..."
+                        className="w-full p-3.5 rounded-xl border border-gray-200 bg-white text-sm focus:outline-none focus:border-[#346BF1]"
+                      />
+                      {errors.canvasCampusProblem && (
+                        <p className="text-xs text-red-500 mt-1 font-medium">{errors.canvasCampusProblem}</p>
+                      )}
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-bold text-gray-800 mb-1">
+                        2. איך הכלי האינטראקטיבי שלכם ב-Canvas יעבוד בפועל, ולמה Canvas מתאים לזה? <span className="text-red-500">*</span>
+                      </label>
+                      <p className="text-[11px] text-gray-500 mb-2">
+                        מה המשתמשים יראו, איזה פרומפט/הנחיה תגדירו ל-Gemini, ואיך הסטודנטים יפעלו מול התוצר? למה לדעתכם פיצ'ר כמו Canvas מתאים לזה במיוחד בהשוואה לכלים אחרים?
+                      </p>
+                      <textarea
+                        rows={3}
+                        value={formData.canvasSolutionDetails}
+                        onChange={(e) => handleChange('canvasSolutionDetails', e.target.value)}
+                        placeholder="הכלי יאפשר לסטודנט להזין... והתוצר ב-Canvas יציג... בחרתי ב-Canvas כי..."
+                        className="w-full p-3.5 rounded-xl border border-gray-200 bg-white text-sm focus:outline-none focus:border-[#346BF1]"
+                      />
+                      {errors.canvasSolutionDetails && (
+                        <p className="text-xs text-red-500 mt-1 font-medium">{errors.canvasSolutionDetails}</p>
+                      )}
+                    </div>
                   </div>
 
-                  {/* Current Gemini Usage */}
-                  <div>
-                    <label className="block text-xs font-bold text-gray-700 mb-1.5">
-                      כיצד את/ה משתמש/ת כיום ב-Gemini בלימודים או ביומיום? <span className="text-red-500">*</span>
-                    </label>
-                    <p className="text-[11px] text-gray-400 mb-2">
-                      דוגמה מעשית למשימה, פרומפט מיוחד, כתיבת קוד, ניתוח מאמרים או פרויקט אישי.
-                    </p>
+                  {/* אתגר 2: בדיקת וייב ויראלי (יוצרי התוכן) */}
+                  <div className="bg-purple-50/40 p-5 rounded-2xl border border-purple-200/80 space-y-3.5">
+                    <div className="flex items-start gap-3">
+                      <div className="w-9 h-9 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center shrink-0">
+                        <Smartphone className="w-5 h-5" />
+                      </div>
+                      <div>
+                        <h5 className="font-bold text-sm text-gray-900">
+                          אתגר 2: בדיקת וייב ויראלי (יוצרי התוכן) 📲
+                        </h5>
+                        <p className="text-xs text-gray-600 leading-relaxed mt-1">
+                          שתפו קישור לפוסט, סרטון (Reels / TikTok / LinkedIn) או תוכן שיצרתם בעבר שאתם ממש גאים בו.
+                        </p>
+                      </div>
+                    </div>
+
+                    <div>
+                      <input
+                        type="url"
+                        value={formData.viralContentUrl}
+                        onChange={(e) => handleChange('viralContentUrl', e.target.value)}
+                        placeholder="קישור לפוסט / סרטון (אופציונלי אך מומלץ)"
+                        className="w-full px-3.5 py-2.5 rounded-xl border border-gray-200 text-xs bg-white focus:outline-none focus:border-purple-500"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-bold text-gray-800 mb-1">
+                        מה הפך את התוכן למוצלח, ואיזה ערך הקהל שלכם קיבל ממנו? <span className="text-red-500">*</span>
+                      </label>
+                      <textarea
+                        rows={2}
+                        value={formData.viralContentDescription}
+                        onChange={(e) => handleChange('viralContentDescription', e.target.value)}
+                        placeholder="התוכן הצליח כי... הערך שהעוקבים קיבלו היה..."
+                        className="w-full p-3.5 rounded-xl border border-gray-200 bg-white text-sm focus:outline-none focus:border-purple-500"
+                      />
+                      {errors.viralContentDescription && (
+                        <p className="text-xs text-red-500 mt-1 font-medium">{errors.viralContentDescription}</p>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* אתגר 3: בוני הקהילה (מחברי הקמפוס) */}
+                  <div className="bg-emerald-50/40 p-5 rounded-2xl border border-emerald-200/80 space-y-3.5">
+                    <div className="flex items-start gap-3">
+                      <div className="w-9 h-9 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0">
+                        <Users className="w-5 h-5" />
+                      </div>
+                      <div>
+                        <h5 className="font-bold text-sm text-gray-900">
+                          אתגר 3: בוני הקהילה (מחברי הקמפוס) 🤝
+                        </h5>
+                        <p className="text-xs text-gray-600 leading-relaxed mt-1">
+                          ספרו לנו על פעם שבה הובלתם פרויקט, יוזמה או אירוע מאפס (באקדמיה, בצבא, או בקהילת סטודנטים). מה היה האתגר הכי מורכב בדרך, ואיך רתמתם אנשים לעבודה משותפת כדי להגיע לתוצאה? <span className="text-red-500">*</span>
+                        </p>
+                      </div>
+                    </div>
+
                     <textarea
                       rows={3}
-                      value={formData.currentGeminiUsage}
-                      onChange={(e) => handleChange('currentGeminiUsage', e.target.value)}
-                      placeholder="לדוגמה: אני נעזר/ת ב-Gemini לסיכום מאמרים אקדמיים, לכתיבת סקריפטים ב-Python, או לסיעור מוחות..."
-                      className="w-full p-4 rounded-2xl border border-gray-200 bg-[#F8FAFC] focus:bg-white focus:outline-none focus:border-[#346BF1] focus:ring-2 focus:ring-blue-100 text-sm leading-relaxed transition-all"
+                      value={formData.communityLeadershipStory}
+                      onChange={(e) => handleChange('communityLeadershipStory', e.target.value)}
+                      placeholder="הקמתי / הובלתי את... האתגר המרכזי היה... הצלחתי לרתום אנשים על ידי..."
+                      className="w-full p-3.5 rounded-xl border border-gray-200 bg-white text-sm focus:outline-none focus:border-emerald-500"
                     />
-                    {errors.currentGeminiUsage && <p className="text-xs text-red-500 mt-1 font-medium">{errors.currentGeminiUsage}</p>}
+                    {errors.communityLeadershipStory && (
+                      <p className="text-xs text-red-500 mt-1 font-medium">{errors.communityLeadershipStory}</p>
+                    )}
                   </div>
 
-                  {/* Favorite Feature */}
+                  {/* אתגר 4: ניצוץ בקמפוס (המפעילים היצירתיים) */}
+                  <div className="bg-amber-50/40 p-5 rounded-2xl border border-amber-200/80 space-y-3.5">
+                    <div className="flex items-start gap-3">
+                      <div className="w-9 h-9 rounded-xl bg-amber-100 text-amber-800 flex items-center justify-center shrink-0">
+                        <Lightbulb className="w-5 h-5" />
+                      </div>
+                      <div>
+                        <h5 className="font-bold text-sm text-gray-900">
+                          אתגר 4: ניצוץ בקמפוס (המפעילים היצירתיים) 💡
+                        </h5>
+                        <p className="text-xs text-gray-600 leading-relaxed mt-1">
+                          אנחנו רוצים לשנות מהקצה לקצה את הדרך שבה סטודנטים נעזרים ב-AI בקמפוס! תציעו רעיון מפתיע ומחוץ לקופסה לאירוע שטח או פעילות פופ-אפ בקמפוס (בדשא, בספריה, או בין ההרצאות) שתשנה לחלוטין את האופן שבו סטודנטים משתמשים ב-Gemini וב-NotebookLM ביום-יום האקדמי שלהם.
+                        </p>
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-bold text-gray-800 mb-1">
+                        מה הרעיון, איך הוא נראה בפועל, ומה יגרום לסטודנטים לעצור הכל ולהשתתף? (זקקו את זה ל-2–4 משפטים חדים!) <span className="text-red-500">*</span>
+                      </label>
+                      <textarea
+                        rows={3}
+                        value={formData.campusPopUpIdea}
+                        onChange={(e) => handleChange('campusPopUpIdea', e.target.value)}
+                        placeholder="הרעיון שלי הוא אירוע שבו... הסטודנטים יחוו... ומה שימשוך אותם לעצור הוא..."
+                        className="w-full p-3.5 rounded-xl border border-gray-200 bg-white text-sm focus:outline-none focus:border-amber-500"
+                      />
+                      {errors.campusPopUpIdea && (
+                        <p className="text-xs text-red-500 mt-1 font-medium">{errors.campusPopUpIdea}</p>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* אתגר 5: מד האהבה לגוגל (מספרי הסיפורים) */}
+                  <div className="bg-rose-50/40 p-5 rounded-2xl border border-rose-200/80 space-y-3.5">
+                    <div className="flex items-start gap-3">
+                      <div className="w-9 h-9 rounded-xl bg-rose-100 text-rose-600 flex items-center justify-center shrink-0">
+                        <Heart className="w-5 h-5" />
+                      </div>
+                      <div>
+                        <h5 className="font-bold text-sm text-gray-900">
+                          אתגר 5: מד האהבה לגוגל (מספרי הסיפורים) 💙
+                        </h5>
+                        <p className="text-xs text-gray-600 leading-relaxed mt-1">
+                          למה אתם באמת רוצים להיות שגרירי Google Gemini? <span className="text-red-500">*</span>
+                        </p>
+                      </div>
+                    </div>
+
+                    <textarea
+                      rows={3}
+                      value={formData.whyGoogleGeminiAmbassador}
+                      onChange={(e) => handleChange('whyGoogleGeminiAmbassador', e.target.value)}
+                      placeholder="החיבור שלי ל-Google ול-AI התחיל כאשר... חשוב לי להוביל את התוכנית הזו כי..."
+                      className="w-full p-3.5 rounded-xl border border-gray-200 bg-white text-sm focus:outline-none focus:border-rose-500"
+                    />
+                    {errors.whyGoogleGeminiAmbassador && (
+                      <p className="text-xs text-red-500 mt-1 font-medium">{errors.whyGoogleGeminiAmbassador}</p>
+                    )}
+                  </div>
+                </div>
+              )}
+
+              {/* ================= חלק 3: רגע הפיץ' 🎙️ ================= */}
+              {currentStep === 3 && (
+                <div className="space-y-6 animate-in fade-in duration-150">
+                  <div className="border-b border-gray-100 pb-3">
+                    <h4 className="text-lg font-bold text-gray-900 flex items-center gap-2">
+                      <Mic className="w-5 h-5 text-[#EA4335]" />
+                      <span>חלק 3: רגע הפיץ' 🎙️</span>
+                    </h4>
+                    <p className="text-xs text-gray-500">הסרטון האישי, תקציר ואישור סופי</p>
+                  </div>
+
+                  {/* Video Instructions Banner */}
+                  <div className="bg-gradient-to-r from-red-50/90 via-amber-50/70 to-blue-50/80 border border-red-200/90 rounded-2xl p-5 space-y-3">
+                    <div className="flex items-center gap-2">
+                      <Video className="w-5 h-5 text-[#EA4335]" />
+                      <span className="font-bold text-sm text-gray-900">
+                        אל תתביישו מהמצלמה! העלו סרטון קצר (60–90 שניות)
+                      </span>
+                    </div>
+
+                    <p className="text-xs text-gray-600 leading-relaxed">
+                      העלו סרטון בקישור פתוח (Google Drive / YouTube Unlisted / TikTok / Reels) הכולל:
+                    </p>
+
+                    <div className="space-y-1.5 text-xs text-gray-700 bg-white/70 p-3 rounded-xl border border-red-100">
+                      <div>
+                        <strong>• חלק א': היכרות מהירה</strong> — מי אתם ומה האנרגיה והוייב שאתם מביאים לשולחן?
+                      </div>
+                      <div>
+                        <strong>• חלק ב': ה-Study Hack שלכם ב-AI</strong> — תספרו לנו על Gemini / NotebookLM Study Hack חכם, פרקטי ומפתיע שפותר משימה אקדמית אמיתית, אתגר לימודי, או באג בקוד.
+                      </div>
+                      <div className="text-amber-800 font-semibold pt-1">
+                        💡 טיפ ובונוס למעזים: יתרון למי שישלבו בסרטון גם הדגמה בלייב על המסך!
+                      </div>
+                    </div>
+
+                    <p className="text-[11px] text-gray-500 italic">
+                      (מדביקים את הקישור לסרטון ישירות בטופס – אין צורך להעלות קבצים!)
+                    </p>
+                  </div>
+
+                  {/* Video URL Input */}
                   <div>
-                    <label className="block text-xs font-bold text-gray-700 mb-1.5">
-                      מה הפיצ'ר האהוב עליך ביותר ב-Gemini?
+                    <label className="block text-xs font-bold text-gray-800 mb-1.5">
+                      קישור לסרטון הפיץ' (60–90 שניות) <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      type="url"
+                      value={formData.videoPitchUrl}
+                      onChange={(e) => handleChange('videoPitchUrl', e.target.value)}
+                      placeholder="https://drive.google.com/... או קישור ל-YouTube / Loom / Reels"
+                      className="w-full px-4 py-3 rounded-xl border border-gray-300 bg-white text-sm focus:outline-none focus:border-[#346BF1] focus:ring-2 focus:ring-blue-100"
+                    />
+                    {errors.videoPitchUrl && (
+                      <p className="text-xs text-red-500 mt-1 font-medium">{errors.videoPitchUrl}</p>
+                    )}
+                  </div>
+
+                  {/* Study Hack Summary (Optional) */}
+                  <div>
+                    <label className="block text-xs font-bold text-gray-800 mb-1.5">
+                      תקציר ה-Study Hack שלכם במשפט או שניים (אופציונלי):
                     </label>
                     <input
                       type="text"
-                      value={formData.favoriteGeminiFeature}
-                      onChange={(e) => handleChange('favoriteGeminiFeature', e.target.value)}
-                      placeholder="לדוגמה: חלון הקשר של 2M טוקנים, Multimodal (וידאו ותמונות), Google Workspace integration..."
-                      className="w-full px-4 py-3 rounded-2xl border border-gray-200 bg-[#F8FAFC] focus:bg-white focus:outline-none focus:border-[#346BF1] focus:ring-2 focus:ring-blue-100 text-sm transition-all"
+                      value={formData.studyHackSummary || ''}
+                      onChange={(e) => handleChange('studyHackSummary', e.target.value)}
+                      placeholder="למשל: יצירת פודקאסט שמע ב-NotebookLM ממאמר באנגלית לבחינה בביולוגיה..."
+                      className="w-full px-4 py-2.5 rounded-xl border border-gray-200 bg-[#F8FAFC] text-sm focus:bg-white focus:outline-none focus:border-[#346BF1]"
                     />
                   </div>
-                </div>
-              )}
 
-              {/* ================= STEP 3: Strengths & Skills ================= */}
-              {currentStep === 3 && (
-                <div className="space-y-5 animate-in fade-in duration-150">
-                  <div className="border-b border-gray-100 pb-3">
-                    <h4 className="text-lg font-bold text-gray-900">
-                      במה את/ה הכי טוב/ה? חוזקות וכישורים
-                    </h4>
-                    <p className="text-xs text-gray-500">בחרו את התחומים שבהם אתם מביאים ערך מיוחד</p>
-                  </div>
-
-                  {/* Interactive Strength Cards */}
-                  <div>
-                    <label className="block text-xs font-bold text-gray-700 mb-2">
-                      תחומי החוזק הבולטים שלך (ניתן לבחור יותר מאחד) <span className="text-red-500">*</span>
-                    </label>
-                    <div className="grid sm:grid-cols-2 gap-2.5">
-                      {STRENGTH_OPTIONS.map((strength) => {
-                        const isChecked = formData.primaryStrengths.includes(strength.label);
-                        return (
-                          <div
-                            key={strength.id}
-                            onClick={() => toggleArrayItem('primaryStrengths', strength.label)}
-                            className={`p-3.5 rounded-2xl border cursor-pointer transition-all flex items-center gap-3 text-xs sm:text-sm font-medium ${
-                              isChecked
-                                ? 'bg-[#E8F0FE] border-[#346BF1] text-[#346BF1] shadow-xs'
-                                : 'bg-[#F8FAFC] border-gray-200 hover:border-gray-300 text-gray-700 hover:bg-white'
-                            }`}
-                          >
-                            <div
-                              className={`w-5 h-5 rounded-lg border flex items-center justify-center shrink-0 transition-all ${
-                                isChecked
-                                  ? 'bg-[#346BF1] border-[#346BF1] text-white'
-                                  : 'border-gray-300 bg-white'
-                              }`}
-                            >
-                              {isChecked && <Check className="w-3.5 h-3.5 stroke-[3]" />}
-                            </div>
-                            <span className="leading-snug">{strength.label}</span>
-                          </div>
-                        );
-                      })}
+                  {/* Candidate Summary Card */}
+                  <div className="bg-[#F8FAFC] p-5 rounded-2xl border border-gray-200 space-y-2.5 text-xs text-gray-700">
+                    <div className="font-bold text-gray-900 pb-1.5 border-b border-gray-200 flex items-center justify-between">
+                      <span>תמצית המועמדות שלך:</span>
+                      <span className="text-[#346BF1] text-[11px]">בדקו את הפרטים לפני שליחה</span>
                     </div>
-                    {errors.primaryStrengths && <p className="text-xs text-red-500 mt-1 font-medium">{errors.primaryStrengths}</p>}
-                  </div>
-
-                  {/* Past Leadership Experience */}
-                  <div>
-                    <label className="block text-xs font-bold text-gray-700 mb-1.5">
-                      ספרו על מיזם, אירוע או פעילות שהובלתם בעבר <span className="text-red-500">*</span>
-                    </label>
-                    <p className="text-[11px] text-gray-400 mb-2">
-                      בלימודים, בשירות הצבאי/לאומי, בעבודה, בתנועת נוער או בפרויקט קהילתי.
-                    </p>
-                    <textarea
-                      rows={3}
-                      value={formData.pastLeadershipExperience}
-                      onChange={(e) => handleChange('pastLeadershipExperience', e.target.value)}
-                      placeholder="במסגרת... הובלתי... האתגר המרכזי היה... והשגנו תוצאה של..."
-                      className="w-full p-4 rounded-2xl border border-gray-200 bg-[#F8FAFC] focus:bg-white focus:outline-none focus:border-[#346BF1] focus:ring-2 focus:ring-blue-100 text-sm leading-relaxed transition-all"
-                    />
-                    {errors.pastLeadershipExperience && <p className="text-xs text-red-500 mt-1 font-medium">{errors.pastLeadershipExperience}</p>}
-                  </div>
-
-                  {/* Technical & Community Skills Chips */}
-                  <div>
-                    <label className="block text-xs font-bold text-gray-700 mb-2">
-                      כלים ומיומנויות נוספים:
-                    </label>
-                    <div className="flex flex-wrap gap-2">
-                      {TECHNICAL_SKILL_OPTIONS.map((skill, i) => {
-                        const isSelected = formData.technicalSkills.includes(skill);
-                        return (
-                          <button
-                            type="button"
-                            key={i}
-                            onClick={() => toggleArrayItem('technicalSkills', skill)}
-                            className={`px-3.5 py-1.5 rounded-full text-xs font-medium transition-all ${
-                              isSelected
-                                ? 'bg-[#346BF1] text-white shadow-xs'
-                                : 'bg-[#F1F5F9] text-gray-600 hover:bg-gray-200'
-                            }`}
-                          >
-                            {isSelected ? `✓ ${skill}` : `+ ${skill}`}
-                          </button>
-                        );
-                      })}
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {/* ================= STEP 4: Campus Vision ================= */}
-              {currentStep === 4 && (
-                <div className="space-y-5 animate-in fade-in duration-150">
-                  <div className="border-b border-gray-100 pb-3">
-                    <h4 className="text-lg font-bold text-gray-900">
-                      חזון ויוזמה בקמפוס
-                    </h4>
-                    <p className="text-xs text-gray-500">איך תביאו את מהפכת ה-AI לקהילת הסטודנטים אצלכם</p>
-                  </div>
-
-                  <div>
-                    <label className="block text-xs font-bold text-gray-700 mb-1.5">
-                      איזה אירוע או סדנה ראשונה תרצו להפיק בקמפוס? <span className="text-red-500">*</span>
-                    </label>
-                    <p className="text-[11px] text-gray-400 mb-2">
-                      לדוגמה: "סדנת Prompt Engineering לבניית עוזר אישי למבחנים", "האקתון פיתוח עם Gemini API", "אירוע AI לעסקים".
-                    </p>
-                    <textarea
-                      rows={3}
-                      value={formData.proposedFirstEvent}
-                      onChange={(e) => handleChange('proposedFirstEvent', e.target.value)}
-                      placeholder="הייתי מארגן/ת סדנה של שעתיים שבה כל סטודנט בונה..."
-                      className="w-full p-4 rounded-2xl border border-gray-200 bg-[#F8FAFC] focus:bg-white focus:outline-none focus:border-[#346BF1] focus:ring-2 focus:ring-blue-100 text-sm leading-relaxed transition-all"
-                    />
-                    {errors.proposedFirstEvent && <p className="text-xs text-red-500 mt-1 font-medium">{errors.proposedFirstEvent}</p>}
-                  </div>
-
-                  <div>
-                    <label className="block text-xs font-bold text-gray-700 mb-1.5">
-                      איך תרתמו סטודנטים שלא מגיעים מרקע טכנולוגי (משפטים, מנהל עסקים, עיצוב)?
-                    </label>
-                    <textarea
-                      rows={3}
-                      value={formData.nonTechOutreachStrategy}
-                      onChange={(e) => handleChange('nonTechOutreachStrategy', e.target.value)}
-                      placeholder="אציג דוגמאות מותאמות לתחום שלהם, כמו סיכום תקדימים משפטיים או ניתוח דוחות שוק..."
-                      className="w-full p-4 rounded-2xl border border-gray-200 bg-[#F8FAFC] focus:bg-white focus:outline-none focus:border-[#346BF1] focus:ring-2 focus:ring-blue-100 text-sm leading-relaxed transition-all"
-                    />
-                  </div>
-
-                  {/* Video Pitch */}
-                  <div className="bg-[#FEF7E0]/60 p-4 sm:p-5 rounded-2xl border border-[#FBBC04]/80">
-                    <label className="block text-xs font-bold text-gray-900 mb-1 flex items-center justify-between">
-                      <span className="flex items-center gap-1.5">
-                        <Video className="w-4 h-4 text-[#EA4335]" />
-                        <span>קישור לסרטון היכרות (עד 2 דקות) <span className="text-red-500">*</span></span>
-                      </span>
-                      <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-red-100 text-[#EA4335] border border-red-200">
-                        דרישת חובה
-                      </span>
-                    </label>
-                    <p className="text-[11px] text-gray-600 mb-2.5 leading-relaxed">
-                      סרטון של עד 2 דקות שבו אתם מציגים את עצמכם ומסבירים מקרה שימוש מעשי (Use-case) או דרך שבה אתם נעזרים ב-Gemini בשגרה (קישור פתוח לצפייה מ-Loom, Google Drive, YouTube וכו').
-                    </p>
-                    <input
-                      type="url"
-                      value={formData.videoPitchUrl || ''}
-                      onChange={(e) => handleChange('videoPitchUrl', e.target.value)}
-                      placeholder="https://www.loom.com/share/... או קישור ל-Google Drive / YouTube"
-                      className="w-full px-4 py-2.5 rounded-xl border border-gray-300 bg-white focus:outline-none focus:border-[#346BF1] focus:ring-2 focus:ring-blue-100 text-sm"
-                    />
-                    {errors.videoPitchUrl && (
-                      <p className="text-xs text-red-500 mt-1.5 font-medium">{errors.videoPitchUrl}</p>
-                    )}
-                  </div>
-                </div>
-              )}
-
-              {/* ================= STEP 5: Review & Commitment ================= */}
-              {currentStep === 5 && (
-                <div className="space-y-5 animate-in fade-in duration-150">
-                  <div className="border-b border-gray-100 pb-3">
-                    <h4 className="text-lg font-bold text-gray-900">
-                      זמינות, התחייבות וסיכום
-                    </h4>
-                    <p className="text-xs text-gray-500">סקירה מהירה של פרטי המועמדות לפני שליחה</p>
-                  </div>
-
-                  {/* Summary Box */}
-                  <div className="bg-[#F8FAFC] p-5 rounded-2xl border border-gray-200 space-y-2.5 text-xs sm:text-sm">
-                    <div className="font-bold text-gray-900 pb-1 border-b border-gray-200/60">
-                      תמצית המועמדות שלך:
-                    </div>
-                    <div className="grid grid-cols-2 gap-3 text-gray-700">
+                    <div className="grid grid-cols-2 gap-2">
                       <div><span className="font-semibold text-gray-500">שם:</span> {formData.fullName}</div>
+                      <div><span className="font-semibold text-gray-500">טלפון:</span> {formData.phone}</div>
                       <div><span className="font-semibold text-gray-500">אימייל:</span> {formData.email}</div>
                       <div><span className="font-semibold text-gray-500">מוסד:</span> {formData.institution}</div>
-                      <div><span className="font-semibold text-gray-500">חוג:</span> {formData.fieldOfStudy} ({formData.currentYear})</div>
-                    </div>
-                    {formData.primaryStrengths.length > 0 && (
-                      <div className="pt-2 text-gray-700">
-                        <span className="font-semibold text-gray-500">חוזקות שנבחרו: </span>
-                        {formData.primaryStrengths.join(', ')}
-                      </div>
-                    )}
-                    {formData.videoPitchUrl && (
-                      <div className="pt-2 text-gray-700">
-                        <span className="font-semibold text-gray-500">סרטון היכרות (2 דק'): </span>
-                        <a
-                          href={formData.videoPitchUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-[#346BF1] underline text-xs"
-                        >
-                          קישור לסרטון שהוזן
-                        </a>
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Weekly Commitment - Rich Selectable Cards */}
-                  <div>
-                    <label className="block text-xs font-bold text-gray-700 mb-2">
-                      היקף שעות שבועי שתוכלו להקדיש לפעילות:
-                    </label>
-                    <div className="grid sm:grid-cols-3 gap-2.5">
-                      {COMMITMENT_OPTIONS.map((opt) => {
-                        const isSelected = formData.weeklyCommitmentHours === opt.id;
-                        return (
-                          <div
-                            key={opt.id}
-                            onClick={() => handleChange('weeklyCommitmentHours', opt.id)}
-                            className={`p-3.5 rounded-2xl border cursor-pointer transition-all text-center flex flex-col justify-between ${
-                              isSelected
-                                ? 'bg-[#E8F0FE] border-[#346BF1] text-[#346BF1] shadow-xs'
-                                : 'bg-[#F8FAFC] border-gray-200 hover:border-gray-300 text-gray-700 hover:bg-white'
-                            }`}
-                          >
-                            <span
-                              className={`text-[10px] font-bold px-2 py-0.5 rounded-full inline-block mx-auto mb-1.5 ${
-                                opt.recommended
-                                  ? 'bg-[#346BF1] text-white'
-                                  : 'bg-gray-200 text-gray-600'
-                              }`}
-                            >
-                              {opt.badge}
-                            </span>
-                            <div className="font-bold text-sm text-gray-900 mb-0.5">
-                              {opt.title}
-                            </div>
-                            <div className="text-[11px] text-gray-500 leading-snug">
-                              {opt.subtitle}
-                            </div>
-                          </div>
-                        );
-                      })}
+                      <div><span className="font-semibold text-gray-500">חוג ושנה:</span> {formData.fieldOfStudy} ({formData.currentYear})</div>
                     </div>
                   </div>
 
-                  {/* Terms & Declarations */}
-                  <div className="pt-2 space-y-3">
+                  {/* Agreement Checkbox */}
+                  <div className="bg-white p-4 rounded-2xl border border-gray-200">
                     <label className="flex items-start gap-3 cursor-pointer">
                       <input
                         type="checkbox"
                         checked={formData.agreedToTerms}
                         onChange={(e) => handleChange('agreedToTerms', e.target.checked)}
-                        className="w-4 h-4 text-[#346BF1] rounded mt-0.5 border-gray-300 focus:ring-[#346BF1]"
+                        className="mt-1 w-4 h-4 rounded text-[#346BF1] focus:ring-blue-400 cursor-pointer"
                       />
-                      <span className="text-xs text-gray-700 leading-normal">
-                        אני מאשר/ת כי הפרטים שנמסרו נכונים, כי אני סטודנט/ית פעיל/ה באקדמיה, ומסכים/ה לקבל עדכונים מנבחרת שגרירי Google Gemini בנוגע למיון התוכנית. <span className="text-red-500">*</span>
+                      <span className="text-xs text-gray-700 leading-relaxed select-none">
+                        אני מאשר/ת שהפרטים שמילאתי נכונים ומדויקים, ומביע/ה את נכונותי לקחת חלק פעיל בתוכנית שגרירי Google Gemini בישראל לשנת 2026.
                       </span>
                     </label>
-                    {errors.agreedToTerms && <p className="text-xs text-red-500 font-medium">{errors.agreedToTerms}</p>}
+                    {errors.agreedToTerms && (
+                      <p className="text-xs text-red-500 mt-2 font-medium">{errors.agreedToTerms}</p>
+                    )}
                   </div>
                 </div>
               )}
 
-              {/* Action Buttons Footer */}
-              <div className="pt-4 border-t border-gray-100 flex items-center justify-between gap-3">
+              {/* Navigation Controls */}
+              <div className="pt-4 border-t border-gray-100 flex items-center justify-between">
                 {currentStep > 1 ? (
                   <button
                     type="button"
                     onClick={handlePrev}
-                    className="px-5 py-2.5 rounded-full border border-gray-300 text-gray-700 hover:bg-gray-50 text-sm font-medium flex items-center gap-1.5 transition-colors"
+                    className="px-5 py-2.5 rounded-full border border-gray-300 text-gray-700 hover:bg-gray-50 text-xs sm:text-sm font-semibold transition-colors flex items-center gap-1.5"
                   >
                     <ArrowRight className="w-4 h-4" />
                     <span>חזרה לשלב הקודם</span>
@@ -872,7 +879,7 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                   <button
                     type="button"
                     onClick={handleNext}
-                    className="bg-[#346BF1] hover:bg-blue-600 text-white px-7 py-2.5 rounded-full text-sm font-medium flex items-center gap-1.5 transition-colors shadow-xs"
+                    className="bg-[#346BF1] hover:bg-blue-600 text-white px-7 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-colors flex items-center gap-2 shadow-xs"
                   >
                     <span>המשך לשלב הבא</span>
                     <ArrowLeft className="w-4 h-4" />
@@ -881,9 +888,16 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="bg-[#346BF1] hover:bg-blue-600 text-white px-8 py-3 rounded-full text-sm sm:text-base font-bold transition-all shadow-md hover:shadow-lg disabled:opacity-50"
+                    className="bg-gradient-to-r from-[#346BF1] to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white px-8 py-3 rounded-full text-sm font-bold transition-all shadow-md flex items-center gap-2 disabled:opacity-50 active:scale-95"
                   >
-                    {isSubmitting ? 'שולח מועמדות...' : 'שליחת מועמדות לתוכנית 2026 🚀'}
+                    {isSubmitting ? (
+                      <span>שולח מועמדות...</span>
+                    ) : (
+                      <>
+                        <span>שליחת מועמדות ל-#TeamGemini 🚀</span>
+                        <Send className="w-4 h-4" />
+                      </>
+                    )}
                   </button>
                 )}
               </div>

@@ -36,40 +36,59 @@ export interface FaqItem {
 }
 
 export interface ApplicationFormData {
-  // Step 1: Personal & Academic
+  // חלק 1: נעים להכיר ☕ (קצת עליכם!)
   fullName: string;
-  email: string;
   phone: string;
+  email: string;
   institution: string;
   customInstitution?: string;
-  degree: string;
-  fieldOfStudy: string;
   currentYear: string;
-  expectedGraduation: string;
-  city: string;
-  linkedInUrl: string;
-  githubOrPortfolioUrl: string;
-  instagramUrl: string;
+  fieldOfStudy: string;
+  hobbiesAndInterests: string;
+  preferredPlatforms: string[];
+  linkedInUrl?: string;
+  tiktokUrl?: string;
+  instagramUrl?: string;
+  youtubeUrl?: string;
 
-  // Step 2: Passion & Why Gemini
-  whyAmbassador: string;
-  currentGeminiUsage: string;
-  favoriteGeminiFeature: string;
+  // חלק 2: תראו לנו את הניצוץ שלכם! ✨
+  // אתגר 1: חוקרי ג'מיניי (חובבי ה-AI) 🤖
+  canvasCampusProblem: string;
+  canvasSolutionDetails: string;
 
-  // Step 3: Strengths & Skills
-  primaryStrengths: string[];
-  pastLeadershipExperience: string;
-  technicalSkills: string[];
+  // אתגר 2: בדיקת וייב ויראלי (יוצרי התוכן) 📲
+  viralContentUrl: string;
+  viralContentDescription: string;
 
-  // Step 4: Campus Vision
-  proposedFirstEvent: string;
-  nonTechOutreachStrategy: string;
+  // אתגר 3: בוני הקהילה (מחברי הקמפוס) 🤝
+  communityLeadershipStory: string;
 
-  // Step 5: Commitment & Final
-  weeklyCommitmentHours: string;
-  videoPitchUrl?: string;
+  // אתגר 4: ניצוץ בקמפוס (המפעילים היצירתיים) 💡
+  campusPopUpIdea: string;
+
+  // אתגר 5: מד האהבה לגוגל (מספרי הסיפורים) 💙
+  whyGoogleGeminiAmbassador: string;
+
+  // חלק 3: רגע הפיץ' 🎙️
+  videoPitchUrl: string;
+  studyHackSummary?: string;
   agreedToTerms: boolean;
-  allowSharingInfo: boolean;
+
+  // Backward compatibility fields
+  city?: string;
+  degree?: string;
+  expectedGraduation?: string;
+  githubOrPortfolioUrl?: string;
+  whyAmbassador?: string;
+  currentGeminiUsage?: string;
+  favoriteGeminiFeature?: string;
+  primaryStrengths?: string[];
+  pastLeadershipExperience?: string;
+  technicalSkills?: string[];
+  proposedFirstEvent?: string;
+  nonTechOutreachStrategy?: string;
+  weeklyCommitmentHours?: string;
+  allowSharingInfo?: boolean;
 }
 
 export interface SubmissionRecord extends ApplicationFormData {
