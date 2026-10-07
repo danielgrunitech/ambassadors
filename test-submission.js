@@ -22,7 +22,7 @@ const testCandidate = {
   submittedAt: new Date().toISOString()
 };
 
-const WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbyKg-JtzKV7T6RAEbLhKVSwf1rt_lsIb9icFC1LxfntAOpaU4MKz1piWne_BefdIzzrXw/exec";
+const WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbyhF8tLJfCVkxe6xS1pjdoxIA2DNro43Ll7xAb1BRKxoA-a0iFHit5AqXV2__HmvHaMpg/exec";
 
 console.log("Submitting test candidate:", testCandidate.fullName, "(" + testCandidate.id + ")...");
 

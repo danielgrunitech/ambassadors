@@ -67,11 +67,17 @@ const SAMPLE_SUBMISSIONS: SubmissionRecord[] = [
   }
 ];
 
-export const DEFAULT_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbyKg-JtzKV7T6RAEbLhKVSwf1rt_lsIb9icFC1LxfntAOpaU4MKz1piWne_BefdIzzrXw/exec';
+export const DEFAULT_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbyhF8tLJfCVkxe6xS1pjdoxIA2DNro43Ll7xAb1BRKxoA-a0iFHit5AqXV2__HmvHaMpg/exec';
+
+const OLD_DEFAULT_WEBHOOK = 'https://script.google.com/macros/s/AKfycbyKg-JtzKV7T6RAEbLhKVSwf1rt_lsIb9icFC1LxfntAOpaU4MKz1piWne_BefdIzzrXw/exec';
 
 export const getWebhookUrl = (): string => {
   try {
-    return localStorage.getItem(WEBHOOK_KEY) || (import.meta as any).env?.VITE_GOOGLE_SHEETS_WEBHOOK_URL || DEFAULT_WEBHOOK_URL;
+    const stored = localStorage.getItem(WEBHOOK_KEY);
+    if (!stored || stored === OLD_DEFAULT_WEBHOOK) {
+      return (import.meta as any).env?.VITE_GOOGLE_SHEETS_WEBHOOK_URL || DEFAULT_WEBHOOK_URL;
+    }
+    return stored;
   } catch (e) {
     return DEFAULT_WEBHOOK_URL;
   }
