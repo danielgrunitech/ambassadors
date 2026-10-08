@@ -118,35 +118,9 @@ function doPost(e) {
 }
 
 function doGet(e) {
-  try {
-    var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
-    var values = sheet.getDataRange().getValues();
-    if (values.length <= 1) {
-      return ContentService.createTextOutput(JSON.stringify({
-        status: "success",
-        submissions: []
-      })).setMimeType(ContentService.MimeType.JSON);
-    }
-    
-    var headers = values[0];
-    var submissions = [];
-    for (var i = 1; i < values.length; i++) {
-      var row = values[i];
-      var item = {};
-      for (var j = 0; j < headers.length; j++) {
-        item[headers[j]] = row[j];
-      }
-      submissions.push(item);
-    }
-    
-    return ContentService.createTextOutput(JSON.stringify({
-      status: "success",
-      submissions: submissions
-    })).setMimeType(ContentService.MimeType.JSON);
-  } catch (err) {
-    return ContentService.createTextOutput(JSON.stringify({
-      status: "error",
-      message: err.toString()
-    })).setMimeType(ContentService.MimeType.JSON);
-  }
+  // Secure: Do not output candidate data
+  return ContentService.createTextOutput(JSON.stringify({
+    status: "active",
+    message: "Google Gemini Ambassador Israel 2026 Endpoint (Write-Only)"
+  })).setMimeType(ContentService.MimeType.JSON);
 }
