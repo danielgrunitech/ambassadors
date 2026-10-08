@@ -183,15 +183,14 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validateStep(3)) return;
 
     setIsSubmitting(true);
-    setTimeout(() => {
-      const record = saveSubmission(formData);
+    try {
+      const record = await saveSubmission(formData);
       setSubmittedRecord(record);
-      setIsSubmitting(false);
       onSubmissionSuccess();
 
       try {
@@ -201,7 +200,11 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
           origin: { y: 0.6 }
         });
       } catch (err) {}
-    }, 500);
+    } catch (err) {
+      console.error('Submission failed', err);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   if (!isOpen) return null;

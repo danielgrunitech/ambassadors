@@ -69,18 +69,11 @@ const SAMPLE_SUBMISSIONS: SubmissionRecord[] = [
 
 export const DEFAULT_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbyhF8tLJfCVkxe6xS1pjdoxIA2DNro43Ll7xAb1BRKxoA-a0iFHit5AqXV2__HmvHaMpg/exec';
 
-const OLD_DEFAULT_WEBHOOK = 'https://script.google.com/macros/s/AKfycbyKg-JtzKV7T6RAEbLhKVSwf1rt_lsIb9icFC1LxfntAOpaU4MKz1piWne_BefdIzzrXw/exec';
-
 export const getWebhookUrl = (): string => {
   try {
-    const stored = localStorage.getItem(WEBHOOK_KEY);
-    if (!stored || stored === OLD_DEFAULT_WEBHOOK) {
-      return (import.meta as any).env?.VITE_GOOGLE_SHEETS_WEBHOOK_URL || DEFAULT_WEBHOOK_URL;
-    }
-    return stored;
-  } catch (e) {
-    return DEFAULT_WEBHOOK_URL;
-  }
+    localStorage.removeItem(WEBHOOK_KEY);
+  } catch (e) {}
+  return DEFAULT_WEBHOOK_URL;
 };
 
 export const setWebhookUrl = (url: string) => {
@@ -92,7 +85,7 @@ export const setWebhookUrl = (url: string) => {
 };
 
 export const sendToGoogleSheets = async (record: SubmissionRecord): Promise<boolean> => {
-  const url = getWebhookUrl();
+  const url = DEFAULT_WEBHOOK_URL;
   if (!url || !url.startsWith('http')) {
     console.log('No Google Sheets Webhook URL configured. Submission saved locally.');
     return false;
@@ -155,7 +148,7 @@ export const getSubmissions = (): SubmissionRecord[] => {
   }
 };
 
-export const saveSubmission = (data: ApplicationFormData): SubmissionRecord => {
+export const saveSubmission = async (data: ApplicationFormData): Promise<SubmissionRecord> => {
   const submissions = getSubmissions();
   const idNumber = Math.floor(1000 + Math.random() * 9000);
   const record: SubmissionRecord = {
@@ -173,8 +166,12 @@ export const saveSubmission = (data: ApplicationFormData): SubmissionRecord => {
     console.error('Failed to save submission', e);
   }
 
-  // Trigger Google Sheets dispatch in background
-  sendToGoogleSheets(record).catch(console.error);
+  // Await Google Sheets dispatch directly
+  try {
+    await sendToGoogleSheets(record);
+  } catch (e) {
+    console.error('Google Sheets dispatch failed', e);
+  }
 
   return record;
 };
