@@ -2,13 +2,47 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Google Sans Flex - Variable Font for Titles / Headers */
+@font-face {
+  font-family: 'Google Sans Flex';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 1000;
+  src: local('Google Sans Flex'),
+       local('Google Sans'),
+       url('/fonts/google-sans-flex-latin-full-normal.woff2') format('woff2-variations');
+}
+
+/* Google Sans Regular for Body Text */
+@font-face {
+  font-family: 'Google Sans Regular';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400;
+  src: local('Google Sans Regular'),
+       local('Google Sans'),
+       local('Google Sans Text'),
+       url('/fonts/google-sans-flex-latin-wght-normal.woff2') format('woff2-variations');
+}
+
+/* Google Sans */
+@font-face {
+  font-family: 'Google Sans';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 1000;
+  src: local('Google Sans'),
+       local('Google Sans Text'),
+       url('/fonts/google-sans-flex-latin-wght-normal.woff2') format('woff2-variations');
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;
   }
   
   body {
-    font-family: 'Heebo', 'Rubik', 'Assistant', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-family: 'Google Sans Regular', 'Google Sans', 'Heebo', 'Rubik', 'Assistant', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     color: #1F2937;
     background-color: #E8F0FE;
   }

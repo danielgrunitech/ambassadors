@@ -44,8 +44,8 @@ export const CustomSelect: React.FC<CustomSelectProps> = ({
     : options;
 
   return (
-    <div className="relative text-right" ref={dropdownRef}>
-      <label className="block text-sm font-medium text-gray-800 mb-1.5">
+    <div className="relative text-right font-google-body" ref={dropdownRef}>
+      <label className="block text-sm font-medium text-gray-800 mb-1.5 font-google-body">
         {label} {required && <span className="text-[#EA4335] font-bold">*</span>}
       </label>
 

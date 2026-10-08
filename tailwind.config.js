@@ -27,7 +27,9 @@ export default {
         }
       },
       fontFamily: {
-        sans: ['Heebo', 'Rubik', 'Assistant', 'system-ui', 'sans-serif'],
+        sans: ['"Google Sans Regular"', '"Google Sans"', 'Heebo', 'Rubik', 'Assistant', 'system-ui', 'sans-serif'],
+        'google-heading': ['"Google Sans Flex"', '"Google Sans"', 'Heebo', 'Rubik', 'sans-serif'],
+        'google-body': ['"Google Sans Regular"', '"Google Sans"', 'Heebo', 'Assistant', 'sans-serif'],
       },
       boxShadow: {
         'gemini': '0 4px 20px -2px rgba(52, 107, 241, 0.12), 0 2px 6px -1px rgba(0, 0, 0, 0.04)',

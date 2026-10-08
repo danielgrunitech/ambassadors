@@ -218,7 +218,7 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
       }`}
     >
       <div
-        className={`bg-[#F0F4FA] text-right flex flex-col transition-all duration-200 overflow-hidden ${
+        className={`bg-[#F0F4FA] font-google-body text-right flex flex-col transition-all duration-200 overflow-hidden ${
           isFullscreen
             ? 'w-full h-full max-w-none max-h-none rounded-none border-0 shadow-none'
             : 'w-full max-w-4xl rounded-[2.25rem] shadow-2xl border border-gray-200/90 my-auto max-h-[94vh]'
@@ -234,7 +234,7 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
             <button
               type="button"
               onClick={() => setIsFullscreen(!isFullscreen)}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-gray-200 hover:border-gray-300 bg-white hover:bg-gray-50 text-gray-700 hover:text-[#3186FF] shadow-2xs transition-all text-xs font-medium cursor-pointer"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-gray-200 hover:border-gray-300 bg-white hover:bg-gray-50 text-gray-700 hover:text-[#3186FF] shadow-2xs transition-all text-xs font-google-heading font-medium cursor-pointer"
               title={isFullscreen ? 'חזרה לתצוגה רגילה' : 'הגדל למסך מלא'}
               aria-label={isFullscreen ? 'חזרה לתצוגה רגילה' : 'הגדל למסך מלא'}
             >
@@ -269,14 +269,14 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                 alt="Google Student Ambassador"
                 className="h-8 sm:h-9 w-auto object-contain shrink-0"
               />
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-[#EBF3FF] text-[#3186FF] border border-[#3186FF]/20 shadow-2xs">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-google-heading font-bold bg-[#EBF3FF] text-[#3186FF] border border-[#3186FF]/20 shadow-2xs">
                 <span>✦</span>
                 <span>#TeamGemini 2026 | ישראל</span>
               </span>
             </div>
 
             <div className="flex items-baseline gap-2 mt-1">
-              <h3 className="text-xl sm:text-2xl font-bold text-gray-900 tracking-tight">
+              <h3 className="text-xl sm:text-2xl font-google-heading font-bold text-gray-900 tracking-tight">
                 שאלון הגשת מועמדות
               </h3>
               <span className="text-xs text-gray-500 font-medium hidden sm:inline">
@@ -298,7 +298,7 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                         onClick={() => {
                           if (def.step < currentStep) setCurrentStep(def.step);
                         }}
-                        className={`flex items-center justify-center gap-2 py-2 px-3 rounded-2xl transition-all text-xs font-semibold ${
+                        className={`flex items-center justify-center gap-2 py-2 px-3 rounded-2xl transition-all text-xs font-google-heading font-semibold ${
                           isCurrent
                             ? 'bg-[#3186FF] text-white shadow-sm'
                             : isPassed
@@ -352,11 +352,11 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                 </div>
 
                 <div>
-                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-semibold border border-emerald-200 mb-3">
+                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-google-heading font-semibold border border-emerald-200 mb-3">
                     <CheckCircle2 className="w-3.5 h-3.5" />
                     <span>המועמדות הוגשה ונרשמה בהצלחה</span>
                   </div>
-                  <h4 className="text-2xl sm:text-3xl font-extrabold text-gray-900 mb-2 tracking-tight">
+                  <h4 className="text-2xl sm:text-3xl font-google-heading font-extrabold text-gray-900 mb-2 tracking-tight">
                     תודה רבה, {submittedRecord.fullName}!
                   </h4>
                   <p className="text-gray-600 max-w-lg mx-auto text-sm leading-relaxed">
@@ -374,7 +374,7 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                 <div className="pt-2">
                   <button
                     onClick={onClose}
-                    className="bg-[#3186FF] hover:bg-[#2563EB] text-white font-bold px-8 py-3 rounded-full transition-all text-sm shadow-sm hover:shadow-md cursor-pointer active:scale-95"
+                    className="bg-[#3186FF] hover:bg-[#2563EB] text-white font-google-heading font-bold px-8 py-3 rounded-full transition-all text-sm shadow-sm hover:shadow-md cursor-pointer active:scale-95"
                   >
                     חזרה לאתר התוכנית
                   </button>
@@ -394,14 +394,14 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                       <div className="flex items-start justify-between gap-4">
                         <div className="space-y-2 flex-1">
                           <div className="flex items-center gap-2">
-                            <span className="font-black text-[#3186FF] text-xs tracking-wider uppercase">
+                            <span className="font-google-heading font-black text-[#3186FF] text-xs tracking-wider uppercase">
                               LOOK WHAT YOU CAN DO ✦
                             </span>
                             <span className="text-gray-300">•</span>
                             <span className="text-xs text-gray-500 font-medium">#TeamGemini 2026</span>
                           </div>
 
-                          <h4 className="text-xl sm:text-2xl font-black text-gray-900 tracking-tight">
+                          <h4 className="text-xl sm:text-2xl font-google-heading font-black text-gray-900 tracking-tight">
                             היי לשגרירים לעתיד של #TeamGemini! 🚀
                           </h4>
 
@@ -434,7 +434,7 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                     <div className="bg-white rounded-3xl border border-gray-200/90 p-6 sm:p-8 shadow-xs space-y-5">
                       <div className="flex items-center gap-2.5 pb-3 border-b border-gray-100">
                         <span className="w-1.5 h-5 bg-[#3186FF] rounded-full inline-block" />
-                        <h4 className="text-base font-bold text-gray-900">
+                        <h4 className="text-base font-google-heading font-bold text-gray-900">
                           פרטי קשר ותקשורת
                         </h4>
                       </div>
@@ -491,7 +491,7 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                     <div className="bg-white rounded-3xl border border-gray-200/90 p-6 sm:p-8 shadow-xs space-y-5">
                       <div className="flex items-center gap-2.5 pb-3 border-b border-gray-100">
                         <span className="w-1.5 h-5 bg-[#34A853] rounded-full inline-block" />
-                        <h4 className="text-base font-bold text-gray-900">
+                        <h4 className="text-base font-google-heading font-bold text-gray-900">
                           רקע אקדמי
                         </h4>
                       </div>
@@ -562,7 +562,7 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                     <div className="bg-white rounded-3xl border border-gray-200/90 p-6 sm:p-8 shadow-xs space-y-6">
                       <div className="flex items-center gap-2.5 pb-3 border-b border-gray-100">
                         <span className="w-1.5 h-5 bg-[#FBBC04] rounded-full inline-block" />
-                        <h4 className="text-base font-bold text-gray-900">
+                        <h4 className="text-base font-google-heading font-bold text-gray-900">
                           תחומי עניין, יצירתיות ונוכחות ברשת
                         </h4>
                       </div>
@@ -668,14 +668,14 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                       <div className="flex items-start justify-between gap-4">
                         <div className="space-y-2 flex-1">
                           <div className="flex items-center gap-2">
-                            <span className="font-black text-[#EA4335] text-xs uppercase tracking-wider">
+                            <span className="font-google-heading font-black text-[#EA4335] text-xs uppercase tracking-wider">
                               SPARK IDEAS ✦ חלק 2
                             </span>
                             <span className="text-gray-300">•</span>
                             <span className="text-xs text-gray-500 font-medium">5 אתגרי עומק</span>
                           </div>
 
-                          <h4 className="text-xl sm:text-2xl font-black text-gray-900 tracking-tight flex items-center gap-2">
+                          <h4 className="text-xl sm:text-2xl font-google-heading font-black text-gray-900 tracking-tight flex items-center gap-2">
                             <span>תראו לנו את הניצוץ שלכם! ✨</span>
                           </h4>
 
@@ -700,7 +700,7 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                       <div className="flex items-center justify-between pb-3 border-b border-gray-100">
                         <div className="flex items-center gap-2.5">
                           <span className="w-1.5 h-5 bg-[#3186FF] rounded-full inline-block" />
-                          <h5 className="font-bold text-base text-gray-900">
+                          <h5 className="font-google-heading font-bold text-base text-gray-900">
                             אתגר 1: חוקרי ג'מיניי (חובבי ה-AI) 🤖
                           </h5>
                         </div>
@@ -767,7 +767,7 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                       <div className="flex items-center justify-between pb-3 border-b border-gray-100">
                         <div className="flex items-center gap-2.5">
                           <span className="w-1.5 h-5 bg-[#EA4335] rounded-full inline-block" />
-                          <h5 className="font-bold text-base text-gray-900">
+                          <h5 className="font-google-heading font-bold text-base text-gray-900">
                             אתגר 2: בדיקת וייב ויראלי (יוצרי התוכן) 📲
                           </h5>
                         </div>
@@ -812,7 +812,7 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                       <div className="flex items-center justify-between pb-3 border-b border-gray-100">
                         <div className="flex items-center gap-2.5">
                           <span className="w-1.5 h-5 bg-[#34A853] rounded-full inline-block" />
-                          <h5 className="font-bold text-base text-gray-900">
+                          <h5 className="font-google-heading font-bold text-base text-gray-900">
                             אתגר 3: בוני הקהילה (מחברי הקמפוס) 🤝
                           </h5>
                         </div>
@@ -841,7 +841,7 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                       <div className="flex items-center justify-between pb-3 border-b border-gray-100">
                         <div className="flex items-center gap-2.5">
                           <span className="w-1.5 h-5 bg-[#FBBC04] rounded-full inline-block" />
-                          <h5 className="font-bold text-base text-gray-900">
+                          <h5 className="font-google-heading font-bold text-base text-gray-900">
                             אתגר 4: ניצוץ בקמפוס (המפעילים היצירתיים) 💡
                           </h5>
                         </div>
@@ -876,7 +876,7 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                       <div className="flex items-center justify-between pb-3 border-b border-gray-100">
                         <div className="flex items-center gap-2.5">
                           <span className="w-1.5 h-5 bg-[#3186FF] rounded-full inline-block" />
-                          <h5 className="font-bold text-base text-gray-900">
+                          <h5 className="font-google-heading font-bold text-base text-gray-900">
                             אתגר 5: מד האהבה לגוגל (מספרי הסיפורים) 💙
                           </h5>
                         </div>
@@ -912,7 +912,7 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                       <div className="flex items-center justify-between pb-3 border-b border-gray-100">
                         <div className="flex items-center gap-2.5">
                           <span className="w-1.5 h-5 bg-[#EA4335] rounded-full inline-block" />
-                          <h4 className="text-lg font-bold text-gray-900 flex items-center gap-2">
+                          <h4 className="text-lg font-google-heading font-bold text-gray-900 flex items-center gap-2">
                             <span>חלק 3: רגע הפיץ' 🎙️</span>
                           </h4>
                         </div>
@@ -926,7 +926,7 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                       <div className="bg-[#FFF8F7] border border-red-100 rounded-2xl p-5 space-y-3 relative overflow-hidden">
                         <div className="flex items-start justify-between gap-4">
                           <div className="space-y-1">
-                            <h5 className="font-bold text-sm text-gray-900">
+                            <h5 className="font-google-heading font-bold text-sm text-gray-900">
                               אל תתביישו מהמצלמה! העלו סרטון קצר (60–90 שניות) בקישור פתוח:
                             </h5>
                             <p className="text-xs text-gray-600">
@@ -1014,7 +1014,7 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                     <button
                       type="button"
                       onClick={handlePrev}
-                      className="px-6 py-2.5 rounded-full border border-gray-300 hover:border-gray-400 bg-white hover:bg-gray-50 text-gray-700 text-xs sm:text-sm font-semibold transition-colors flex items-center gap-1.5 cursor-pointer"
+                      className="px-6 py-2.5 rounded-full border border-gray-300 hover:border-gray-400 bg-white hover:bg-gray-50 text-gray-700 text-xs sm:text-sm font-google-heading font-semibold transition-colors flex items-center gap-1.5 cursor-pointer"
                     >
                       <ArrowRight className="w-4 h-4" />
                       <span>חזרה</span>
@@ -1030,7 +1030,7 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                     <button
                       type="button"
                       onClick={handleNext}
-                      className="bg-[#3186FF] hover:bg-[#2563EB] text-white px-8 py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all flex items-center gap-2 shadow-xs hover:shadow-md cursor-pointer active:scale-95"
+                      className="bg-[#3186FF] hover:bg-[#2563EB] text-white px-8 py-2.5 rounded-full text-xs sm:text-sm font-google-heading font-bold transition-all flex items-center gap-2 shadow-xs hover:shadow-md cursor-pointer active:scale-95"
                     >
                       <span>המשך לשלב הבא</span>
                       <ArrowLeft className="w-4 h-4" />
@@ -1039,7 +1039,7 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="bg-[#3186FF] hover:bg-[#2563EB] text-white px-9 py-3 rounded-full text-sm font-bold transition-all shadow-md hover:shadow-lg flex items-center gap-2 disabled:opacity-50 active:scale-95 cursor-pointer"
+                      className="bg-[#3186FF] hover:bg-[#2563EB] text-white px-9 py-3 rounded-full text-sm font-google-heading font-bold transition-all shadow-md hover:shadow-lg flex items-center gap-2 disabled:opacity-50 active:scale-95 cursor-pointer"
                     >
                       {isSubmitting ? (
                         <span>שולח מועמדות ל-Google Sheets...</span>
