@@ -55,7 +55,7 @@ export const CustomSelect: React.FC<CustomSelectProps> = ({
         onClick={() => setIsOpen(!isOpen)}
         className={`w-full px-4 py-3 rounded-xl border text-right text-sm transition-all duration-150 flex items-center justify-between gap-3 ${
           isOpen
-            ? 'bg-white border-[#1A73E8] ring-2 ring-blue-100 shadow-xs'
+            ? 'bg-white border-[#3186FF] ring-2 ring-[#3186FF]/20 shadow-xs'
             : error
             ? 'bg-red-50/30 border-[#EA4335]'
             : 'bg-white hover:bg-gray-50/50 border-gray-300 hover:border-gray-400'
@@ -70,7 +70,7 @@ export const CustomSelect: React.FC<CustomSelectProps> = ({
 
         <ChevronDown
           className={`w-4 h-4 text-gray-500 shrink-0 transition-transform duration-200 ${
-            isOpen ? 'transform rotate-180 text-[#1A73E8]' : ''
+            isOpen ? 'transform rotate-180 text-[#3186FF]' : ''
           }`}
         />
       </button>
@@ -90,7 +90,7 @@ export const CustomSelect: React.FC<CustomSelectProps> = ({
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="חיפוש באפשרויות..."
-                  className="w-full pr-8 pl-3 py-1.5 text-xs bg-white rounded-lg border border-gray-200 focus:outline-none focus:border-[#1A73E8] focus:ring-1 focus:ring-blue-100"
+                  className="w-full pr-8 pl-3 py-1.5 text-xs bg-white rounded-lg border border-gray-200 focus:outline-none focus:border-[#3186FF] focus:ring-1 focus:ring-[#3186FF]/25"
                   autoFocus
                 />
               </div>
@@ -116,12 +116,12 @@ export const CustomSelect: React.FC<CustomSelectProps> = ({
                     }}
                     className={`px-3.5 py-2.5 rounded-xl cursor-pointer text-xs sm:text-sm transition-colors flex items-center justify-between ${
                       isSelected
-                        ? 'bg-[#E8F0FE] text-[#1A73E8] font-bold'
+                        ? 'bg-[#EBF3FF] text-[#3186FF] font-bold'
                         : 'hover:bg-gray-100/70 text-gray-700'
                     }`}
                   >
                     <span className="truncate">{option}</span>
-                    {isSelected && <Check className="w-4 h-4 text-[#1A73E8] shrink-0" />}
+                    {isSelected && <Check className="w-4 h-4 text-[#3186FF] shrink-0" />}
                   </div>
                 );
               })
