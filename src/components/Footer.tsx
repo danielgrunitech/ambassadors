@@ -1,5 +1,6 @@
 import React from 'react';
 import { ArrowLeft } from 'lucide-react';
+import { GoogleGIcon } from './GeminiLogo';
 
 interface FooterProps {
   onOpenApply: () => void;
@@ -7,46 +8,48 @@ interface FooterProps {
 
 export const Footer: React.FC<FooterProps> = ({ onOpenApply }) => {
   return (
-    <footer className="bg-white border-t border-gray-100 pt-14 pb-10 px-4 text-right">
+    <footer className="bg-black border-t border-white/10 pt-16 pb-12 px-4 text-right">
       <div className="max-w-5xl mx-auto">
         {/* Pre-footer Action Card */}
-        <div className="bg-[#E8F0FE] rounded-[2rem] p-8 md:p-12 text-center mb-12 border border-blue-100/60">
-          <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">
+        <div className="bg-gradient-to-b from-[#131722] to-[#0A0B0E] rounded-[2.5rem] p-8 md:p-12 text-center mb-12 border border-[#3186FF]/20 shadow-2xl relative overflow-hidden">
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-24 bg-[#3186FF]/15 blur-2xl pointer-events-none" />
+
+          <h3 className="font-google-heading font-black text-2xl sm:text-4xl text-white mb-3 tracking-tight">
             הקמפוס שלך מחכה למובילים הבאים
           </h3>
-          <p className="text-gray-600 max-w-lg mx-auto text-sm sm:text-base mb-6 leading-relaxed">
+          <p className="font-google-body text-gray-300 max-w-lg mx-auto text-sm sm:text-base mb-7 leading-relaxed">
             הצטרפו לנבחרת שגרירי Google Gemini בישראל, קבלו מנוי חינם, סמינרים שבועיים מקצועיים והסמכה רשמית מ-Google.
           </p>
           <button
             onClick={onOpenApply}
-            className="bg-[#346BF1] hover:bg-blue-600 text-white px-8 py-3 rounded-full text-base font-medium transition-colors inline-flex items-center gap-2 shadow-xs"
+            className="bg-[#3186FF] hover:bg-[#2563EB] text-white px-8 py-3.5 rounded-full font-google-heading text-base font-bold transition-all shadow-[0_10px_25px_rgba(49,134,255,0.35)] hover:shadow-[0_12px_30px_rgba(49,134,255,0.5)] inline-flex items-center gap-2 cursor-pointer active:scale-95"
           >
             <span>הגשת מועמדות למחזור 2026</span>
             <ArrowLeft className="w-4 h-4" />
           </button>
         </div>
 
-        {/* Footer Brand & Legal matching reference site */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-500 pt-4 border-t border-gray-100">
+        {/* Footer Brand & Legal matching brand book dark mode lockup */}
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-google-body text-gray-400 pt-6 border-t border-white/10">
           <div className="flex items-center gap-3">
-            <img
-              src="/logo-04-header.png"
-              alt="Google Student Ambassador 2026"
-              className="h-7 w-auto object-contain"
-            />
-            <span>© 2026 Google Student Ambassador Program. כל הזכויות שמורות.</span>
+            <div className="w-6 h-6 rounded-full bg-white/10 flex items-center justify-center p-1 shrink-0">
+              <GoogleGIcon size={16} />
+            </div>
+            <span className="font-google-heading text-white font-medium">Google Student Ambassador</span>
+            <span className="text-gray-500">•</span>
+            <span className="text-gray-400">© 2026 כל הזכויות שמורות.</span>
           </div>
 
           <div className="flex items-center gap-4 text-gray-400">
-            <a href="https://policies.google.com/privacy" target="_blank" rel="noreferrer" className="hover:text-gray-600">
+            <a href="https://policies.google.com/privacy" target="_blank" rel="noreferrer" className="hover:text-white transition-colors">
               פרטיות
             </a>
             <span>•</span>
-            <a href="https://policies.google.com/terms" target="_blank" rel="noreferrer" className="hover:text-gray-600">
+            <a href="https://policies.google.com/terms" target="_blank" rel="noreferrer" className="hover:text-white transition-colors">
               תנאי שימוש
             </a>
             <span>•</span>
-            <a href="https://gemini.google.com" target="_blank" rel="noreferrer" className="hover:text-gray-600">
+            <a href="https://gemini.google.com" target="_blank" rel="noreferrer" className="hover:text-white transition-colors">
               Google Gemini
             </a>
           </div>

@@ -32,15 +32,10 @@ export const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#E8F0FE]/60 font-sans text-gray-800 overflow-x-hidden relative flex flex-col selection:bg-[#346BF1] selection:text-white">
-      {/* Background Watermark matching geministudentambassador.com */}
-      <div
-        className="fixed inset-0 z-0 pointer-events-none opacity-40"
-        style={{
-          backgroundImage:
-            'repeating-linear-gradient(-45deg, transparent, transparent 4px, rgba(52, 107, 241, 0.05) 4px, rgba(52, 107, 241, 0.05) 5px)'
-        }}
-      />
+    <div className="min-h-screen bg-black font-google-body text-white overflow-x-hidden relative flex flex-col selection:bg-[#3186FF] selection:text-white">
+      {/* Background Ambience & Subtle Grid matching Google Brand Identity */}
+      <div className="fixed inset-0 z-0 pointer-events-none gemini-dark-grid opacity-60" />
+      <div className="fixed top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-gradient-to-b from-[#3186FF]/12 via-[#1A56DB]/5 to-transparent rounded-full blur-3xl pointer-events-none z-0" />
 
       {/* Main Content Layout */}
       <div className="relative z-10 flex flex-col min-h-screen">
