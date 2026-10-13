@@ -10,11 +10,13 @@ import { FaqSection } from './components/FaqSection';
 import { Footer } from './components/Footer';
 import { ApplicationModal } from './components/Questionnaire/ApplicationModal';
 import { SubmissionsDrawer } from './components/SubmissionsDrawer';
+import { PrivacyModal } from './components/PrivacyModal';
 import { getSubmissions } from './utils/storage';
 import { SubmissionRecord } from './types';
 
 export const App: React.FC = () => {
   const [isApplyOpen, setIsApplyOpen] = useState(false);
+  const [isPrivacyOpen, setIsPrivacyOpen] = useState(false);
   const [isSubmissionsOpen, setIsSubmissionsOpen] = useState(false);
   const [submissions, setSubmissions] = useState<SubmissionRecord[]>([]);
 
@@ -56,7 +58,10 @@ export const App: React.FC = () => {
           <FaqSection />
         </main>
 
-        <Footer onOpenApply={() => setIsApplyOpen(true)} />
+        <Footer
+          onOpenApply={() => setIsApplyOpen(true)}
+          onOpenPrivacy={() => setIsPrivacyOpen(true)}
+        />
       </div>
 
       {/* Interactive Application Questionnaire Modal */}
@@ -64,6 +69,13 @@ export const App: React.FC = () => {
         isOpen={isApplyOpen}
         onClose={() => setIsApplyOpen(false)}
         onSubmissionSuccess={handleSubmissionSuccess}
+        onOpenPrivacy={() => setIsPrivacyOpen(true)}
+      />
+
+      {/* Privacy Policy Modal */}
+      <PrivacyModal
+        isOpen={isPrivacyOpen}
+        onClose={() => setIsPrivacyOpen(false)}
       />
 
       {/* Admin Panel (Only if accessed with ?admin=true) */}

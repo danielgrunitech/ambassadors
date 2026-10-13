@@ -30,6 +30,7 @@ interface ApplicationModalProps {
   isOpen: boolean;
   onClose: () => void;
   onSubmissionSuccess: () => void;
+  onOpenPrivacy?: () => void;
 }
 
 const TOTAL_STEPS = 3;
@@ -43,7 +44,8 @@ const STEP_DEFINITIONS = [
 export const ApplicationModal: React.FC<ApplicationModalProps> = ({
   isOpen,
   onClose,
-  onSubmissionSuccess
+  onSubmissionSuccess,
+  onOpenPrivacy
 }) => {
   const [currentStep, setCurrentStep] = useState<number>(1);
   const [formData, setFormData] = useState<ApplicationFormData>(INITIAL_FORM_DATA);
@@ -358,7 +360,7 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                     תודה רבה, {submittedRecord.fullName}!
                   </h4>
                   <p className="font-google-body text-gray-300 max-w-lg mx-auto text-sm leading-relaxed">
-                    הפרטים שלך נקלטו בהצלחה בנבחרת שגרירי Google Student Ambassadors בישראל לשנת 2026 ונשמרו ישירות ב-Google Sheet של התוכנית. ניצור איתך קשר בהקדם בוואטסאפ ובמייל.
+                    הפרטים שלך נקלטו בהצלחה בנבחרת שגרירי Google Student Ambassadors בישראל לשנת 2026. ניצור איתך קשר בהקדם בוואטסאפ ובמייל.
                   </p>
                 </div>
 
@@ -996,7 +998,19 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                           className="mt-1 w-4 h-4 rounded text-[#3186FF] focus:ring-[#3186FF]/30 cursor-pointer bg-[#16171B] border-white/20"
                         />
                         <span className="font-google-body text-xs text-gray-300 leading-relaxed select-none">
-                          אני מאשר/ת שהפרטים שמילאתי נכונים ומדויקים, ומביע/ה את נכונותי לקחת חלק פעיל בתוכנית שגרירי Google Student Ambassadors בישראל לשנת 2026.
+                          אני מאשר/ת שהפרטים שמילאתי נכונים ומדויקים, מסכים/ה ל
+                          <button
+                            type="button"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              e.stopPropagation();
+                              onOpenPrivacy?.();
+                            }}
+                            className="text-[#3186FF] underline hover:text-[#5B9BFF] mx-1 font-medium inline"
+                          >
+                            מדיניות הפרטיות
+                          </button>
+                          של התוכנית, ומביע/ה את נכונותי לקחת חלק פעיל בתוכנית שגרירי Google Student Ambassadors בישראל לשנת 2026.
                         </span>
                       </label>
                       {errors.agreedToTerms && (
@@ -1040,7 +1054,7 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                       className="bg-[#3186FF] hover:bg-[#2563EB] text-white px-9 py-3 rounded-full text-sm font-google-heading font-bold transition-all shadow-[0_10px_30px_rgba(49,134,255,0.45)] hover:shadow-[0_15px_40px_rgba(49,134,255,0.6)] flex items-center gap-2 disabled:opacity-50 active:scale-95 cursor-pointer"
                     >
                       {isSubmitting ? (
-                        <span>שולח מועמדות ל-Google Sheets...</span>
+                        <span>שולח מועמדות למערכת...</span>
                       ) : (
                         <>
                           <span>שליחת מועמדות ל-#TeamGemini 🚀</span>
