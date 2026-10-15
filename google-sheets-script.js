@@ -1,21 +1,33 @@
 /**
  * Google Apps Script לקליטת מועמדויות שגרירי Google Gemini ישראל 2026
+ * עם מנגנוני הגנה מתקדמים נגד ספאם (Anti-Spam) ומניעת כפילויות (Deduplication)
  * 
- * הוראות התקנה ב-Google Sheets:
- * 1. פתח גוגל שיט חדש (sheets.new) מחשבון Google הרצוי
- * 2. בתפריט העליון לחץ על: תוספים (Extensions) -> Apps Script
- * 3. מחק את מה שכתוב שם, והדבק את כל הקוד הזה במקומו.
- * 4. לחץ על "Deploy" (פריסה) -> "New deployment" (פריסה חדשה).
- * 5. בחר סוג (Select type): "Web app" (אפליקציית אינטרנט).
- * 6. בהגדרות:
- *    - Execute as: "Me" (אני)
- *    - Who has access: "Anyone" (כולם / כל אחד).
- * 7. לחץ על "Deploy", אשר הרשאות, והעתק את ה-"Web app URL".
+ * מה חדש במנגנון האבטחה:
+ * 1. מניעת כפילויות קשיחה (One Submission Per Person):
+ *    בודק האם כתובת המייל או מספר הטלפון כבר קיימים בגיליון. אם כן - חוסם ולא מאפשר הוספת שורה כפולה!
+ * 2. מלכודת בוטים (Honeypot Protection):
+ *    חוסם באופן שקט בוטים וסורקי אבטחה שממלאים שדות נסתרים.
+ * 3. נעילת עריכה סימולטנית (LockService):
+ *    מונע מצבי מירוץ (Race Conditions) של שליחות במקביל באותה שנייה.
+ * 
+ * הוראות עדכון ב-Google Sheets:
+ * 1. פתחו את ה-Google Sheet שלכם
+ * 2. בתפריט העליון: תוספים (Extensions) -> Apps Script
+ * 3. החליפו את כל הקוד הקיים בקוד הזה ולחצו Save (שמור)
+ * 4. לחצו על: פריסה (Deploy) -> נהל פריסות (Manage deployments)
+ * 5. לחצו על עיפרון העריכה (Edit) -> שנו גרסה ל-"New version" (גרסה חדשה) -> Deploy (פרוס)!
  */
 
 function doPost(e) {
   var lock = LockService.getScriptLock();
-  lock.tryLock(10000);
+  // Lock for up to 10 seconds to handle concurrent requests safely
+  var hasLock = lock.tryLock(10000);
+  if (!hasLock) {
+    return ContentService.createTextOutput(JSON.stringify({
+      status: "busy",
+      message: "Server is processing another request, please try again."
+    })).setMimeType(ContentService.MimeType.JSON);
+  }
 
   try {
     var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
@@ -29,10 +41,30 @@ function doPost(e) {
         data = e.parameter;
       }
     } else {
-      data = e.parameter;
+      data = e.parameter || {};
     }
 
-    // Set up headers matching the 2026 TeamGemini application challenges
+    // 1. HONEYPOT TRAP: If a bot or security scanner filled the hidden trap field, silently discard
+    if (data.website_trap || data.honeypot || data.company_url || data.fax_number) {
+      return ContentService.createTextOutput(JSON.stringify({
+        status: "ignored",
+        message: "Request ignored."
+      })).setMimeType(ContentService.MimeType.JSON);
+    }
+
+    // 2. NORMALIZE EMAIL & PHONE
+    var cleanEmail = (data.email || "").toString().trim().toLowerCase();
+    var cleanPhone = (data.phone || "").toString().replace(/[^0-9]/g, "");
+
+    // Validate email presence
+    if (!cleanEmail || cleanEmail.indexOf("@") === -1) {
+      return ContentService.createTextOutput(JSON.stringify({
+        status: "error",
+        message: "כתובת דוא\"ל תקינה הינה שדה חובה."
+      })).setMimeType(ContentService.MimeType.JSON);
+    }
+
+    // Set up headers matching the 2026 application challenges
     var headers = [
       "Timestamp",
       "Candidate ID",
@@ -68,6 +100,34 @@ function doPost(e) {
       sheet.setFrozenRows(1);
     }
 
+    // 3. DEDUPLICATION (חסימת כפילויות - טופס יחיד לכל אדם)
+    var lastRow = sheet.getLastRow();
+    if (lastRow > 1) {
+      // Column 4 is Phone (D), Column 5 is Email (E)
+      var existingRange = sheet.getRange(2, 4, lastRow - 1, 2).getValues();
+      for (var i = 0; i < existingRange.length; i++) {
+        var existingPhone = (existingRange[i][0] || "").toString().replace(/[^0-9]/g, "");
+        var existingEmail = (existingRange[i][1] || "").toString().trim().toLowerCase();
+
+        // Check if email already exists
+        if (existingEmail && existingEmail === cleanEmail) {
+          return ContentService.createTextOutput(JSON.stringify({
+            status: "duplicate",
+            message: "כתובת דוא\"ל זו (" + cleanEmail + ") כבר הגישה מועמדות לתוכנית. ניתן להגיש פעם אחת בלבד."
+          })).setMimeType(ContentService.MimeType.JSON);
+        }
+
+        // Check if phone already exists
+        if (cleanPhone && cleanPhone.length >= 8 && existingPhone && existingPhone === cleanPhone) {
+          return ContentService.createTextOutput(JSON.stringify({
+            status: "duplicate",
+            message: "מספר טלפון זה (" + data.phone + ") כבר קיים במערכת. ניתן להגיש פעם אחת בלבד."
+          })).setMimeType(ContentService.MimeType.JSON);
+        }
+      }
+    }
+
+    // 4. PREPARE & APPEND NEW CANDIDATE ROW
     var timestamp = new Date();
     var institutionStr = data.institution === "מוסד לימודים אחר..." && data.customInstitution 
       ? data.customInstitution 
@@ -79,7 +139,7 @@ function doPost(e) {
       data.id || ("IL-GEMINI-2026-" + Math.floor(1000 + Math.random() * 9000)),
       data.fullName || "",
       data.phone || "",
-      data.email || "",
+      cleanEmail,
       institutionStr,
       data.currentYear || "",
       data.fieldOfStudy || "",
@@ -104,7 +164,8 @@ function doPost(e) {
 
     return ContentService.createTextOutput(JSON.stringify({
       status: "success",
-      id: data.id
+      id: data.id,
+      message: "המועמדות נקלטה בהצלחה!"
     })).setMimeType(ContentService.MimeType.JSON);
 
   } catch (error) {
@@ -118,9 +179,9 @@ function doPost(e) {
 }
 
 function doGet(e) {
-  // Secure: Do not output candidate data
+  // Secure: Write-only endpoint
   return ContentService.createTextOutput(JSON.stringify({
     status: "active",
-    message: "Google Gemini Ambassador Israel 2026 Endpoint (Write-Only)"
+    message: "Google Gemini Ambassador Israel 2026 Endpoint (Write-Only, Anti-Spam Enabled)"
   })).setMimeType(ContentService.MimeType.JSON);
 }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   X,
   ArrowRight,
@@ -21,6 +21,7 @@ import {
   getDraft,
   saveDraft,
   saveSubmission,
+  getMySubmission,
   INITIAL_FORM_DATA
 } from '../../utils/storage';
 import { CustomSelect } from './CustomSelect';
@@ -53,13 +54,22 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
   const [submittedRecord, setSubmittedRecord] = useState<SubmissionRecord | null>(null);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [isFullscreen, setIsFullscreen] = useState<boolean>(false);
+  const [honeypot, setHoneypot] = useState<string>('');
+  const formOpenTime = useRef<number>(Date.now());
 
   useEffect(() => {
     if (isOpen) {
+      const existing = getMySubmission();
+      if (existing) {
+        setSubmittedRecord(existing);
+        return;
+      }
       const draft = getDraft();
       setFormData(draft);
       setSubmittedRecord(null);
       setCurrentStep(1);
+      setHoneypot('');
+      formOpenTime.current = Date.now();
     }
   }, [isOpen]);
 
@@ -187,6 +197,29 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    // 1. One submission per person lockout check (local browser record)
+    const existing = getMySubmission();
+    if (existing) {
+      setSubmittedRecord(existing);
+      return;
+    }
+
+    // 2. Honeypot check: automated bots & scrapers fill hidden inputs
+    if (honeypot.trim().length > 0) {
+      console.warn('Bot detected via honeypot trap.');
+      setIsSubmitting(false);
+      onClose();
+      return;
+    }
+
+    // 3. Timing rate protection: human candidates take time to review & fill 3 steps
+    const elapsedSeconds = (Date.now() - formOpenTime.current) / 1000;
+    if (elapsedSeconds < 3) {
+      console.warn('Submission too fast, suspected automated bot.');
+      return;
+    }
+
     if (!validateStep(3)) return;
 
     setIsSubmitting(true);
@@ -369,6 +402,9 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                   <div className="font-mono text-xl font-extrabold text-[#1a73e8] tracking-wider">
                     {submittedRecord.id}
                   </div>
+                  <div className="text-[11px] text-gray-500 mt-2 border-t border-gray-200 pt-2 font-google-body">
+                    ✓ ההגשה נקלטה במערכת. כדי לשמור על שוויון הזדמנויות, כל מועמד/ת רשאי/ת להגיש טופס אחד בלבד.
+                  </div>
                 </div>
 
                 <div className="pt-2">
@@ -383,6 +419,19 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
             ) : (
               /* Google Multi-step Form */
               <form onSubmit={handleSubmit} className="space-y-6">
+                {/* Hidden Honeypot Bot Trap: completely invisible to real human candidates */}
+                <div className="opacity-0 absolute -top-[9999px] -right-[9999px] pointer-events-none" aria-hidden="true" tabIndex={-1}>
+                  <label htmlFor="website_trap">Leave empty</label>
+                  <input
+                    id="website_trap"
+                    name="website_trap"
+                    type="text"
+                    value={honeypot}
+                    onChange={(e) => setHoneypot(e.target.value)}
+                    tabIndex={-1}
+                    autoComplete="off"
+                  />
+                </div>
 
                 {/* ================= חלק 1: נעים להכיר ☕ ================= */}
                 {currentStep === 1 && (

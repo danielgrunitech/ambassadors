@@ -2,6 +2,7 @@ import { ApplicationFormData, SubmissionRecord } from '../types';
 
 const DRAFT_KEY = 'gemini_ambassador_il_draft';
 const SUBMISSIONS_KEY = 'gemini_ambassador_il_submissions';
+const MY_SUBMISSION_KEY = 'gemini_ambassador_il_my_submission';
 const WEBHOOK_KEY = 'gemini_webhook_url';
 
 export const INITIAL_FORM_DATA: ApplicationFormData = {
@@ -84,7 +85,7 @@ export const setWebhookUrl = (url: string) => {
   }
 };
 
-export const sendToGoogleSheets = async (record: SubmissionRecord): Promise<boolean> => {
+export const sendToGoogleSheets = async (record: SubmissionRecord & { website_trap?: string }): Promise<boolean> => {
   const url = DEFAULT_WEBHOOK_URL;
   if (!url || !url.startsWith('http')) {
     console.log('No Google Sheets Webhook URL configured. Submission saved locally.');
@@ -93,12 +94,16 @@ export const sendToGoogleSheets = async (record: SubmissionRecord): Promise<bool
 
   try {
     // Send as plain text JSON to prevent CORS preflight in Google Apps Script
+    // Include empty website_trap honeypot so normal users are marked legitimate
     await fetch(url, {
       method: 'POST',
       headers: {
         'Content-Type': 'text/plain;charset=utf-8',
       },
-      body: JSON.stringify(record),
+      body: JSON.stringify({
+        ...record,
+        website_trap: '',
+      }),
       mode: 'no-cors',
     });
     console.log('Successfully posted submission to Google Sheets Webhook.');
@@ -148,6 +153,30 @@ export const getSubmissions = (): SubmissionRecord[] => {
   }
 };
 
+export const getMySubmission = (): SubmissionRecord | null => {
+  try {
+    const raw = localStorage.getItem(MY_SUBMISSION_KEY);
+    if (!raw) return null;
+    return JSON.parse(raw);
+  } catch (e) {
+    return null;
+  }
+};
+
+export const setMySubmission = (record: SubmissionRecord) => {
+  try {
+    localStorage.setItem(MY_SUBMISSION_KEY, JSON.stringify(record));
+  } catch (e) {
+    console.error('Failed to set my submission in localStorage', e);
+  }
+};
+
+export const clearMySubmission = () => {
+  try {
+    localStorage.removeItem(MY_SUBMISSION_KEY);
+  } catch (e) {}
+};
+
 export const saveSubmission = async (data: ApplicationFormData): Promise<SubmissionRecord> => {
   const submissions = getSubmissions();
   const idNumber = Math.floor(1000 + Math.random() * 9000);
@@ -161,6 +190,7 @@ export const saveSubmission = async (data: ApplicationFormData): Promise<Submiss
   submissions.unshift(record);
   try {
     localStorage.setItem(SUBMISSIONS_KEY, JSON.stringify(submissions));
+    setMySubmission(record);
     clearDraft();
   } catch (e) {
     console.error('Failed to save submission', e);
