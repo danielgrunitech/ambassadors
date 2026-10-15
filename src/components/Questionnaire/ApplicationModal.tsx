@@ -577,14 +577,22 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                         </p>
                         <textarea
                           rows={3}
+                          maxLength={500}
                           value={formData.hobbiesAndInterests}
                           onChange={(e) => handleChange('hobbiesAndInterests', e.target.value)}
                           placeholder="ספרו לנו קצת על מה שאתם אוהבים לעשות בזמנכם הפנוי..."
                           className="w-full p-4 rounded-2xl border border-gray-300 hover:border-gray-400 focus:border-[#1a73e8] focus:ring-4 focus:ring-blue-500/10 bg-gray-50/50 hover:bg-white focus:bg-white text-gray-900 text-sm leading-relaxed transition-all outline-none font-google-body placeholder-gray-400"
                         />
-                        {errors.hobbiesAndInterests && (
-                          <p className="text-xs text-[#EA4335] mt-1.5 font-medium">{errors.hobbiesAndInterests}</p>
-                        )}
+                        <div className="flex items-center justify-between mt-1 text-[11px] text-gray-400 font-google-body">
+                          {errors.hobbiesAndInterests ? (
+                            <p className="text-xs text-[#EA4335] font-medium">{errors.hobbiesAndInterests}</p>
+                          ) : (
+                            <span />
+                          )}
+                          <span className={formData.hobbiesAndInterests.length >= 500 ? 'text-[#EA4335] font-semibold' : ''}>
+                            {formData.hobbiesAndInterests.length} / 500 תווים
+                          </span>
+                        </div>
                       </div>
 
                       {/* Digital Platforms Filter Chips */}
@@ -732,14 +740,22 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                         </p>
                         <textarea
                           rows={2}
+                          maxLength={400}
                           value={formData.canvasCampusProblem}
                           onChange={(e) => handleChange('canvasCampusProblem', e.target.value)}
                           placeholder="הבעיה שאני רוצה לפתור בקמפוס היא..."
                           className="w-full p-4 rounded-2xl border border-gray-300 hover:border-gray-400 focus:border-[#1a73e8] focus:ring-4 focus:ring-blue-500/10 bg-gray-50/50 hover:bg-white focus:bg-white text-gray-900 text-sm leading-relaxed outline-none font-google-body placeholder-gray-400"
                         />
-                        {errors.canvasCampusProblem && (
-                          <p className="text-xs text-[#EA4335] mt-1.5 font-medium">{errors.canvasCampusProblem}</p>
-                        )}
+                        <div className="flex items-center justify-between mt-1 text-[11px] text-gray-400 font-google-body">
+                          {errors.canvasCampusProblem ? (
+                            <p className="text-xs text-[#EA4335] font-medium">{errors.canvasCampusProblem}</p>
+                          ) : (
+                            <span />
+                          )}
+                          <span className={formData.canvasCampusProblem.length >= 400 ? 'text-[#EA4335] font-semibold' : ''}>
+                            {formData.canvasCampusProblem.length} / 400 תווים
+                          </span>
+                        </div>
                       </div>
 
                       <div>
@@ -751,14 +767,22 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                         </p>
                         <textarea
                           rows={3}
+                          maxLength={700}
                           value={formData.canvasSolutionDetails}
                           onChange={(e) => handleChange('canvasSolutionDetails', e.target.value)}
                           placeholder="הכלי יאפשר לסטודנטים להזין... והתוצר ב-Canvas יציג... בחרתי ב-Canvas כי..."
                           className="w-full p-4 rounded-2xl border border-gray-300 hover:border-gray-400 focus:border-[#1a73e8] focus:ring-4 focus:ring-blue-500/10 bg-gray-50/50 hover:bg-white focus:bg-white text-gray-900 text-sm leading-relaxed outline-none font-google-body placeholder-gray-400"
                         />
-                        {errors.canvasSolutionDetails && (
-                          <p className="text-xs text-[#EA4335] mt-1.5 font-medium">{errors.canvasSolutionDetails}</p>
-                        )}
+                        <div className="flex items-center justify-between mt-1 text-[11px] text-gray-400 font-google-body">
+                          {errors.canvasSolutionDetails ? (
+                            <p className="text-xs text-[#EA4335] font-medium">{errors.canvasSolutionDetails}</p>
+                          ) : (
+                            <span />
+                          )}
+                          <span className={formData.canvasSolutionDetails.length >= 700 ? 'text-[#EA4335] font-semibold' : ''}>
+                            {formData.canvasSolutionDetails.length} / 700 תווים
+                          </span>
+                        </div>
                       </div>
                     </div>
 
@@ -796,14 +820,22 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                         </label>
                         <textarea
                           rows={2}
+                          maxLength={500}
                           value={formData.viralContentDescription}
                           onChange={(e) => handleChange('viralContentDescription', e.target.value)}
                           placeholder="התוכן עבד מעולה כי... והערך המרכזי שהקהל לקח ממנו היה..."
                           className="w-full p-4 rounded-2xl border border-gray-300 hover:border-gray-400 focus:border-[#EA4335] focus:ring-4 focus:ring-red-500/10 bg-gray-50/50 hover:bg-white focus:bg-white text-gray-900 text-sm leading-relaxed outline-none font-google-body placeholder-gray-400"
                         />
-                        {errors.viralContentDescription && (
-                          <p className="text-xs text-[#EA4335] mt-1.5 font-medium">{errors.viralContentDescription}</p>
-                        )}
+                        <div className="flex items-center justify-between mt-1 text-[11px] text-gray-400 font-google-body">
+                          {errors.viralContentDescription ? (
+                            <p className="text-xs text-[#EA4335] font-medium">{errors.viralContentDescription}</p>
+                          ) : (
+                            <span />
+                          )}
+                          <span className={formData.viralContentDescription.length >= 500 ? 'text-[#EA4335] font-semibold' : ''}>
+                            {formData.viralContentDescription.length} / 500 תווים
+                          </span>
+                        </div>
                       </div>
                     </div>
 
@@ -826,14 +858,22 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                       </label>
                       <textarea
                         rows={3}
+                        maxLength={800}
                         value={formData.communityLeadershipStory}
                         onChange={(e) => handleChange('communityLeadershipStory', e.target.value)}
                         placeholder="הקמתי / הובלתי את... האתגר המרכזי היה... הצלחתי לרתום אנשים על ידי..."
                         className="w-full p-4 rounded-2xl border border-gray-300 hover:border-gray-400 focus:border-[#34A853] focus:ring-4 focus:ring-emerald-500/10 bg-gray-50/50 hover:bg-white focus:bg-white text-gray-900 text-sm leading-relaxed outline-none font-google-body placeholder-gray-400"
                       />
-                      {errors.communityLeadershipStory && (
-                        <p className="text-xs text-[#EA4335] mt-1.5 font-medium">{errors.communityLeadershipStory}</p>
-                      )}
+                      <div className="flex items-center justify-between mt-1 text-[11px] text-gray-400 font-google-body">
+                        {errors.communityLeadershipStory ? (
+                          <p className="text-xs text-[#EA4335] font-medium">{errors.communityLeadershipStory}</p>
+                        ) : (
+                          <span />
+                        )}
+                        <span className={formData.communityLeadershipStory.length >= 800 ? 'text-[#EA4335] font-semibold' : ''}>
+                          {formData.communityLeadershipStory.length} / 800 תווים
+                        </span>
+                      </div>
                     </div>
 
                     {/* אתגר 4: ניצוץ בקמפוס (המפעילים היצירתיים) */}
@@ -860,14 +900,22 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                         </label>
                         <textarea
                           rows={3}
+                          maxLength={500}
                           value={formData.campusPopUpIdea}
                           onChange={(e) => handleChange('campusPopUpIdea', e.target.value)}
                           placeholder="הרעיון שלי הוא אירוע שטח שבו... הסטודנטים יחוו... ומה שימשוך אותם לעצור ולהשתתף הוא..."
                           className="w-full p-4 rounded-2xl border border-gray-300 hover:border-gray-400 focus:border-[#FBBC04] focus:ring-4 focus:ring-amber-500/10 bg-gray-50/50 hover:bg-white focus:bg-white text-gray-900 text-sm leading-relaxed outline-none font-google-body placeholder-gray-400"
                         />
-                        {errors.campusPopUpIdea && (
-                          <p className="text-xs text-[#EA4335] mt-1.5 font-medium">{errors.campusPopUpIdea}</p>
-                        )}
+                        <div className="flex items-center justify-between mt-1 text-[11px] text-gray-400 font-google-body">
+                          {errors.campusPopUpIdea ? (
+                            <p className="text-xs text-[#EA4335] font-medium">{errors.campusPopUpIdea}</p>
+                          ) : (
+                            <span />
+                          )}
+                          <span className={formData.campusPopUpIdea.length >= 500 ? 'text-[#EA4335] font-semibold' : ''}>
+                            {formData.campusPopUpIdea.length} / 500 תווים
+                          </span>
+                        </div>
                       </div>
                     </div>
 
@@ -890,14 +938,22 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                       </label>
                       <textarea
                         rows={3}
+                        maxLength={700}
                         value={formData.whyGoogleGeminiAmbassador}
                         onChange={(e) => handleChange('whyGoogleGeminiAmbassador', e.target.value)}
                         placeholder="החיבור שלי ל-Google ול-AI התחיל כאשר... חשוב לי להוביל את התוכנית הזו בקמפוס שלי כי..."
                         className="w-full p-4 rounded-2xl border border-gray-300 hover:border-gray-400 focus:border-[#1a73e8] focus:ring-4 focus:ring-blue-500/10 bg-gray-50/50 hover:bg-white focus:bg-white text-gray-900 text-sm leading-relaxed outline-none font-google-body placeholder-gray-400"
                       />
-                      {errors.whyGoogleGeminiAmbassador && (
-                        <p className="text-xs text-[#EA4335] mt-1.5 font-medium">{errors.whyGoogleGeminiAmbassador}</p>
-                      )}
+                      <div className="flex items-center justify-between mt-1 text-[11px] text-gray-400 font-google-body">
+                        {errors.whyGoogleGeminiAmbassador ? (
+                          <p className="text-xs text-[#EA4335] font-medium">{errors.whyGoogleGeminiAmbassador}</p>
+                        ) : (
+                          <span />
+                        )}
+                        <span className={formData.whyGoogleGeminiAmbassador.length >= 700 ? 'text-[#EA4335] font-semibold' : ''}>
+                          {formData.whyGoogleGeminiAmbassador.length} / 700 תווים
+                        </span>
+                      </div>
                     </div>
                   </div>
                 )}
@@ -980,11 +1036,17 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                         </label>
                         <textarea
                           rows={2}
+                          maxLength={250}
                           value={formData.studyHackSummary || ''}
                           onChange={(e) => handleChange('studyHackSummary', e.target.value)}
                           placeholder="בקצרה: מה ה-Study Hack שהצגתם בסרטון?"
                           className="w-full p-4 rounded-2xl border border-gray-300 hover:border-gray-400 focus:border-[#1a73e8] focus:ring-4 focus:ring-blue-500/10 bg-gray-50/50 hover:bg-white focus:bg-white text-gray-900 text-sm leading-relaxed outline-none font-google-body placeholder-gray-400"
                         />
+                        <div className="flex items-center justify-end mt-1 text-[11px] text-gray-400 font-google-body">
+                          <span className={(formData.studyHackSummary || '').length >= 250 ? 'text-[#EA4335] font-semibold' : ''}>
+                            {(formData.studyHackSummary || '').length} / 250 תווים
+                          </span>
+                        </div>
                       </div>
                     </div>
 
