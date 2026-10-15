@@ -215,39 +215,39 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
     <div
       className={`fixed inset-0 z-50 flex items-center justify-center transition-all duration-200 ${
         isFullscreen
-          ? 'p-0 bg-black'
-          : 'p-2 sm:p-4 md:p-6 bg-black/85 backdrop-blur-md overflow-y-auto'
+          ? 'p-0 bg-white'
+          : 'p-2 sm:p-4 md:p-6 bg-black/60 backdrop-blur-sm overflow-y-auto'
       }`}
     >
       <div
-        className={`bg-[#0B0C0E] font-google-body text-right flex flex-col transition-all duration-200 overflow-hidden ${
+        className={`bg-white font-google-body text-right flex flex-col transition-all duration-200 overflow-hidden ${
           isFullscreen
             ? 'w-full h-full max-w-none max-h-none rounded-none border-0 shadow-none'
-            : 'w-full max-w-4xl rounded-[2.25rem] shadow-2xl border border-white/10 my-auto max-h-[94vh]'
+            : 'w-full max-w-4xl rounded-[2.25rem] shadow-2xl border border-gray-200 my-auto max-h-[94vh]'
         }`}
       >
         {/* Google Signature 4-Color Accent Top Bar */}
         <div className="h-1.5 w-full bg-gradient-to-r from-[#4285F4] via-[#EA4335] via-[#FBBC04] to-[#34A853] shrink-0" />
 
-        {/* Google Brand Header */}
-        <div className="bg-[#111215] px-6 py-5 sm:px-8 sm:py-6 border-b border-white/10 relative shrink-0">
+        {/* Clean White Brand Header */}
+        <div className="bg-white px-6 py-5 sm:px-8 sm:py-6 border-b border-gray-200 relative shrink-0">
           {/* Header Action Buttons (Fullscreen & Close) */}
           <div className="absolute top-4 left-4 sm:top-5 sm:left-6 flex items-center gap-2 z-10">
             <button
               type="button"
               onClick={() => setIsFullscreen(!isFullscreen)}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-white/15 hover:border-white/25 bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white shadow-2xs transition-all text-xs font-google-heading font-medium cursor-pointer"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-gray-200 hover:border-gray-300 bg-gray-50 hover:bg-gray-100 text-gray-700 hover:text-gray-900 shadow-2xs transition-all text-xs font-google-heading font-medium cursor-pointer"
               title={isFullscreen ? 'חזרה לתצוגה רגילה' : 'הגדל למסך מלא'}
               aria-label={isFullscreen ? 'חזרה לתצוגה רגילה' : 'הגדל למסך מלא'}
             >
               {isFullscreen ? (
                 <>
-                  <Minimize2 className="w-3.5 h-3.5 text-gray-400" />
+                  <Minimize2 className="w-3.5 h-3.5 text-gray-500" />
                   <span className="hidden sm:inline">תצוגה רגילה</span>
                 </>
               ) : (
                 <>
-                  <Maximize2 className="w-3.5 h-3.5 text-[#3186FF]" />
+                  <Maximize2 className="w-3.5 h-3.5 text-[#1a73e8]" />
                   <span className="hidden sm:inline">מסך מלא</span>
                 </>
               )}
@@ -255,7 +255,7 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
             <button
               type="button"
               onClick={onClose}
-              className="p-1.5 sm:p-2 rounded-full hover:bg-white/10 text-gray-400 hover:text-white transition-colors cursor-pointer"
+              className="p-1.5 sm:p-2 rounded-full hover:bg-gray-100 text-gray-400 hover:text-gray-900 transition-colors cursor-pointer"
               aria-label="סגירה"
               title="סגירה"
             >
@@ -266,20 +266,20 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
           <div className={isFullscreen ? 'max-w-3xl mx-auto w-full pl-28 sm:pl-36' : 'pl-24 sm:pl-32'}>
             {/* Google Brand Identity Lockup */}
             <div className="flex items-center gap-3 mb-2 flex-wrap sm:flex-nowrap">
-              <span className="font-google-heading font-bold text-white text-base sm:text-lg tracking-tight">
+              <span className="font-google-heading font-bold text-gray-900 text-base sm:text-lg tracking-tight">
                 Google Student Ambassador
               </span>
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-google-heading font-bold bg-[#131722] text-[#3186FF] border border-[#3186FF]/30 shadow-2xs">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-google-heading font-bold bg-blue-50 text-[#1a73e8] border border-blue-200 shadow-2xs">
                 <span>✦</span>
-                <span>#TeamGemini 2026 | ישראל</span>
+                <span>תוכנית השגרירים 2026 | ישראל</span>
               </span>
             </div>
 
             <div className="flex items-baseline gap-2 mt-1">
-              <h3 className="text-xl sm:text-2xl font-google-heading font-black text-white tracking-tight">
+              <h3 className="text-xl sm:text-2xl font-google-heading font-black text-gray-900 tracking-tight">
                 שאלון הגשת מועמדות
               </h3>
-              <span className="text-xs text-gray-400 font-medium hidden sm:inline">
+              <span className="text-xs text-gray-500 font-medium hidden sm:inline">
                 • מחזור שגרירי הסטודנטים 2026
               </span>
             </div>
@@ -300,19 +300,19 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                         }}
                         className={`flex items-center justify-center gap-2 py-2 px-3 rounded-2xl transition-all text-xs font-google-heading font-semibold ${
                           isCurrent
-                            ? 'bg-[#3186FF] text-white shadow-lg'
+                            ? 'bg-[#1a73e8] text-white shadow-md'
                             : isPassed
-                            ? 'bg-[#131722] text-[#3186FF] cursor-pointer hover:bg-blue-900/40 border border-[#3186FF]/30'
-                            : 'bg-white/5 text-gray-500 cursor-default'
+                            ? 'bg-blue-50 text-[#1a73e8] cursor-pointer hover:bg-blue-100 border border-blue-200'
+                            : 'bg-gray-100 text-gray-500 cursor-default'
                         }`}
                       >
                         <span
                           className={`w-5 h-5 rounded-full flex items-center justify-center text-[11px] font-bold ${
                             isCurrent
-                              ? 'bg-white text-[#3186FF]'
+                              ? 'bg-white text-[#1a73e8]'
                               : isPassed
-                              ? 'bg-[#3186FF]/20 text-[#3186FF]'
-                              : 'bg-white/10 text-gray-500'
+                              ? 'bg-[#1a73e8] text-white'
+                              : 'bg-gray-200 text-gray-500'
                           }`}
                         >
                           {isPassed ? <Check className="w-3 h-3 stroke-[3]" /> : def.step}
@@ -324,9 +324,9 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                 </div>
 
                 {/* Micro Progress Line */}
-                <div className="w-full bg-white/10 h-1 rounded-full overflow-hidden">
+                <div className="w-full bg-gray-100 h-1 rounded-full overflow-hidden">
                   <div
-                    className="bg-[#3186FF] h-full transition-all duration-300 rounded-full"
+                    className="bg-[#1a73e8] h-full transition-all duration-300 rounded-full"
                     style={{ width: `${(currentStep / TOTAL_STEPS) * 100}%` }}
                   />
                 </div>
@@ -336,37 +336,37 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
         </div>
 
         {/* Modal Scrollable Canvas */}
-        <div id="modal-scroll-area" className="p-4 sm:p-6 md:p-8 overflow-y-auto flex-1 bg-[#0B0C0E]">
+        <div id="modal-scroll-area" className="p-4 sm:p-6 md:p-8 overflow-y-auto flex-1 bg-gray-50/70">
           <div className={isFullscreen ? 'max-w-3xl mx-auto w-full' : 'max-w-3xl mx-auto w-full'}>
             {submittedRecord ? (
               /* Google Success Confirmation Screen */
-              <div className="bg-[#111215] rounded-3xl border border-white/10 p-8 sm:p-12 text-center shadow-2xl space-y-6 relative overflow-hidden">
+              <div className="bg-white rounded-3xl border border-gray-200 p-8 sm:p-12 text-center shadow-lg space-y-6 relative overflow-hidden">
                 <div className="h-1.5 w-full bg-gradient-to-r from-[#4285F4] via-[#EA4335] via-[#FBBC04] to-[#34A853] absolute top-0 left-0" />
 
                 <div className="relative mx-auto w-24 h-24 flex items-center justify-center">
                   <img
                     src="/star-emoticon.png"
                     alt="Success"
-                    className="w-20 h-20 object-contain drop-shadow-2xl animate-bounce"
+                    className="w-20 h-20 object-contain drop-shadow-md animate-bounce"
                   />
                 </div>
 
                 <div>
-                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-950/40 text-emerald-400 text-xs font-google-heading font-semibold border border-emerald-500/30 mb-3">
+                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-google-heading font-semibold border border-emerald-200 mb-3">
                     <CheckCircle2 className="w-3.5 h-3.5" />
                     <span>המועמדות הוגשה ונרשמה בהצלחה</span>
                   </div>
-                  <h4 className="text-2xl sm:text-3xl font-google-heading font-black text-white mb-2 tracking-tight">
+                  <h4 className="text-2xl sm:text-3xl font-google-heading font-black text-gray-900 mb-2 tracking-tight">
                     תודה רבה, {submittedRecord.fullName}!
                   </h4>
-                  <p className="font-google-body text-gray-300 max-w-lg mx-auto text-sm leading-relaxed">
+                  <p className="font-google-body text-gray-600 max-w-lg mx-auto text-sm leading-relaxed">
                     הפרטים שלך נקלטו בהצלחה בנבחרת שגרירי Google Student Ambassadors בישראל לשנת 2026. ניצור איתך קשר בהקדם בוואטסאפ ובמייל.
                   </p>
                 </div>
 
-                <div className="bg-[#16171B] border border-white/10 rounded-2xl p-5 max-w-sm mx-auto shadow-inner">
-                  <div className="text-xs text-gray-400 mb-1 font-medium font-google-body">מספר מועמדות למעקב:</div>
-                  <div className="font-mono text-xl font-extrabold text-[#3186FF] tracking-wider">
+                <div className="bg-gray-50 border border-gray-200 rounded-2xl p-5 max-w-sm mx-auto shadow-inner">
+                  <div className="text-xs text-gray-500 mb-1 font-medium font-google-body">מספר מועמדות למעקב:</div>
+                  <div className="font-mono text-xl font-extrabold text-[#1a73e8] tracking-wider">
                     {submittedRecord.id}
                   </div>
                 </div>
@@ -374,7 +374,7 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                 <div className="pt-2">
                   <button
                     onClick={onClose}
-                    className="bg-[#3186FF] hover:bg-[#2563EB] text-white font-google-heading font-bold px-8 py-3 rounded-full transition-all text-sm shadow-[0_10px_25px_rgba(49,134,255,0.35)] cursor-pointer active:scale-95"
+                    className="bg-[#1a73e8] hover:bg-[#1557b0] text-white font-google-heading font-bold px-8 py-3 rounded-full transition-all text-sm shadow-md cursor-pointer active:scale-95"
                   >
                     חזרה לאתר התוכנית
                   </button>
@@ -387,29 +387,29 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                 {/* ================= חלק 1: נעים להכיר ☕ ================= */}
                 {currentStep === 1 && (
                   <div className="space-y-5 animate-in fade-in duration-200">
-                    {/* Google Brand Hero Card */}
-                    <div className="bg-[#111215] rounded-3xl border border-white/10 p-6 sm:p-8 shadow-xl relative overflow-hidden">
-                      <div className="h-1.5 w-full bg-gradient-to-r from-[#3186FF] via-[#7C4DFF] to-[#EA4335] absolute top-0 left-0" />
+                    {/* Brand Welcome Card */}
+                    <div className="bg-white rounded-3xl border border-gray-200 p-6 sm:p-8 shadow-sm relative overflow-hidden">
+                      <div className="h-1.5 w-full bg-gradient-to-r from-[#1a73e8] via-[#7C4DFF] to-[#EA4335] absolute top-0 left-0" />
 
                       <div className="flex items-start justify-between gap-4">
                         <div className="space-y-2 flex-1">
                           <div className="flex items-center gap-2">
-                            <span className="font-google-heading font-black text-[#3186FF] text-xs tracking-wider uppercase">
+                            <span className="font-google-heading font-black text-[#1a73e8] text-xs tracking-wider uppercase">
                               LOOK WHAT YOU CAN DO ✦
                             </span>
-                            <span className="text-gray-600">•</span>
-                            <span className="text-xs text-gray-400 font-medium font-google-body">#TeamGemini 2026</span>
+                            <span className="text-gray-300">•</span>
+                            <span className="text-xs text-gray-500 font-medium font-google-body">תוכנית שגרירי Gemini 2026</span>
                           </div>
 
-                          <h4 className="text-xl sm:text-2xl font-google-heading font-black text-white tracking-tight">
-                            היי לשגרירים לעתיד של #TeamGemini! 🚀
+                          <h4 className="text-xl sm:text-2xl font-google-heading font-black text-gray-900 tracking-tight">
+                            היי לשגרירי העתיד של Gemini! 🚀
                           </h4>
 
-                          <p className="font-google-body text-sm text-gray-300 leading-relaxed pt-1">
+                          <p className="font-google-body text-sm text-gray-700 leading-relaxed pt-1">
                             מוכנים להוביל, לחדש ולחבר קהילה שלמה של חובבי טכנולוגיה ו-AI? אם אתם עפים על העולמות של Google ושל בינה מלאכותית, ורוצים להביא את האנרגיה הזו ישירות לקמפוס שלכם – הגעתם בדיוק למקום הנכון!
                           </p>
 
-                          <p className="font-google-body text-xs text-gray-400 leading-relaxed">
+                          <p className="font-google-body text-xs text-gray-500 leading-relaxed">
                             אנחנו מחפשים את מחזור שגרירי הסטודנטים הבא של Google – הטיפוסים שמזיזים עניינים, יזמים בנשמה ומובילי דעה שמוכנים לצלול לעומק ה-AI, לחבר את הקמפוס ולהביא את היצירתיות הייחודית שלהם לקדמת הבמה.
                           </p>
                         </div>
@@ -419,22 +419,22 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                           <img
                             src="/speach-light-emoticon.png"
                             alt="Welcome"
-                            className="w-16 h-16 object-contain drop-shadow-xl"
+                            className="w-16 h-16 object-contain drop-shadow-md"
                           />
                         </div>
                       </div>
 
-                      <div className="flex items-center gap-1.5 text-xs text-[#EA4335] font-medium pt-3 mt-3 border-t border-white/10 font-google-body">
+                      <div className="flex items-center gap-1.5 text-xs text-[#EA4335] font-medium pt-3 mt-3 border-t border-gray-100 font-google-body">
                         <span>*</span>
                         <span>מסמן שאלות חובה</span>
                       </div>
                     </div>
 
                     {/* Card A: פרטי קשר אישיים */}
-                    <div className="bg-[#111215] rounded-3xl border border-white/10 p-6 sm:p-8 shadow-xl space-y-5">
-                      <div className="flex items-center gap-2.5 pb-3 border-b border-white/10">
-                        <span className="w-1.5 h-5 bg-[#3186FF] rounded-full inline-block" />
-                        <h4 className="text-base font-google-heading font-bold text-white">
+                    <div className="bg-white rounded-3xl border border-gray-200 p-6 sm:p-8 shadow-sm space-y-5">
+                      <div className="flex items-center gap-2.5 pb-3 border-b border-gray-100">
+                        <span className="w-1.5 h-5 bg-[#1a73e8] rounded-full inline-block" />
+                        <h4 className="text-base font-google-heading font-bold text-gray-900">
                           פרטי קשר ותקשורת
                         </h4>
                       </div>
@@ -442,7 +442,7 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                       <div className="grid sm:grid-cols-2 gap-5">
                         {/* Full Name */}
                         <div>
-                          <label className="block text-sm font-google-heading font-medium text-gray-200 mb-1.5">
+                          <label className="block text-sm font-google-heading font-medium text-gray-800 mb-1.5">
                             שם מלא <span className="text-[#EA4335] font-bold">*</span>
                           </label>
                           <input
@@ -450,14 +450,14 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                             value={formData.fullName}
                             onChange={(e) => handleChange('fullName', e.target.value)}
                             placeholder="ישראל ישראלי"
-                            className="w-full px-4 py-3 rounded-2xl border border-white/15 hover:border-white/25 focus:border-[#3186FF] focus:ring-4 focus:ring-[#3186FF]/20 bg-[#16171B] text-white text-sm transition-all outline-none font-google-body placeholder-gray-500"
+                            className="w-full px-4 py-3 rounded-2xl border border-gray-300 hover:border-gray-400 focus:border-[#1a73e8] focus:ring-4 focus:ring-blue-500/10 bg-gray-50/50 hover:bg-white focus:bg-white text-gray-900 text-sm transition-all outline-none font-google-body placeholder-gray-400"
                           />
                           {errors.fullName && <p className="text-xs text-[#EA4335] mt-1.5 font-medium">{errors.fullName}</p>}
                         </div>
 
                         {/* Phone */}
                         <div>
-                          <label className="block text-sm font-google-heading font-medium text-gray-200 mb-1.5">
+                          <label className="block text-sm font-google-heading font-medium text-gray-800 mb-1.5">
                             מספר טלפון נייד (לוואטסאפ) <span className="text-[#EA4335] font-bold">*</span>
                           </label>
                           <input
@@ -465,14 +465,14 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                             value={formData.phone}
                             onChange={(e) => handleChange('phone', e.target.value)}
                             placeholder="050-1234567"
-                            className="w-full px-4 py-3 rounded-2xl border border-white/15 hover:border-white/25 focus:border-[#3186FF] focus:ring-4 focus:ring-[#3186FF]/20 bg-[#16171B] text-white text-sm transition-all outline-none font-google-body placeholder-gray-500"
+                            className="w-full px-4 py-3 rounded-2xl border border-gray-300 hover:border-gray-400 focus:border-[#1a73e8] focus:ring-4 focus:ring-blue-500/10 bg-gray-50/50 hover:bg-white focus:bg-white text-gray-900 text-sm transition-all outline-none font-google-body placeholder-gray-400"
                           />
                           {errors.phone && <p className="text-xs text-[#EA4335] mt-1.5 font-medium">{errors.phone}</p>}
                         </div>
 
                         {/* Email */}
                         <div className="sm:col-span-2">
-                          <label className="block text-sm font-google-heading font-medium text-gray-200 mb-1.5">
+                          <label className="block text-sm font-google-heading font-medium text-gray-800 mb-1.5">
                             כתובת דוא"ל (עדיפות למייל אקדמי) <span className="text-[#EA4335] font-bold">*</span>
                           </label>
                           <input
@@ -480,7 +480,7 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                             value={formData.email}
                             onChange={(e) => handleChange('email', e.target.value)}
                             placeholder="student@campus.ac.il"
-                            className="w-full px-4 py-3 rounded-2xl border border-white/15 hover:border-white/25 focus:border-[#3186FF] focus:ring-4 focus:ring-[#3186FF]/20 bg-[#16171B] text-white text-sm transition-all outline-none font-google-body placeholder-gray-500"
+                            className="w-full px-4 py-3 rounded-2xl border border-gray-300 hover:border-gray-400 focus:border-[#1a73e8] focus:ring-4 focus:ring-blue-500/10 bg-gray-50/50 hover:bg-white focus:bg-white text-gray-900 text-sm transition-all outline-none font-google-body placeholder-gray-400"
                           />
                           {errors.email && <p className="text-xs text-[#EA4335] mt-1.5 font-medium">{errors.email}</p>}
                         </div>
@@ -488,10 +488,10 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                     </div>
 
                     {/* Card B: רקע אקדמי */}
-                    <div className="bg-[#111215] rounded-3xl border border-white/10 p-6 sm:p-8 shadow-xl space-y-5">
-                      <div className="flex items-center gap-2.5 pb-3 border-b border-white/10">
+                    <div className="bg-white rounded-3xl border border-gray-200 p-6 sm:p-8 shadow-sm space-y-5">
+                      <div className="flex items-center gap-2.5 pb-3 border-b border-gray-100">
                         <span className="w-1.5 h-5 bg-[#34A853] rounded-full inline-block" />
-                        <h4 className="text-base font-google-heading font-bold text-white">
+                        <h4 className="text-base font-google-heading font-bold text-gray-900">
                           רקע אקדמי
                         </h4>
                       </div>
@@ -511,7 +511,7 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                           />
                           {formData.institution === 'מוסד לימודים אחר...' && (
                             <div className="mt-3">
-                              <label className="block text-xs font-google-heading font-medium text-gray-300 mb-1">
+                              <label className="block text-xs font-google-heading font-medium text-gray-700 mb-1">
                                 שם מוסד הלימודים: <span className="text-[#EA4335]">*</span>
                               </label>
                               <input
@@ -519,7 +519,7 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                                 value={formData.customInstitution || ''}
                                 onChange={(e) => handleChange('customInstitution', e.target.value)}
                                 placeholder="למשל: המכללה למינהל, מכללת ספיר..."
-                                className="w-full px-4 py-2.5 rounded-xl border border-white/15 hover:border-white/25 focus:border-[#3186FF] focus:ring-2 focus:ring-[#3186FF]/20 bg-[#16171B] text-white text-sm outline-none font-google-body placeholder-gray-500"
+                                className="w-full px-4 py-2.5 rounded-xl border border-gray-300 hover:border-gray-400 focus:border-[#1a73e8] focus:ring-2 focus:ring-blue-500/10 bg-gray-50 hover:bg-white focus:bg-white text-gray-900 text-sm outline-none font-google-body placeholder-gray-400"
                               />
                               {errors.customInstitution && (
                                 <p className="text-xs text-[#EA4335] mt-1 font-medium">{errors.customInstitution}</p>
@@ -543,7 +543,7 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
 
                         {/* Field of Study */}
                         <div className="sm:col-span-2">
-                          <label className="block text-sm font-google-heading font-medium text-gray-200 mb-1.5">
+                          <label className="block text-sm font-google-heading font-medium text-gray-800 mb-1.5">
                             חוג / פקולטה <span className="text-[#EA4335] font-bold">*</span>
                           </label>
                           <input
@@ -551,7 +551,7 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                             value={formData.fieldOfStudy}
                             onChange={(e) => handleChange('fieldOfStudy', e.target.value)}
                             placeholder="למשל: מדעי המחשב, משפטים, פסיכולוגיה, הנדסת תעשייה וניהול..."
-                            className="w-full px-4 py-3 rounded-2xl border border-white/15 hover:border-white/25 focus:border-[#3186FF] focus:ring-4 focus:ring-[#3186FF]/20 bg-[#16171B] text-white text-sm transition-all outline-none font-google-body placeholder-gray-500"
+                            className="w-full px-4 py-3 rounded-2xl border border-gray-300 hover:border-gray-400 focus:border-[#1a73e8] focus:ring-4 focus:ring-blue-500/10 bg-gray-50/50 hover:bg-white focus:bg-white text-gray-900 text-sm transition-all outline-none font-google-body placeholder-gray-400"
                           />
                           {errors.fieldOfStudy && <p className="text-xs text-[#EA4335] mt-1.5 font-medium">{errors.fieldOfStudy}</p>}
                         </div>
@@ -559,20 +559,20 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                     </div>
 
                     {/* Card C: תחומי עניין ונוכחות ברשת */}
-                    <div className="bg-[#111215] rounded-3xl border border-white/10 p-6 sm:p-8 shadow-xl space-y-6">
-                      <div className="flex items-center gap-2.5 pb-3 border-b border-white/10">
+                    <div className="bg-white rounded-3xl border border-gray-200 p-6 sm:p-8 shadow-sm space-y-6">
+                      <div className="flex items-center gap-2.5 pb-3 border-b border-gray-100">
                         <span className="w-1.5 h-5 bg-[#FBBC04] rounded-full inline-block" />
-                        <h4 className="text-base font-google-heading font-bold text-white">
+                        <h4 className="text-base font-google-heading font-bold text-gray-900">
                           תחומי עניין, יצירתיות ונוכחות ברשת
                         </h4>
                       </div>
 
                       {/* Hobbies and Interests */}
                       <div>
-                        <label className="block text-sm font-google-heading font-medium text-gray-200 mb-1">
+                        <label className="block text-sm font-google-heading font-medium text-gray-800 mb-1">
                           תחביבים ותחומי עניין (מעבר לספרי הלימוד!) <span className="text-[#EA4335] font-bold">*</span>
                         </label>
-                        <p className="font-google-body text-xs text-gray-400 mb-2.5 leading-relaxed">
+                        <p className="font-google-body text-xs text-gray-500 mb-2.5 leading-relaxed">
                           מה עושה לכם את זה? בינג' סדרות, פרויקטים של קוד לתוך הלילה, יצירת תוכן ב-TikTok, או אימונים במכון? בא לנו לדעת!
                         </p>
                         <textarea
@@ -580,7 +580,7 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                           value={formData.hobbiesAndInterests}
                           onChange={(e) => handleChange('hobbiesAndInterests', e.target.value)}
                           placeholder="ספרו לנו קצת על מה שאתם אוהבים לעשות בזמנכם הפנוי..."
-                          className="w-full p-4 rounded-2xl border border-white/15 hover:border-white/25 focus:border-[#3186FF] focus:ring-4 focus:ring-[#3186FF]/20 bg-[#16171B] text-white text-sm leading-relaxed transition-all outline-none font-google-body placeholder-gray-500"
+                          className="w-full p-4 rounded-2xl border border-gray-300 hover:border-gray-400 focus:border-[#1a73e8] focus:ring-4 focus:ring-blue-500/10 bg-gray-50/50 hover:bg-white focus:bg-white text-gray-900 text-sm leading-relaxed transition-all outline-none font-google-body placeholder-gray-400"
                         />
                         {errors.hobbiesAndInterests && (
                           <p className="text-xs text-[#EA4335] mt-1.5 font-medium">{errors.hobbiesAndInterests}</p>
@@ -589,11 +589,11 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
 
                       {/* Digital Platforms Filter Chips */}
                       <div>
-                        <label className="block text-sm font-google-heading font-medium text-gray-200 mb-1">
+                        <label className="block text-sm font-google-heading font-medium text-gray-800 mb-1">
                           איפה אתם הכי אוהבים לשתף מחשבות ויצירות שלכם ברשת?
-                          <span className="text-xs text-gray-400 font-normal mr-1.5">(אופציונלי אך מומלץ)</span>
+                          <span className="text-xs text-gray-500 font-normal mr-1.5">(אופציונלי אך מומלץ)</span>
                         </label>
-                        <p className="font-google-body text-xs text-gray-400 mb-3">
+                        <p className="font-google-body text-xs text-gray-500 mb-3">
                           בלוג, YouTube, LinkedIn, Instagram, TikTok, GitHub, אתר אישי או כל מקום אחר שבו הנוכחות הדיגיטלית שלכם בולטת.
                         </p>
                         <div className="flex flex-wrap gap-2">
@@ -606,11 +606,11 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                                 onClick={() => togglePlatform(plat)}
                                 className={`px-4 py-2 rounded-full text-xs transition-all duration-150 cursor-pointer flex items-center gap-1.5 ${
                                   isSelected
-                                    ? 'bg-[#131722] text-[#3186FF] border border-[#3186FF] font-google-heading font-semibold shadow-xs'
-                                    : 'bg-[#16171B] text-gray-300 border border-white/15 hover:border-white/25 hover:bg-white/5 font-google-heading font-medium'
+                                    ? 'bg-blue-50 text-[#1a73e8] border border-[#1a73e8] font-google-heading font-semibold shadow-xs'
+                                    : 'bg-gray-100 text-gray-700 border border-gray-200 hover:bg-gray-200/80 font-google-heading font-medium'
                                 }`}
                               >
-                                {isSelected ? <Check className="w-3.5 h-3.5 text-[#3186FF] stroke-[2.5]" /> : <span className="text-gray-400">+</span>}
+                                {isSelected ? <Check className="w-3.5 h-3.5 text-[#1a73e8] stroke-[2.5]" /> : <span className="text-gray-400">+</span>}
                                 <span>{plat}</span>
                               </button>
                             );
@@ -619,8 +619,8 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                       </div>
 
                       {/* Social Media Links */}
-                      <div className="pt-2 border-t border-white/10">
-                        <label className="block text-sm font-google-heading font-medium text-gray-200 mb-3">
+                      <div className="pt-2 border-t border-gray-100">
+                        <label className="block text-sm font-google-heading font-medium text-gray-800 mb-3">
                           קישורים לפרופילים ברשתות החברתיות (מומלץ):
                         </label>
                         <div className="grid sm:grid-cols-2 gap-3.5">
@@ -629,28 +629,28 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                             value={formData.linkedInUrl || ''}
                             onChange={(e) => handleChange('linkedInUrl', e.target.value)}
                             placeholder="פרופיל LinkedIn"
-                            className="w-full px-4 py-2.5 rounded-xl border border-white/15 hover:border-white/25 focus:border-[#3186FF] focus:ring-2 focus:ring-[#3186FF]/20 bg-[#16171B] text-xs text-white outline-none font-google-body placeholder-gray-500"
+                            className="w-full px-4 py-2.5 rounded-xl border border-gray-300 hover:border-gray-400 focus:border-[#1a73e8] focus:ring-2 focus:ring-blue-500/10 bg-gray-50/50 hover:bg-white focus:bg-white text-xs text-gray-900 outline-none font-google-body placeholder-gray-400"
                           />
                           <input
                             type="url"
                             value={formData.tiktokUrl || ''}
                             onChange={(e) => handleChange('tiktokUrl', e.target.value)}
                             placeholder="פרופיל TikTok"
-                            className="w-full px-4 py-2.5 rounded-xl border border-white/15 hover:border-white/25 focus:border-[#3186FF] focus:ring-2 focus:ring-[#3186FF]/20 bg-[#16171B] text-xs text-white outline-none font-google-body placeholder-gray-500"
+                            className="w-full px-4 py-2.5 rounded-xl border border-gray-300 hover:border-gray-400 focus:border-[#1a73e8] focus:ring-2 focus:ring-blue-500/10 bg-gray-50/50 hover:bg-white focus:bg-white text-xs text-gray-900 outline-none font-google-body placeholder-gray-400"
                           />
                           <input
                             type="url"
                             value={formData.instagramUrl || ''}
                             onChange={(e) => handleChange('instagramUrl', e.target.value)}
                             placeholder="פרופיל Instagram"
-                            className="w-full px-4 py-2.5 rounded-xl border border-white/15 hover:border-white/25 focus:border-[#3186FF] focus:ring-2 focus:ring-[#3186FF]/20 bg-[#16171B] text-xs text-white outline-none font-google-body placeholder-gray-500"
+                            className="w-full px-4 py-2.5 rounded-xl border border-gray-300 hover:border-gray-400 focus:border-[#1a73e8] focus:ring-2 focus:ring-blue-500/10 bg-gray-50/50 hover:bg-white focus:bg-white text-xs text-gray-900 outline-none font-google-body placeholder-gray-400"
                           />
                           <input
                             type="url"
                             value={formData.youtubeUrl || ''}
                             onChange={(e) => handleChange('youtubeUrl', e.target.value)}
                             placeholder="YouTube / GitHub / אתר אישי"
-                            className="w-full px-4 py-2.5 rounded-xl border border-white/15 hover:border-white/25 focus:border-[#3186FF] focus:ring-2 focus:ring-[#3186FF]/20 bg-[#16171B] text-xs text-white outline-none font-google-body placeholder-gray-500"
+                            className="w-full px-4 py-2.5 rounded-xl border border-gray-300 hover:border-gray-400 focus:border-[#1a73e8] focus:ring-2 focus:ring-blue-500/10 bg-gray-50/50 hover:bg-white focus:bg-white text-xs text-gray-900 outline-none font-google-body placeholder-gray-400"
                           />
                         </div>
                       </div>
@@ -662,8 +662,8 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                 {currentStep === 2 && (
                   <div className="space-y-5 animate-in fade-in duration-200">
                     {/* Header Banner */}
-                    <div className="bg-[#111215] rounded-3xl border border-white/10 p-6 sm:p-8 shadow-xl relative overflow-hidden">
-                      <div className="h-1.5 w-full bg-gradient-to-r from-[#EA4335] via-[#FBBC04] to-[#3186FF] absolute top-0 left-0" />
+                    <div className="bg-white rounded-3xl border border-gray-200 p-6 sm:p-8 shadow-sm relative overflow-hidden">
+                      <div className="h-1.5 w-full bg-gradient-to-r from-[#EA4335] via-[#FBBC04] to-[#1a73e8] absolute top-0 left-0" />
 
                       <div className="flex items-start justify-between gap-4">
                         <div className="space-y-2 flex-1">
@@ -671,15 +671,15 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                             <span className="font-google-heading font-black text-[#EA4335] text-xs uppercase tracking-wider">
                               SPARK IDEAS ✦ חלק 2
                             </span>
-                            <span className="text-gray-600">•</span>
-                            <span className="text-xs text-gray-400 font-medium font-google-body">5 אתגרי עומק</span>
+                            <span className="text-gray-300">•</span>
+                            <span className="text-xs text-gray-500 font-medium font-google-body">5 אתגרי עומק</span>
                           </div>
 
-                          <h4 className="text-xl sm:text-2xl font-google-heading font-black text-white tracking-tight flex items-center gap-2">
+                          <h4 className="text-xl sm:text-2xl font-google-heading font-black text-gray-900 tracking-tight flex items-center gap-2">
                             <span>תראו לנו את הניצוץ שלכם! ✨</span>
                           </h4>
 
-                          <p className="font-google-body text-sm text-gray-300 leading-relaxed">
+                          <p className="font-google-body text-sm text-gray-700 leading-relaxed">
                             בלי חפירות ומאמרים ארוכים – תראו לנו את הניסיון, היכולות והחשיבה המקורית שלכם דרך האתגרים הבאים:
                           </p>
                         </div>
@@ -689,45 +689,45 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                           <img
                             src="/star-emoticon.png"
                             alt="Star"
-                            className="w-16 h-16 object-contain drop-shadow-xl"
+                            className="w-16 h-16 object-contain drop-shadow-md"
                           />
                         </div>
                       </div>
                     </div>
 
                     {/* אתגר 1: חוקרי ג'מיניי (Gemini Canvas) */}
-                    <div className="bg-[#111215] rounded-3xl border border-white/10 p-6 sm:p-8 shadow-xl space-y-5">
-                      <div className="flex items-center justify-between pb-3 border-b border-white/10">
+                    <div className="bg-white rounded-3xl border border-gray-200 p-6 sm:p-8 shadow-sm space-y-5">
+                      <div className="flex items-center justify-between pb-3 border-b border-gray-100">
                         <div className="flex items-center gap-2.5">
-                          <span className="w-1.5 h-5 bg-[#3186FF] rounded-full inline-block" />
-                          <h5 className="font-google-heading font-bold text-base text-white">
+                          <span className="w-1.5 h-5 bg-[#1a73e8] rounded-full inline-block" />
+                          <h5 className="font-google-heading font-bold text-base text-gray-900">
                             אתגר 1: חוקרי ג'מיניי (חובבי ה-AI) 🤖
                           </h5>
                         </div>
-                        <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-[#131722] text-[#3186FF] border border-[#3186FF]/30 font-google-heading">
+                        <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-blue-50 text-[#1a73e8] border border-blue-200 font-google-heading">
                           Gemini Canvas
                         </span>
                       </div>
 
                       {/* Google AI Lab Context Box */}
-                      <div className="bg-[#131722] rounded-2xl p-4 sm:p-5 border border-[#3186FF]/30 text-xs text-gray-200 leading-relaxed space-y-2">
-                        <div className="font-bold text-[#3186FF] flex items-center gap-1.5 font-google-heading">
+                      <div className="bg-blue-50/60 rounded-2xl p-4 sm:p-5 border border-blue-200 text-xs text-gray-800 leading-relaxed space-y-2">
+                        <div className="font-bold text-[#1a73e8] flex items-center gap-1.5 font-google-heading">
                           <GeminiSparkle size={14} />
                           <span>פיצ'ר Gemini Canvas של Google</span>
                         </div>
-                        <p className="font-google-body">
+                        <p className="font-google-body text-gray-700">
                           ל-Gemini יש פיצ'ר סופר חזק שנקרא <strong>Gemini Canvas</strong> – מרחב עבודה אינטראקטיבי שבו אפשר לבנות מסמכים דינמיים, שאלונים, כלי עבודה או "אפליקציות פשוטות" רק באמצעות פרומפטים בטקסט פשוט (ללא שום צורך ברקע בטכנולוגיה או בקוד!).
                         </p>
-                        <p className="font-medium text-[#3186FF] font-google-body">
+                        <p className="font-medium text-[#1a73e8] font-google-body">
                           המשימה שלכם: דמיינו שאתם רוצים לפתור בעיה או ליצור כלי עזר קטן ביום-יום של הסטודנטים בקמפוס שלכם בלחיצת כפתור.
                         </p>
                       </div>
 
                       <div>
-                        <label className="block text-sm font-google-heading font-medium text-gray-200 mb-1">
+                        <label className="block text-sm font-google-heading font-medium text-gray-800 mb-1">
                           1. מה הבעיה או הצורך בקמפוס שאתם רוצים לפתור? <span className="text-[#EA4335] font-bold">*</span>
                         </label>
-                        <p className="font-google-body text-xs text-gray-400 mb-2">
+                        <p className="font-google-body text-xs text-gray-500 mb-2">
                           (לדוגמה: מחולל סימולציות מבחן למשפטים/רפואה, מפת דרכים לסיכום מאמרים אקדמיים, כלי הרשמה מהיר לאירוע חברתי, או לוח משימות אינטראקטיבי לעבודה קבוצתית).
                         </p>
                         <textarea
@@ -735,7 +735,7 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                           value={formData.canvasCampusProblem}
                           onChange={(e) => handleChange('canvasCampusProblem', e.target.value)}
                           placeholder="הבעיה שאני רוצה לפתור בקמפוס היא..."
-                          className="w-full p-4 rounded-2xl border border-white/15 hover:border-white/25 focus:border-[#3186FF] focus:ring-4 focus:ring-[#3186FF]/20 bg-[#16171B] text-white text-sm leading-relaxed outline-none font-google-body placeholder-gray-500"
+                          className="w-full p-4 rounded-2xl border border-gray-300 hover:border-gray-400 focus:border-[#1a73e8] focus:ring-4 focus:ring-blue-500/10 bg-gray-50/50 hover:bg-white focus:bg-white text-gray-900 text-sm leading-relaxed outline-none font-google-body placeholder-gray-400"
                         />
                         {errors.canvasCampusProblem && (
                           <p className="text-xs text-[#EA4335] mt-1.5 font-medium">{errors.canvasCampusProblem}</p>
@@ -743,10 +743,10 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                       </div>
 
                       <div>
-                        <label className="block text-sm font-google-heading font-medium text-gray-200 mb-1">
+                        <label className="block text-sm font-google-heading font-medium text-gray-800 mb-1">
                           2. איך הכלי האינטראקטיבי שלכם ב-Canvas יעבוד בפועל, ולמה Canvas מתאים לזה? <span className="text-[#EA4335] font-bold">*</span>
                         </label>
-                        <p className="font-google-body text-xs text-gray-400 mb-2">
+                        <p className="font-google-body text-xs text-gray-500 mb-2">
                           מה המשתמשים יראו, איזה פרומפט/הנחיה תגדירו ל-Gemini, ואיך הסטודנטים יפעלו מול התוצר? למה לדעתכם פיצ'ר כמו Canvas מתאים לזה במיוחד בהשוואה לכלים אחרים?
                         </p>
                         <textarea
@@ -754,7 +754,7 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                           value={formData.canvasSolutionDetails}
                           onChange={(e) => handleChange('canvasSolutionDetails', e.target.value)}
                           placeholder="הכלי יאפשר לסטודנטים להזין... והתוצר ב-Canvas יציג... בחרתי ב-Canvas כי..."
-                          className="w-full p-4 rounded-2xl border border-white/15 hover:border-white/25 focus:border-[#3186FF] focus:ring-4 focus:ring-[#3186FF]/20 bg-[#16171B] text-white text-sm leading-relaxed outline-none font-google-body placeholder-gray-500"
+                          className="w-full p-4 rounded-2xl border border-gray-300 hover:border-gray-400 focus:border-[#1a73e8] focus:ring-4 focus:ring-blue-500/10 bg-gray-50/50 hover:bg-white focus:bg-white text-gray-900 text-sm leading-relaxed outline-none font-google-body placeholder-gray-400"
                         />
                         {errors.canvasSolutionDetails && (
                           <p className="text-xs text-[#EA4335] mt-1.5 font-medium">{errors.canvasSolutionDetails}</p>
@@ -763,20 +763,20 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                     </div>
 
                     {/* אתגר 2: בדיקת וייב ויראלי (יוצרי התוכן) */}
-                    <div className="bg-[#111215] rounded-3xl border border-white/10 p-6 sm:p-8 shadow-xl space-y-5">
-                      <div className="flex items-center justify-between pb-3 border-b border-white/10">
+                    <div className="bg-white rounded-3xl border border-gray-200 p-6 sm:p-8 shadow-sm space-y-5">
+                      <div className="flex items-center justify-between pb-3 border-b border-gray-100">
                         <div className="flex items-center gap-2.5">
                           <span className="w-1.5 h-5 bg-[#EA4335] rounded-full inline-block" />
-                          <h5 className="font-google-heading font-bold text-base text-white">
+                          <h5 className="font-google-heading font-bold text-base text-gray-900">
                             אתגר 2: בדיקת וייב ויראלי (יוצרי התוכן) 📲
                           </h5>
                         </div>
-                        <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-[#1C1416] text-[#EA4335] border border-red-500/30 font-google-heading">
+                        <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-red-50 text-[#EA4335] border border-red-200 font-google-heading">
                           Content & Reach
                         </span>
                       </div>
 
-                      <p className="font-google-body text-xs text-gray-300 leading-relaxed">
+                      <p className="font-google-body text-xs text-gray-600 leading-relaxed">
                         שתפו קישור לפוסט, סרטון (Reels / TikTok / LinkedIn) או תוכן שיצרתם בעבר שאתם ממש גאים בו:
                       </p>
 
@@ -786,12 +786,12 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                           value={formData.viralContentUrl}
                           onChange={(e) => handleChange('viralContentUrl', e.target.value)}
                           placeholder="קישור לפוסט / סרטון (אופציונלי אך מומלץ)"
-                          className="w-full px-4 py-3 rounded-2xl border border-white/15 hover:border-white/25 focus:border-[#EA4335] focus:ring-4 focus:ring-[#EA4335]/20 bg-[#16171B] text-white text-sm outline-none font-google-body placeholder-gray-500"
+                          className="w-full px-4 py-3 rounded-2xl border border-gray-300 hover:border-gray-400 focus:border-[#EA4335] focus:ring-4 focus:ring-red-500/10 bg-gray-50/50 hover:bg-white focus:bg-white text-gray-900 text-sm outline-none font-google-body placeholder-gray-400"
                         />
                       </div>
 
                       <div>
-                        <label className="block text-sm font-google-heading font-medium text-gray-200 mb-1">
+                        <label className="block text-sm font-google-heading font-medium text-gray-800 mb-1">
                           מה הפך את התוכן למוצלח, ואיזה ערך הקהל שלכם קיבל ממנו? <span className="text-[#EA4335] font-bold">*</span>
                         </label>
                         <textarea
@@ -799,7 +799,7 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                           value={formData.viralContentDescription}
                           onChange={(e) => handleChange('viralContentDescription', e.target.value)}
                           placeholder="התוכן עבד מעולה כי... והערך המרכזי שהקהל לקח ממנו היה..."
-                          className="w-full p-4 rounded-2xl border border-white/15 hover:border-white/25 focus:border-[#EA4335] focus:ring-4 focus:ring-[#EA4335]/20 bg-[#16171B] text-white text-sm leading-relaxed outline-none font-google-body placeholder-gray-500"
+                          className="w-full p-4 rounded-2xl border border-gray-300 hover:border-gray-400 focus:border-[#EA4335] focus:ring-4 focus:ring-red-500/10 bg-gray-50/50 hover:bg-white focus:bg-white text-gray-900 text-sm leading-relaxed outline-none font-google-body placeholder-gray-400"
                         />
                         {errors.viralContentDescription && (
                           <p className="text-xs text-[#EA4335] mt-1.5 font-medium">{errors.viralContentDescription}</p>
@@ -808,20 +808,20 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                     </div>
 
                     {/* אתגר 3: בוני הקהילה (מחברי הקמפוס) */}
-                    <div className="bg-[#111215] rounded-3xl border border-white/10 p-6 sm:p-8 shadow-xl space-y-4">
-                      <div className="flex items-center justify-between pb-3 border-b border-white/10">
+                    <div className="bg-white rounded-3xl border border-gray-200 p-6 sm:p-8 shadow-sm space-y-4">
+                      <div className="flex items-center justify-between pb-3 border-b border-gray-100">
                         <div className="flex items-center gap-2.5">
                           <span className="w-1.5 h-5 bg-[#34A853] rounded-full inline-block" />
-                          <h5 className="font-google-heading font-bold text-base text-white">
+                          <h5 className="font-google-heading font-bold text-base text-gray-900">
                             אתגר 3: בוני הקהילה (מחברי הקמפוס) 🤝
                           </h5>
                         </div>
-                        <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-[#121A15] text-[#34A853] border border-emerald-500/30 font-google-heading">
+                        <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-emerald-50 text-[#34A853] border border-emerald-200 font-google-heading">
                           Community
                         </span>
                       </div>
 
-                      <label className="block text-sm font-google-heading font-medium text-gray-200">
+                      <label className="block text-sm font-google-heading font-medium text-gray-800">
                         ספרו לנו על פעם שבה הובלתם פרויקט, יוזמה או אירוע מאפס (באקדמיה, בצבא, או בקהילת סטודנטים). מה היה האתגר הכי מורכב בדרך, ואיך רתמתם אנשים לעבודה משותפת כדי להגיע לתוצאה? <span className="text-[#EA4335] font-bold">*</span>
                       </label>
                       <textarea
@@ -829,7 +829,7 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                         value={formData.communityLeadershipStory}
                         onChange={(e) => handleChange('communityLeadershipStory', e.target.value)}
                         placeholder="הקמתי / הובלתי את... האתגר המרכזי היה... הצלחתי לרתום אנשים על ידי..."
-                        className="w-full p-4 rounded-2xl border border-white/15 hover:border-white/25 focus:border-[#34A853] focus:ring-4 focus:ring-[#34A853]/20 bg-[#16171B] text-white text-sm leading-relaxed outline-none font-google-body placeholder-gray-500"
+                        className="w-full p-4 rounded-2xl border border-gray-300 hover:border-gray-400 focus:border-[#34A853] focus:ring-4 focus:ring-emerald-500/10 bg-gray-50/50 hover:bg-white focus:bg-white text-gray-900 text-sm leading-relaxed outline-none font-google-body placeholder-gray-400"
                       />
                       {errors.communityLeadershipStory && (
                         <p className="text-xs text-[#EA4335] mt-1.5 font-medium">{errors.communityLeadershipStory}</p>
@@ -837,25 +837,25 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                     </div>
 
                     {/* אתגר 4: ניצוץ בקמפוס (המפעילים היצירתיים) */}
-                    <div className="bg-[#111215] rounded-3xl border border-white/10 p-6 sm:p-8 shadow-xl space-y-4">
-                      <div className="flex items-center justify-between pb-3 border-b border-white/10">
+                    <div className="bg-white rounded-3xl border border-gray-200 p-6 sm:p-8 shadow-sm space-y-4">
+                      <div className="flex items-center justify-between pb-3 border-b border-gray-100">
                         <div className="flex items-center gap-2.5">
                           <span className="w-1.5 h-5 bg-[#FBBC04] rounded-full inline-block" />
-                          <h5 className="font-google-heading font-bold text-base text-white">
+                          <h5 className="font-google-heading font-bold text-base text-gray-900">
                             אתגר 4: ניצוץ בקמפוס (המפעילים היצירתיים) 💡
                           </h5>
                         </div>
-                        <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-[#1C1914] text-amber-400 border border-amber-500/30 font-google-heading">
+                        <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-amber-50 text-amber-700 border border-amber-200 font-google-heading">
                           Campus Pop-Up
                         </span>
                       </div>
 
-                      <p className="font-google-body text-xs text-gray-300 leading-relaxed">
+                      <p className="font-google-body text-xs text-gray-600 leading-relaxed">
                         אנחנו רוצים לשנות מהקצה לקצה את הדרך שבה סטודנטים נעזרים ב-AI בקמפוס! תציעו רעיון מפתיע ומחוץ לקופסה לאירוע שטח או פעילות פופ-אפ בקמפוס (בדשא, בספריה, או בין ההרצאות) שתשנה לחלוטין את האופן שבו סטודנטים משתמשים ב-Gemini וב-NotebookLM ביום-יום האקדמי שלהם.
                       </p>
 
                       <div>
-                        <label className="block text-sm font-google-heading font-medium text-gray-200 mb-1">
+                        <label className="block text-sm font-google-heading font-medium text-gray-800 mb-1">
                           מה הרעיון, איך הוא נראה בפועל, ומה יגרום לסטודנטים לעצור הכל ולהשתתף? (זקקו את זה ל-2–4 משפטים חדים!) <span className="text-[#EA4335] font-bold">*</span>
                         </label>
                         <textarea
@@ -863,7 +863,7 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                           value={formData.campusPopUpIdea}
                           onChange={(e) => handleChange('campusPopUpIdea', e.target.value)}
                           placeholder="הרעיון שלי הוא אירוע שטח שבו... הסטודנטים יחוו... ומה שימשוך אותם לעצור ולהשתתף הוא..."
-                          className="w-full p-4 rounded-2xl border border-white/15 hover:border-white/25 focus:border-[#FBBC04] focus:ring-4 focus:ring-[#FBBC04]/20 bg-[#16171B] text-white text-sm leading-relaxed outline-none font-google-body placeholder-gray-500"
+                          className="w-full p-4 rounded-2xl border border-gray-300 hover:border-gray-400 focus:border-[#FBBC04] focus:ring-4 focus:ring-amber-500/10 bg-gray-50/50 hover:bg-white focus:bg-white text-gray-900 text-sm leading-relaxed outline-none font-google-body placeholder-gray-400"
                         />
                         {errors.campusPopUpIdea && (
                           <p className="text-xs text-[#EA4335] mt-1.5 font-medium">{errors.campusPopUpIdea}</p>
@@ -872,20 +872,20 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                     </div>
 
                     {/* אתגר 5: מד האהבה לגוגל (מספרי הסיפורים) */}
-                    <div className="bg-[#111215] rounded-3xl border border-white/10 p-6 sm:p-8 shadow-xl space-y-4">
-                      <div className="flex items-center justify-between pb-3 border-b border-white/10">
+                    <div className="bg-white rounded-3xl border border-gray-200 p-6 sm:p-8 shadow-sm space-y-4">
+                      <div className="flex items-center justify-between pb-3 border-b border-gray-100">
                         <div className="flex items-center gap-2.5">
-                          <span className="w-1.5 h-5 bg-[#3186FF] rounded-full inline-block" />
-                          <h5 className="font-google-heading font-bold text-base text-white">
+                          <span className="w-1.5 h-5 bg-[#1a73e8] rounded-full inline-block" />
+                          <h5 className="font-google-heading font-bold text-base text-gray-900">
                             אתגר 5: מד האהבה לגוגל (מספרי הסיפורים) 💙
                           </h5>
                         </div>
-                        <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-[#131722] text-[#3186FF] border border-[#3186FF]/30 font-google-heading">
-                          Why #TeamGemini
+                        <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-blue-50 text-[#1a73e8] border border-blue-200 font-google-heading">
+                          Why Gemini Ambassador
                         </span>
                       </div>
 
-                      <label className="block text-sm font-google-heading font-medium text-gray-200">
+                      <label className="block text-sm font-google-heading font-medium text-gray-800">
                         למה אתם באמת רוצים להיות שגרירי Google Gemini? <span className="text-[#EA4335] font-bold">*</span>
                       </label>
                       <textarea
@@ -893,7 +893,7 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                         value={formData.whyGoogleGeminiAmbassador}
                         onChange={(e) => handleChange('whyGoogleGeminiAmbassador', e.target.value)}
                         placeholder="החיבור שלי ל-Google ול-AI התחיל כאשר... חשוב לי להוביל את התוכנית הזו בקמפוס שלי כי..."
-                        className="w-full p-4 rounded-2xl border border-white/15 hover:border-white/25 focus:border-[#3186FF] focus:ring-4 focus:ring-[#3186FF]/20 bg-[#16171B] text-white text-sm leading-relaxed outline-none font-google-body placeholder-gray-500"
+                        className="w-full p-4 rounded-2xl border border-gray-300 hover:border-gray-400 focus:border-[#1a73e8] focus:ring-4 focus:ring-blue-500/10 bg-gray-50/50 hover:bg-white focus:bg-white text-gray-900 text-sm leading-relaxed outline-none font-google-body placeholder-gray-400"
                       />
                       {errors.whyGoogleGeminiAmbassador && (
                         <p className="text-xs text-[#EA4335] mt-1.5 font-medium">{errors.whyGoogleGeminiAmbassador}</p>
@@ -906,48 +906,48 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                 {currentStep === 3 && (
                   <div className="space-y-5 animate-in fade-in duration-200">
                     {/* Video Pitch Hero Card */}
-                    <div className="bg-[#111215] rounded-3xl border border-white/10 p-6 sm:p-8 shadow-xl relative overflow-hidden space-y-5">
+                    <div className="bg-white rounded-3xl border border-gray-200 p-6 sm:p-8 shadow-sm relative overflow-hidden space-y-5">
                       <div className="h-1.5 w-full bg-gradient-to-r from-[#EA4335] via-[#FBBC04] to-[#34A853] absolute top-0 left-0" />
 
-                      <div className="flex items-center justify-between pb-3 border-b border-white/10">
+                      <div className="flex items-center justify-between pb-3 border-b border-gray-100">
                         <div className="flex items-center gap-2.5">
                           <span className="w-1.5 h-5 bg-[#EA4335] rounded-full inline-block" />
-                          <h4 className="text-lg font-google-heading font-bold text-white flex items-center gap-2">
+                          <h4 className="text-lg font-google-heading font-bold text-gray-900 flex items-center gap-2">
                             <span>חלק 3: רגע הפיץ' 🎙️</span>
                           </h4>
                         </div>
-                        <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-[#1C1416] text-[#EA4335] border border-red-500/30 flex items-center gap-1 font-google-heading">
+                        <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-red-50 text-[#EA4335] border border-red-200 flex items-center gap-1 font-google-heading">
                           <Video className="w-3.5 h-3.5" />
                           <span>60–90 שניות</span>
                         </span>
                       </div>
 
                       {/* Video Brief Card */}
-                      <div className="bg-[#181316] border border-red-500/30 rounded-2xl p-5 space-y-3 relative overflow-hidden">
+                      <div className="bg-gray-50 border border-gray-200 rounded-2xl p-5 space-y-3 relative overflow-hidden">
                         <div className="flex items-start justify-between gap-4">
                           <div className="space-y-1">
-                            <h5 className="font-google-heading font-bold text-sm text-white">
+                            <h5 className="font-google-heading font-bold text-sm text-gray-900">
                               אל תתביישו מהמצלמה! העלו סרטון קצר (60–90 שניות) בקישור פתוח:
                             </h5>
-                            <p className="font-google-body text-xs text-gray-300">
+                            <p className="font-google-body text-xs text-gray-600">
                               קישור פתוח ב-Google Drive / YouTube Unlisted / TikTok / Reels הכולל:
                             </p>
                           </div>
                           <img
                             src="/speaker-emoticon.png"
                             alt="Speaker"
-                            className="w-14 h-14 object-contain drop-shadow-xl hidden sm:block shrink-0"
+                            className="w-14 h-14 object-contain drop-shadow-md hidden sm:block shrink-0"
                           />
                         </div>
 
-                        <div className="space-y-2 text-xs text-gray-300 bg-[#111215] p-4 rounded-xl border border-red-500/20 font-google-body">
+                        <div className="space-y-2 text-xs text-gray-700 bg-white p-4 rounded-xl border border-gray-200 font-google-body">
                           <div>
-                            <strong className="text-white">• חלק א': היכרות מהירה</strong> — מי אתם ומה האנרגיה והוייב שאתם מביאים לשולחן?
+                            <strong className="text-gray-900">• חלק א': היכרות מהירה</strong> — מי אתם ומה האנרגיה והוייב שאתם מביאים לשולחן?
                           </div>
                           <div>
-                            <strong className="text-white">• חלק ב': ה-Study Hack שלכם ב-AI</strong> — תספרו לנו על Gemini / NotebookLM Study Hack חכם, פרקטי ומפתיע שפותר משימה אקדמית אמיתית, אתגר לימודי, או באג בקוד.
+                            <strong className="text-gray-900">• חלק ב': ה-Study Hack שלכם ב-AI</strong> — תספרו לנו על Gemini / NotebookLM Study Hack חכם, פרקטי ומפתיע שפותר משימה אקדמית אמיתית, אתגר לימודי, או באג בקוד.
                           </div>
-                          <div className="text-amber-400 font-semibold pt-1 border-t border-white/10">
+                          <div className="text-amber-700 font-semibold pt-1 border-t border-gray-200">
                             💡 טיפ ובונוס למעזים: יתרון למי שישלבו בסרטון גם הדגמה בלייב על המסך!
                           </div>
                         </div>
@@ -955,10 +955,10 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
 
                       {/* Video URL Input */}
                       <div>
-                        <label className="block text-sm font-google-heading font-medium text-gray-200 mb-1.5">
+                        <label className="block text-sm font-google-heading font-medium text-gray-800 mb-1.5">
                           קישור לסרטון הפיץ' שלכם <span className="text-[#EA4335] font-bold">*</span>
                         </label>
-                        <p className="font-google-body text-xs text-gray-400 mb-2">
+                        <p className="font-google-body text-xs text-gray-500 mb-2">
                           מדביקים את הקישור לסרטון ישירות בטופס – אין צורך להעלות קבצים! (ודאו שהרשאות הצפייה פתוחות)
                         </p>
                         <input
@@ -966,7 +966,7 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                           value={formData.videoPitchUrl}
                           onChange={(e) => handleChange('videoPitchUrl', e.target.value)}
                           placeholder="https://drive.google.com/... או https://youtube.com/watch?v=..."
-                          className="w-full px-4 py-3 rounded-2xl border border-white/15 hover:border-white/25 focus:border-[#EA4335] focus:ring-4 focus:ring-[#EA4335]/20 bg-[#16171B] text-white text-sm outline-none font-google-body placeholder-gray-500"
+                          className="w-full px-4 py-3 rounded-2xl border border-gray-300 hover:border-gray-400 focus:border-[#EA4335] focus:ring-4 focus:ring-red-500/10 bg-gray-50/50 hover:bg-white focus:bg-white text-gray-900 text-sm outline-none font-google-body placeholder-gray-400"
                         />
                         {errors.videoPitchUrl && (
                           <p className="text-xs text-[#EA4335] mt-1.5 font-medium">{errors.videoPitchUrl}</p>
@@ -975,7 +975,7 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
 
                       {/* Study Hack Summary */}
                       <div>
-                        <label className="block text-sm font-google-heading font-medium text-gray-200 mb-1.5">
+                        <label className="block text-sm font-google-heading font-medium text-gray-800 mb-1.5">
                           תקציר ה-Study Hack שלכם (בשורה או שתיים):
                         </label>
                         <textarea
@@ -983,21 +983,21 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                           value={formData.studyHackSummary || ''}
                           onChange={(e) => handleChange('studyHackSummary', e.target.value)}
                           placeholder="בקצרה: מה ה-Study Hack שהצגתם בסרטון?"
-                          className="w-full p-4 rounded-2xl border border-white/15 hover:border-white/25 focus:border-[#3186FF] focus:ring-4 focus:ring-[#3186FF]/20 bg-[#16171B] text-white text-sm leading-relaxed outline-none font-google-body placeholder-gray-500"
+                          className="w-full p-4 rounded-2xl border border-gray-300 hover:border-gray-400 focus:border-[#1a73e8] focus:ring-4 focus:ring-blue-500/10 bg-gray-50/50 hover:bg-white focus:bg-white text-gray-900 text-sm leading-relaxed outline-none font-google-body placeholder-gray-400"
                         />
                       </div>
                     </div>
 
                     {/* Terms & Consent Card */}
-                    <div className="bg-[#111215] rounded-3xl border border-white/10 p-6 sm:p-7 shadow-xl space-y-4">
+                    <div className="bg-white rounded-3xl border border-gray-200 p-6 sm:p-7 shadow-sm space-y-4">
                       <label className="flex items-start gap-3 cursor-pointer">
                         <input
                           type="checkbox"
                           checked={formData.agreedToTerms}
                           onChange={(e) => handleChange('agreedToTerms', e.target.checked)}
-                          className="mt-1 w-4 h-4 rounded text-[#3186FF] focus:ring-[#3186FF]/30 cursor-pointer bg-[#16171B] border-white/20"
+                          className="mt-1 w-4 h-4 rounded text-[#1a73e8] focus:ring-blue-500/30 cursor-pointer bg-gray-50 border-gray-300"
                         />
-                        <span className="font-google-body text-xs text-gray-300 leading-relaxed select-none">
+                        <span className="font-google-body text-xs text-gray-700 leading-relaxed select-none">
                           אני מאשר/ת שהפרטים שמילאתי נכונים ומדויקים, מסכים/ה ל
                           <button
                             type="button"
@@ -1006,7 +1006,7 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                               e.stopPropagation();
                               onOpenPrivacy?.();
                             }}
-                            className="text-[#3186FF] underline hover:text-[#5B9BFF] mx-1 font-medium inline"
+                            className="text-[#1a73e8] underline hover:text-blue-700 mx-1 font-medium inline"
                           >
                             מדיניות הפרטיות
                           </button>
@@ -1020,20 +1020,20 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                   </div>
                 )}
 
-                {/* Google Navigation Controls Bar */}
-                <div className="bg-[#111215] rounded-2xl border border-white/10 p-4 sm:p-5 flex items-center justify-between shadow-2xl">
+                {/* Navigation Controls Bar */}
+                <div className="bg-white rounded-2xl border border-gray-200 p-4 sm:p-5 flex items-center justify-between shadow-sm">
                   {currentStep > 1 ? (
                     <button
                       type="button"
                       onClick={handlePrev}
-                      className="px-6 py-2.5 rounded-full border border-white/15 hover:border-white/25 bg-white/5 hover:bg-white/10 text-gray-300 text-xs sm:text-sm font-google-heading font-semibold transition-colors flex items-center gap-1.5 cursor-pointer"
+                      className="px-6 py-2.5 rounded-full border border-gray-300 hover:border-gray-400 bg-gray-50 hover:bg-gray-100 text-gray-700 text-xs sm:text-sm font-google-heading font-semibold transition-colors flex items-center gap-1.5 cursor-pointer"
                     >
                       <ArrowRight className="w-4 h-4" />
                       <span>חזרה</span>
                     </button>
                   ) : (
-                    <div className="flex items-center gap-1.5 text-xs text-gray-400 font-google-body">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+                    <div className="flex items-center gap-1.5 text-xs text-gray-500 font-google-body">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
                       <span>הטיוטה נשמרת אוטומטית בדפדפן</span>
                     </div>
                   )}
@@ -1042,7 +1042,7 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                     <button
                       type="button"
                       onClick={handleNext}
-                      className="bg-[#3186FF] hover:bg-[#2563EB] text-white px-8 py-2.5 rounded-full text-xs sm:text-sm font-google-heading font-bold transition-all flex items-center gap-2 shadow-[0_10px_25px_rgba(49,134,255,0.35)] cursor-pointer active:scale-95"
+                      className="bg-[#1a73e8] hover:bg-[#1557b0] text-white px-8 py-2.5 rounded-full text-xs sm:text-sm font-google-heading font-bold transition-all flex items-center gap-2 shadow-md hover:shadow-lg cursor-pointer active:scale-95"
                     >
                       <span>המשך לשלב הבא</span>
                       <ArrowLeft className="w-4 h-4" />
@@ -1051,13 +1051,13 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="bg-[#3186FF] hover:bg-[#2563EB] text-white px-9 py-3 rounded-full text-sm font-google-heading font-bold transition-all shadow-[0_10px_30px_rgba(49,134,255,0.45)] hover:shadow-[0_15px_40px_rgba(49,134,255,0.6)] flex items-center gap-2 disabled:opacity-50 active:scale-95 cursor-pointer"
+                      className="bg-[#1a73e8] hover:bg-[#1557b0] text-white px-9 py-3 rounded-full text-sm font-google-heading font-bold transition-all shadow-md hover:shadow-lg flex items-center gap-2 disabled:opacity-50 active:scale-95 cursor-pointer"
                     >
                       {isSubmitting ? (
                         <span>שולח מועמדות למערכת...</span>
                       ) : (
                         <>
-                          <span>שליחת מועמדות ל-#TeamGemini 🚀</span>
+                          <span>שליחת מועמדות לתוכנית השגרירים 🚀</span>
                           <Send className="w-4 h-4" />
                         </>
                       )}
