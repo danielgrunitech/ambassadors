@@ -19,7 +19,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenApply, onOpenPrivacy }) =>
             הקמפוס שלך מחכה למובילים הבאים
           </h3>
           <p className="font-google-body text-gray-300 max-w-lg mx-auto text-sm sm:text-base mb-7 leading-relaxed">
-            הצטרפו לנבחרת שגרירי Google Gemini בישראל, קבלו מנוי חינם, סמינרים שבועיים מקצועיים והסמכה רשמית מ-Google.
+            הצטרפו לנבחרת שגרירי Google Gemini בישראל, קבלו מנוי AI Plus חינם, סמינרים שבועיים מקצועיים והסמכה רשמית מ-Google.
           </p>
           <button
             onClick={onOpenApply}

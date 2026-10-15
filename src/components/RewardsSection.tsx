@@ -26,7 +26,7 @@ export const RewardsSection: React.FC = () => {
       dotColor: 'bg-[#4285F4] shadow-[0_0_8px_#4285F4]',
       checkColor: 'text-[#4285F4]',
       badgeText: 'הטבת הדגל ✦',
-      categoryCode: '01 // GEMINI ADVANCED ACCESS',
+      categoryCode: '01 // GOOGLE AI PLUS ACCESS',
       isFeatured: true
     },
     'certification': {
@@ -88,7 +88,7 @@ export const RewardsSection: React.FC = () => {
 
           <p className="font-google-body text-gray-300 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto font-normal">
             התוכנית בישראל מתמקדת בהעצמת מנהיגות טכנולוגית אקדמית.
-            שגרירי הנבחרת זוכים במעטפת למידה יוקרתית, מנוי מלא, הכשרות עומק ישירות מ-Google והכרה מקצועית.
+            שגרירי הנבחרת זוכים במעטפת למידה יוקרתית, מנוי AI Plus מלא, הכשרות עומק ישירות מ-Google והכרה מקצועית.
           </p>
         </div>
 

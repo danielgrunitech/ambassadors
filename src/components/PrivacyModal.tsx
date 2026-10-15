@@ -79,7 +79,7 @@ export const PrivacyModal: React.FC<PrivacyModalProps> = ({ isOpen, onClose }) =
               <li><strong>סרטון היכרות:</strong> קישור לסרטון פיץ' קצר שהועלה על ידכם לענן.</li>
             </ul>
             <p className="pt-2 text-xs text-gray-400 border-t border-white/10">
-              <strong>מטרות השימוש:</strong> בחינת התאמת המועמדים, ניהול תהליך המיון והראיונות, הענקת מנויי Gemini לסטודנטים למתקבלים, והפעלת מפגשי הלמידה וההסמכה של התוכנית.
+              <strong>מטרות השימוש:</strong> בחינת התאמת המועמדים, ניהול תהליך המיון והראיונות, הענקת מנוי AI Plus למתקבלים, והפעלת מפגשי הלמידה וההסמכה של התוכנית.
             </p>
           </div>
 

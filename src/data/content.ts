@@ -82,7 +82,7 @@ export const PERSONAS: Persona[] = [
     iconName: 'Sparkles',
     points: [
       'סקרנים לגבי איך טכנולוגיה עובדת מתחת למכסה המנוע',
-      'חוקרים ומתנסים בכלים ובמודלים חדשים לפני כולם',
+      'חוקרים ומתנסים בכלים ובפיצ\'רים חדשים לפני כולם',
       'בינה מלאכותית לא מפחידה אתכם — היא מרגשת ומעוררת השראה'
     ],
     gradient: 'from-blue-600 via-indigo-600 to-cyan-500',
@@ -149,13 +149,13 @@ export interface ProgramBenefit {
 export const PROGRAM_BENEFITS: ProgramBenefit[] = [
   {
     id: 'gemini-advanced',
-    title: 'מנוי Gemini לסטודנטים בחינם',
-    subtitle: 'Gemini for Students Access',
-    badge: 'גישה מלאה',
+    title: 'מנוי Google AI Plus בחינם',
+    subtitle: 'Google AI Plus Access',
+    badge: 'מנוי AI Plus',
     badgeColor: 'bg-blue-100 text-[#346BF1]',
-    description: 'שגרירי התוכנית מקבלים גישה מלאה לחבילת Gemini לסטודנטים ללא תשלום, הכוללת את כלי ה-AI המתקדמים והעוצמתיים ביותר של Google.',
+    description: 'שגרירי התוכנית מקבלים מנוי Google AI Plus מלא ללא תשלום, המעניק גישה מורחבת לכל יכולות Gemini, אינטגרציה מעמיקה עם סביבת העבודה ושימוש בכלים מתקדמים.',
     details: [
-      'גישה מלאה לחבילת ה-AI המתקדמת של Google לסטודנטים',
+      'מנוי Google AI Plus מלא ללא עלות לאורך שנת הפעילות',
       'יכולות עיבוד מתקדמות וחלון הקשר רחב לניתוח מאמרים, מסמכים ומחקר',
       'אינטגרציה חלקה עם Google Workspace (Docs, Sheets, Drive)',
       'יצירת Gems מותאמים אישית ללמידה ולפרויקטים'
@@ -175,8 +175,7 @@ export const PROGRAM_BENEFITS: ProgramBenefit[] = [
     details: [
       'תעודת סיום רשמית ויוקרתית (Certificate of Recognition)',
       'Digital Badge מאומת לפרופיל ה-LinkedIn שלכם',
-      'תוספת משמעותית ומבדלת לקורות החיים להשתלבות בהייטק',
-      'מכתב המלצה רשמי למצטייני התוכנית'
+      'תוספת משמעותית ומבדלת לקורות החיים להשתלבות בהייטק'
     ]
   },
   {
@@ -258,12 +257,12 @@ export const FAQ_ITEMS: FaqItem[] = [
   {
     category: 'general',
     question: 'מהי בדיוק תוכנית Google Gemini Student Ambassador בישראל?',
-    answer: 'זוהי תוכנית מנהיגות סטודנטיאלית יוקרתית שמובילה Google במטרה להכשיר את דור מנהיגי ה-AI הבא באקדמיה הישראלית. השגרירים מייצגים את Gemini בקמפוס שלהם, זוכים להכשרות עומק Hands-on שבועיות ישירות ממהנדסי Google, מנהלים פעילויות קהילתיות, ומקבלים מנוי Gemini חינם ותעודת הסמכה רשמית.'
+    answer: 'זוהי תוכנית מנהיגות סטודנטיאלית יוקרתית שמובילה Google במטרה להכשיר את דור מנהיגי ה-AI הבא באקדמיה הישראלית. השגרירים מייצגים את Gemini בקמפוס שלהם, זוכים להכשרות עומק Hands-on שבועיות ישירות ממהנדסי Google, מנהלים פעילויות קהילתיות, ומקבלים מנוי AI Plus חינם ותעודת הסמכה רשמית.'
   },
   {
     category: 'benefits',
     question: 'מה מקבלים השגרירים במסגרת התוכנית?',
-    answer: 'השגרירים בישראל זוכים למנוי Gemini לסטודנטים בחינם (gemini.google/students), תעודת שגריר רשמית מ-Google (Formal Certification) לפרופיל ה-LinkedIn ולקורות החיים, סמינרים והכשרות מקצועיות שבועיות עם מהנדסי וחוקרי AI, והפתעות והזדמנויות בלעדיות לאורך השנה.'
+    answer: 'השגרירים בישראל זוכים למנוי Google AI Plus בחינם, תעודת שגריר רשמית מ-Google (Formal Certification) לפרופיל ה-LinkedIn ולקורות החיים, סמינרים והכשרות מקצועיות שבועיות עם מהנדסי וחוקרי AI, והפתעות והזדמנויות בלעדיות לאורך השנה.'
   },
   {
     category: 'eligibility',
