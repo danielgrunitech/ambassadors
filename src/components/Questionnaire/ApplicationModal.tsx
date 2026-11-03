@@ -33,6 +33,7 @@ interface ApplicationModalProps {
   onClose: () => void;
   onSubmissionSuccess: () => void;
   onOpenPrivacy?: () => void;
+  onOpenTerms?: () => void;
 }
 
 const TOTAL_STEPS = 3;
@@ -47,7 +48,8 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
   isOpen,
   onClose,
   onSubmissionSuccess,
-  onOpenPrivacy
+  onOpenPrivacy,
+  onOpenTerms
 }) => {
   const [currentStep, setCurrentStep] = useState<number>(1);
   const [formData, setFormData] = useState<ApplicationFormData>(INITIAL_FORM_DATA);
@@ -1113,13 +1115,25 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                             onClick={(e) => {
                               e.preventDefault();
                               e.stopPropagation();
+                              onOpenTerms?.();
+                            }}
+                            className="text-[#1a73e8] underline hover:text-blue-700 mx-1 font-medium inline"
+                          >
+                            תנאי השימוש
+                          </button>
+                          ול
+                          <button
+                            type="button"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              e.stopPropagation();
                               onOpenPrivacy?.();
                             }}
                             className="text-[#1a73e8] underline hover:text-blue-700 mx-1 font-medium inline"
                           >
                             מדיניות הפרטיות
                           </button>
-                          של התוכנית, ומביע/ה את נכונותי לקחת חלק פעיל בתוכנית שגרירי Google Student Ambassadors בישראל לשנת 2026.
+                          של התוכנית (לרבות אחסון המידע במערכות גרוניטק ומחיקת נתוני מועמדים שלא יתקבלו בתוך 60 ימים), ומביע/ה את נכונותי לקחת חלק פעיל בתוכנית שגרירי Google Student Ambassadors בישראל לשנת 2026.
                         </span>
                       </label>
                       {errors.agreedToTerms && (

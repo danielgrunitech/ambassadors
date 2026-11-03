@@ -11,12 +11,14 @@ import { Footer } from './components/Footer';
 import { ApplicationModal } from './components/Questionnaire/ApplicationModal';
 import { SubmissionsDrawer } from './components/SubmissionsDrawer';
 import { PrivacyModal } from './components/PrivacyModal';
+import { TermsModal } from './components/TermsModal';
 import { getSubmissions } from './utils/storage';
 import { SubmissionRecord } from './types';
 
 export const App: React.FC = () => {
   const [isApplyOpen, setIsApplyOpen] = useState(false);
   const [isPrivacyOpen, setIsPrivacyOpen] = useState(false);
+  const [isTermsOpen, setIsTermsOpen] = useState(false);
   const [isSubmissionsOpen, setIsSubmissionsOpen] = useState(false);
   const [submissions, setSubmissions] = useState<SubmissionRecord[]>([]);
 
@@ -61,6 +63,7 @@ export const App: React.FC = () => {
         <Footer
           onOpenApply={() => setIsApplyOpen(true)}
           onOpenPrivacy={() => setIsPrivacyOpen(true)}
+          onOpenTerms={() => setIsTermsOpen(true)}
         />
       </div>
 
@@ -70,12 +73,20 @@ export const App: React.FC = () => {
         onClose={() => setIsApplyOpen(false)}
         onSubmissionSuccess={handleSubmissionSuccess}
         onOpenPrivacy={() => setIsPrivacyOpen(true)}
+        onOpenTerms={() => setIsTermsOpen(true)}
       />
 
       {/* Privacy Policy Modal */}
       <PrivacyModal
         isOpen={isPrivacyOpen}
         onClose={() => setIsPrivacyOpen(false)}
+      />
+
+      {/* Terms of Service Modal */}
+      <TermsModal
+        isOpen={isTermsOpen}
+        onClose={() => setIsTermsOpen(false)}
+        onOpenPrivacy={() => setIsPrivacyOpen(true)}
       />
 
       {/* Admin Panel (Only if accessed with ?admin=true) */}

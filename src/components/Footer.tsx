@@ -5,9 +5,10 @@ import { GoogleGIcon } from './GeminiLogo';
 interface FooterProps {
   onOpenApply: () => void;
   onOpenPrivacy?: () => void;
+  onOpenTerms?: () => void;
 }
 
-export const Footer: React.FC<FooterProps> = ({ onOpenApply, onOpenPrivacy }) => {
+export const Footer: React.FC<FooterProps> = ({ onOpenApply, onOpenPrivacy, onOpenTerms }) => {
   return (
     <footer className="bg-black border-t border-white/10 pt-16 pb-12 px-4 text-right">
       <div className="max-w-5xl mx-auto">
@@ -49,9 +50,12 @@ export const Footer: React.FC<FooterProps> = ({ onOpenApply, onOpenPrivacy }) =>
               מדיניות פרטיות
             </button>
             <span>•</span>
-            <a href="https://policies.google.com/terms" target="_blank" rel="noreferrer" className="hover:text-white transition-colors">
+            <button
+              onClick={onOpenTerms}
+              className="hover:text-white transition-colors cursor-pointer"
+            >
               תנאי שימוש
-            </a>
+            </button>
             <span>•</span>
             <a href="https://gemini.google.com" target="_blank" rel="noreferrer" className="hover:text-white transition-colors">
               Google Gemini
