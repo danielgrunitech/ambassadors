@@ -68,6 +68,64 @@ const SAMPLE_SUBMISSIONS: SubmissionRecord[] = [
   }
 ];
 
+export const SUPABASE_URL = 'https://epjezllslyrtrqfxplas.supabase.co';
+export const SUPABASE_ANON_KEY = 'sb_publishable_WHfzg0TuS3ytdpIABKwGUQ_RH544PiT';
+
+export const sendToSupabase = async (record: SubmissionRecord): Promise<boolean> => {
+  try {
+    const payload = {
+      id: record.id,
+      full_name: record.fullName,
+      phone: record.phone,
+      email: record.email,
+      institution: record.institution,
+      custom_institution: record.customInstitution || null,
+      current_year: record.currentYear,
+      field_of_study: record.fieldOfStudy,
+      hobbies_and_interests: record.hobbiesAndInterests,
+      preferred_platforms: record.preferredPlatforms,
+      linkedin_url: record.linkedInUrl || null,
+      tiktok_url: record.tiktokUrl || null,
+      instagram_url: record.instagramUrl || null,
+      youtube_url: record.youtubeUrl || null,
+      canvas_campus_problem: record.canvasCampusProblem,
+      canvas_solution_details: record.canvasSolutionDetails,
+      viral_content_url: record.viralContentUrl,
+      viral_content_description: record.viralContentDescription,
+      community_leadership_story: record.communityLeadershipStory,
+      campus_popup_idea: record.campusPopUpIdea,
+      why_google_gemini_ambassador: record.whyGoogleGeminiAmbassador,
+      video_pitch_url: record.videoPitchUrl,
+      study_hack_summary: record.studyHackSummary || null,
+      agreed_to_terms: record.agreedToTerms,
+      status: record.status || 'submitted',
+    };
+
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/applications`, {
+      method: 'POST',
+      headers: {
+        'apikey': SUPABASE_ANON_KEY,
+        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+        'Content-Type': 'application/json',
+        'Prefer': 'return=minimal',
+      },
+      body: JSON.stringify(payload),
+    });
+
+    if (res.ok) {
+      console.log('Successfully saved application to Supabase.');
+      return true;
+    } else {
+      const err = await res.text();
+      console.error('Failed to save to Supabase:', err);
+      return false;
+    }
+  } catch (err) {
+    console.error('Error sending to Supabase:', err);
+    return false;
+  }
+};
+
 export const DEFAULT_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbyhF8tLJfCVkxe6xS1pjdoxIA2DNro43Ll7xAb1BRKxoA-a0iFHit5AqXV2__HmvHaMpg/exec';
 
 export const getWebhookUrl = (): string => {
@@ -196,7 +254,14 @@ export const saveSubmission = async (data: ApplicationFormData): Promise<Submiss
     console.error('Failed to save submission', e);
   }
 
-  // Await Google Sheets dispatch directly
+  // Primary secure dispatch to Supabase PostgreSQL database
+  try {
+    await sendToSupabase(record);
+  } catch (e) {
+    console.error('Supabase dispatch failed', e);
+  }
+
+  // Dual-dispatch to Google Sheets (for backwards compatibility/backup)
   try {
     await sendToGoogleSheets(record);
   } catch (e) {
