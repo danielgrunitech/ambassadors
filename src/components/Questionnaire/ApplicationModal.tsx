@@ -22,6 +22,7 @@ import {
   saveDraft,
   saveSubmission,
   getMySubmission,
+  clearMySubmission,
   INITIAL_FORM_DATA
 } from '../../utils/storage';
 import { CustomSelect } from './CustomSelect';
@@ -198,25 +199,11 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // 1. One submission per person lockout check (local browser record)
-    const existing = getMySubmission();
-    if (existing) {
-      setSubmittedRecord(existing);
-      return;
-    }
-
-    // 2. Honeypot check: automated bots & scrapers fill hidden inputs
+    // 1. Honeypot check: automated bots & scrapers fill hidden inputs
     if (honeypot.trim().length > 0) {
       console.warn('Bot detected via honeypot trap.');
       setIsSubmitting(false);
       onClose();
-      return;
-    }
-
-    // 3. Timing rate protection: human candidates take time to review & fill 3 steps
-    const elapsedSeconds = (Date.now() - formOpenTime.current) / 1000;
-    if (elapsedSeconds < 3) {
-      console.warn('Submission too fast, suspected automated bot.');
       return;
     }
 
@@ -407,12 +394,23 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                   </div>
                 </div>
 
-                <div className="pt-2">
+                <div className="pt-2 flex flex-col items-center gap-3">
                   <button
                     onClick={onClose}
                     className="bg-[#1a73e8] hover:bg-[#1557b0] text-white font-google-heading font-bold px-8 py-3 rounded-full transition-all text-sm shadow-md cursor-pointer active:scale-95"
                   >
                     חזרה לאתר התוכנית
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      clearMySubmission();
+                      setSubmittedRecord(null);
+                      setCurrentStep(1);
+                    }}
+                    className="text-xs text-gray-400 hover:text-[#1a73e8] underline cursor-pointer transition-colors"
+                  >
+                    מצב בדיקה: הגשת טופס נוסף (איפוס נתוני בדיקה מקומיים)
                   </button>
                 </div>
               </div>
