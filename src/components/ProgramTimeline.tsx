@@ -37,7 +37,7 @@ export const ProgramTimeline: React.FC = () => {
             </span>
           </h2>
           <p className="font-google-body text-gray-300 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto font-normal">
-            תהליך קצר, שקוף ומובנה: מהקלטת סרטון ההיכרות ומילוי השאלון, דרך הסמינרים השבועיים ועד לקבלת תעודת ההסמכה מ-Google.
+            תהליך קצר, שקוף ומובנה: מהקלטת סרטון ההיכרות ומילוי השאלון, דרך מפגשי יום בחודש ב-Google Campus, סדנאות מעשיות והרצאות, ועד לקבלת תעודת ההסמכה מ-Google.
           </p>
         </div>
 

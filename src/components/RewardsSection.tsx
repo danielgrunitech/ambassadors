@@ -46,8 +46,8 @@ export const RewardsSection: React.FC = () => {
       hoverBorder: 'hover:border-[#FBBC04]/60 hover:shadow-[0_20px_60px_rgba(251,188,4,0.2)]',
       dotColor: 'bg-[#FBBC04] shadow-[0_0_8px_#FBBC04]',
       checkColor: 'text-[#FBBC04]',
-      badgeText: 'העשרת עומק',
-      categoryCode: '03 // WEEKLY MASTERCLASSES'
+      badgeText: 'סדנאות והרצאות',
+      categoryCode: '03 // HANDS-ON WORKSHOPS & LECTURES'
     },
     'surprises-and-access': {
       icon: <Zap className="w-6 h-6 text-[#34A853]" />,
@@ -56,8 +56,8 @@ export const RewardsSection: React.FC = () => {
       hoverBorder: 'hover:border-[#34A853]/60 hover:shadow-[0_20px_60px_rgba(52,168,83,0.2)]',
       dotColor: 'bg-[#34A853] shadow-[0_0_8px_#34A853]',
       checkColor: 'text-[#34A853]',
-      badgeText: 'בלעדי לשגרירים',
-      categoryCode: '04 // EXCLUSIVE ACCESS'
+      badgeText: 'נטוורקינג וקהילה',
+      categoryCode: '04 // NETWORKING & ACCESS'
     }
   };
 
@@ -87,8 +87,8 @@ export const RewardsSection: React.FC = () => {
           </h2>
 
           <p className="font-google-body text-gray-300 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto font-normal">
-            התוכנית בישראל מתמקדת בהעצמת מנהיגות טכנולוגית אקדמית.
-            שגרירי הנבחרת זוכים במעטפת למידה יוקרתית, מנוי AI Plus מלא, הכשרות עומק ישירות מ-Google והכרה מקצועית.
+            שגרירי הנבחרת זוכים במעטפת למידה והכשרה יוקרתית מבית Google:
+            מנוי Plus מלא, סדנאות Hands-on והרצאות עומק ב-Google Campus, נטוורקינג עם מהנדסים ומובילי תחום, ותעודת הסמכה רשמית.
           </p>
         </div>
 
