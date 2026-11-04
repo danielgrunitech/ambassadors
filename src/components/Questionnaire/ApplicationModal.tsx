@@ -297,12 +297,16 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
               </span>
             </div>
 
-            <div className="flex items-baseline gap-2 mt-1">
+            <div className="flex items-center gap-2 mt-1 flex-wrap">
               <h3 className="text-xl sm:text-2xl font-google-heading font-black text-gray-900 tracking-tight">
                 שאלון הגשת מועמדות
               </h3>
               <span className="text-xs text-gray-500 font-medium hidden sm:inline">
                 • מחזור שגרירי הסטודנטים 2026
+              </span>
+              <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-google-heading font-semibold bg-amber-50 text-amber-900 border border-amber-300">
+                <span>⏱️</span>
+                <span>דדליין: 1 בפברואר 2027</span>
               </span>
             </div>
 

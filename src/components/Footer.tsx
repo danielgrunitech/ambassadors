@@ -6,9 +6,15 @@ interface FooterProps {
   onOpenApply: () => void;
   onOpenPrivacy?: () => void;
   onOpenTerms?: () => void;
+  onOpenAccessibility?: () => void;
 }
 
-export const Footer: React.FC<FooterProps> = ({ onOpenApply, onOpenPrivacy, onOpenTerms }) => {
+export const Footer: React.FC<FooterProps> = ({
+  onOpenApply,
+  onOpenPrivacy,
+  onOpenTerms,
+  onOpenAccessibility
+}) => {
   return (
     <footer className="bg-black border-t border-white/10 pt-16 pb-12 px-4 text-right">
       <div className="max-w-5xl mx-auto">
@@ -42,7 +48,24 @@ export const Footer: React.FC<FooterProps> = ({ onOpenApply, onOpenPrivacy, onOp
             <span className="text-gray-400">© 2026 כל הזכויות שמורות.</span>
           </div>
 
-          <div className="flex items-center gap-4 text-gray-400">
+          <div className="flex flex-wrap items-center justify-center sm:justify-end gap-3 sm:gap-4 text-gray-400">
+            <button
+              onClick={() => {
+                const contactEl = document.querySelector('#contact');
+                if (contactEl) contactEl.scrollIntoView({ behavior: 'smooth' });
+              }}
+              className="hover:text-white transition-colors cursor-pointer"
+            >
+              צור קשר
+            </button>
+            <span>•</span>
+            <button
+              onClick={onOpenAccessibility}
+              className="hover:text-white transition-colors cursor-pointer"
+            >
+              הצהרת נגישות
+            </button>
+            <span>•</span>
             <button
               onClick={onOpenPrivacy}
               className="hover:text-white transition-colors cursor-pointer"

@@ -7,11 +7,13 @@ import { Eligibility } from './components/Eligibility';
 import { RewardsSection } from './components/RewardsSection';
 import { ProgramTimeline } from './components/ProgramTimeline';
 import { FaqSection } from './components/FaqSection';
+import { ContactSection } from './components/ContactSection';
 import { Footer } from './components/Footer';
 import { ApplicationModal } from './components/Questionnaire/ApplicationModal';
 import { SubmissionsDrawer } from './components/SubmissionsDrawer';
 import { PrivacyModal } from './components/PrivacyModal';
 import { TermsModal } from './components/TermsModal';
+import { AccessibilityModal } from './components/AccessibilityModal';
 import { getSubmissions } from './utils/storage';
 import { SubmissionRecord } from './types';
 
@@ -19,6 +21,7 @@ export const App: React.FC = () => {
   const [isApplyOpen, setIsApplyOpen] = useState(false);
   const [isPrivacyOpen, setIsPrivacyOpen] = useState(false);
   const [isTermsOpen, setIsTermsOpen] = useState(false);
+  const [isAccessibilityOpen, setIsAccessibilityOpen] = useState(false);
   const [isSubmissionsOpen, setIsSubmissionsOpen] = useState(false);
   const [submissions, setSubmissions] = useState<SubmissionRecord[]>([]);
 
@@ -58,12 +61,16 @@ export const App: React.FC = () => {
           <RewardsSection />
           <ProgramTimeline />
           <FaqSection />
+          <ContactSection
+            onOpenAccessibility={() => setIsAccessibilityOpen(true)}
+          />
         </main>
 
         <Footer
           onOpenApply={() => setIsApplyOpen(true)}
           onOpenPrivacy={() => setIsPrivacyOpen(true)}
           onOpenTerms={() => setIsTermsOpen(true)}
+          onOpenAccessibility={() => setIsAccessibilityOpen(true)}
         />
       </div>
 
@@ -87,6 +94,12 @@ export const App: React.FC = () => {
         isOpen={isTermsOpen}
         onClose={() => setIsTermsOpen(false)}
         onOpenPrivacy={() => setIsPrivacyOpen(true)}
+      />
+
+      {/* Accessibility Statement Modal */}
+      <AccessibilityModal
+        isOpen={isAccessibilityOpen}
+        onClose={() => setIsAccessibilityOpen(false)}
       />
 
       {/* Admin Panel (Only if accessed with ?admin=true) */}

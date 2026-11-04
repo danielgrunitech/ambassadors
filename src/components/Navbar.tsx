@@ -24,6 +24,7 @@ export const Navbar: React.FC<NavbarProps> = ({
     { label: 'תנאי סף', href: '#eligibility' },
     { label: 'שלבי התוכנית', href: '#timeline' },
     { label: 'שאלות נפוצות', href: '#faq' },
+    { label: 'צור קשר', href: '#contact' },
   ];
 
   const handleNavClick = (href: string) => {

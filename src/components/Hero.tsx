@@ -60,6 +60,12 @@ export const Hero: React.FC<HeroProps> = ({ onOpenApply }) => {
           </button>
         </div>
 
+        {/* Deadline Urgency Banner */}
+        <div className="mt-5 inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-950/40 border border-amber-500/30 text-amber-200 text-xs sm:text-sm font-google-heading font-medium">
+          <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
+          <span>מועד אחרון להגשת מועמדות: 1 בפברואר 2027 (23:59)</span>
+        </div>
+
         {/* Dark Mode Bottom Sub-Lockup */}
         <div className="mt-14 pt-8 border-t border-white/10 flex items-center justify-center gap-2.5 text-gray-400 text-sm">
           <div className="w-5 h-5 rounded-full bg-white/10 flex items-center justify-center p-0.5">
