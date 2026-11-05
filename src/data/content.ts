@@ -76,14 +76,14 @@ export const TECHNICAL_SKILL_OPTIONS = [
 export const PERSONAS: Persona[] = [
   {
     id: 'ai-enthusiast',
-    title: 'חובב/ת ה-AI',
+    title: 'חובב/ת ויוצר/ת ה-AI',
     subtitle: 'The AI Enthusiast',
-    badge: 'סקרנות טכנולוגית',
+    badge: 'בנייה ויצירה ב-AI',
     iconName: 'Sparkles',
     points: [
-      'סקרנים לגבי איך טכנולוגיה עובדת מתחת למכסה המנוע',
-      'חוקרים ומתנסים בכלים ובפיצ\'רים חדשים לפני כולם',
-      'בינה מלאכותית לא מפחידה אתכם — היא מרגשת ומעוררת השראה'
+      'מרגישים בנוח לבנות, ליצור ולהשתמש במגוון כלי AI',
+      'סקרנים לחקור כלים, פונקציות ופיתוחים חדשים לפני כולם',
+      'בינה מלאכותית לא מפחידה אתכם — היא מרגשת וכלי עוצמתי לעשייה'
     ],
     gradient: 'from-blue-600 via-indigo-600 to-cyan-500',
     bgLight: 'bg-[#E8F0FE]'
@@ -104,14 +104,14 @@ export const PERSONAS: Persona[] = [
   },
   {
     id: 'communicator',
-    title: 'המחבר/ת והמדריך/ה',
+    title: 'יוצר/ת התוכן והמחבר/ת',
     subtitle: 'The Communicator',
-    badge: 'הובלת קהילה',
+    badge: 'יצירת תוכן והשפעה',
     iconName: 'Megaphone',
     points: [
-      'אוהבים לחבר בין אנשים, מוחות ורעיונות שונים',
-      'יודעים לקחת מושגי AI מורכבים ולהפוך אותם לפשוטים ומובנים',
-      'חולקים בשמחה ידע וטיפים עם סטודנטים מכל הפקולטות'
+      'יודעים ליצור תוכן סוחף ברשתות (LinkedIn, Instagram ועוד)',
+      'שמחים לחלוק טיפים, תובנות והדרכות — כמעט כמו Influencer בקמפוס',
+      'אוהבים לחבר בין אנשים ולהפוך רעיונות מורכבים לפשוטים ונגישים'
     ],
     gradient: 'from-emerald-600 via-teal-600 to-cyan-600',
     bgLight: 'bg-[#E6F4EA]'

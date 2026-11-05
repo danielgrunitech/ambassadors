@@ -41,20 +41,20 @@ export const PersonaCards: React.FC<PersonaCardsProps> = ({ onOpenApply }) => {
                 The AI Enthusiast
               </h3>
               <div className="font-google-heading text-xs font-semibold text-[#3186FF] mb-5">
-                חובב/ת ה-AI
+                חובב/ת ויוצר/ת ה-AI
               </div>
               <ul className="font-google-body space-y-3 text-gray-300 text-sm sm:text-base leading-snug">
                 <li className="flex items-start gap-3">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#3186FF] mt-2 shrink-0" />
-                  <span>סקרנים לגבי איך דברים עובדים.</span>
+                  <span>מרגישים בנוח לבנות, ליצור ולהשתמש במגוון כלי AI.</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#3186FF] mt-2 shrink-0" />
-                  <span>חוקרים כלים חדשים לפני כולם.</span>
+                  <span>סקרנים לחקור כלים, פונקציות ופיתוחים חדשים לפני כולם.</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#3186FF] mt-2 shrink-0" />
-                  <span>AI לא מפחיד אתכם — הוא מרגש.</span>
+                  <span>AI לא מפחיד אתכם — הוא מרגש וכלי עוצמתי לעשייה.</span>
                 </li>
               </ul>
             </div>
@@ -94,20 +94,20 @@ export const PersonaCards: React.FC<PersonaCardsProps> = ({ onOpenApply }) => {
                 The Communicator
               </h3>
               <div className="font-google-heading text-xs font-semibold text-emerald-400 mb-5">
-                המחבר/ת והמדריך/ה
+                יוצר/ת התוכן והמחבר/ת
               </div>
               <ul className="font-google-body space-y-3 text-gray-300 text-sm sm:text-base leading-snug">
                 <li className="flex items-start gap-3">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 mt-2 shrink-0" />
-                  <span>אוהבים לחבר בין אנשים.</span>
+                  <span>יודעים ליצור תוכן סוחף ברשתות (LinkedIn, Instagram ועוד).</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 mt-2 shrink-0" />
-                  <span>חולקים בשמחה את מה שאתם לומדים.</span>
+                  <span>שמחים לחלוק טיפים, תובנות והדרכות — כמעט כמו Influencer בקמפוס.</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 mt-2 shrink-0" />
-                  <span>הופכים דברים מורכבים לפשוטים.</span>
+                  <span>אוהבים לחבר בין אנשים ולהפוך רעיונות מורכבים לפשוטים ונגישים.</span>
                 </li>
               </ul>
             </div>
