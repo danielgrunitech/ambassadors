@@ -38,7 +38,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
 
         {/* 3 Contact Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {/* Card 1: Direct Email (Blank / Placeholder for now) */}
+          {/* Card 1: Direct Email */}
           <div className="bg-[#111215] rounded-3xl p-6 sm:p-7 border border-white/10 hover:border-[#3186FF]/40 transition-all shadow-xl flex flex-col justify-between group">
             <div>
               <div className="w-12 h-12 rounded-2xl bg-[#131722] border border-[#3186FF]/30 flex items-center justify-center text-[#3186FF] mb-5 group-hover:scale-105 transition-transform">
@@ -53,12 +53,12 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
             </div>
 
             <div className="pt-4 border-t border-white/10">
-              <div className="p-2.5 rounded-xl bg-white/[0.04] border border-dashed border-white/20 text-center">
-                <span className="font-mono text-xs text-gray-400 select-all">
-                  {/* Email left blank as requested */}
-                  [כתובת המייל תעודכן בקרוב]
-                </span>
-              </div>
+              <a
+                href="mailto:Google.Ambassadors@grunitech.com"
+                className="w-full py-2.5 px-3 rounded-xl bg-[#131722] hover:bg-[#1B2335] border border-[#3186FF]/30 hover:border-[#3186FF]/60 text-[#5B9BFF] hover:text-white text-xs font-google-heading font-semibold transition-all inline-flex items-center justify-center gap-2 break-all"
+              >
+                <bdi dir="ltr">Google.Ambassadors@grunitech.com</bdi>
+              </a>
             </div>
           </div>
 

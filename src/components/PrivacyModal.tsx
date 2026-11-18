@@ -124,7 +124,14 @@ export const PrivacyModal: React.FC<PrivacyModalProps> = ({ isOpen, onClose }) =
               כל מועמד/ת זכאי/ת לעיין במידע האישי השמור אודותיו/ה, ולבקש לתקנו או למחקו אם נמצא שאינו מדויק או מעודכן. כמו כן, ניתן לחזור מהסכמה ולהסיר את המועמדות בכל עת.
             </p>
             <p className="text-xs text-gray-400 pt-1 border-t border-white/10">
-              למימוש זכויות או לפניות בנושאי פרטיות: <strong>daniel@grunitech.com</strong> | גרוניטק בע"מ, ישראל.
+              למימוש זכויות או לפניות בנושאי פרטיות:{' '}
+              <a
+                href="mailto:Google.Ambassadors@grunitech.com"
+                className="text-[#3186FF] hover:text-[#5B9BFF] underline font-semibold"
+              >
+                <bdi dir="ltr">Google.Ambassadors@grunitech.com</bdi>
+              </a>{' '}
+              | גרוניטק בע"מ, ישראל.
             </p>
           </div>
         </div>

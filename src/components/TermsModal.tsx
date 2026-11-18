@@ -130,7 +130,14 @@ export const TermsModal: React.FC<TermsModalProps> = ({ isOpen, onClose, onOpenP
               מנהלת התוכנית שומרת לעצמה את הזכות לעדכן את תנאי התוכנית, לוחות הזמנים ומערך ההכשרות מעת לעת. על תנאי שימוש אלה יחולו אך ורק דיני מדינת ישראל, וסמכות השיפוט הבלעדית בכל מחלוקת נתונה לבתי המשפט המוסמכים במחוז תל אביב-יפו.
             </p>
             <p className="text-xs text-gray-400 pt-1 border-t border-white/10">
-              לשאלות ובירורים: <strong>daniel@grunitech.com</strong> | גרוניטק בע"מ, ישראל.
+              לשאלות ובירורים:{' '}
+              <a
+                href="mailto:Google.Ambassadors@grunitech.com"
+                className="text-[#3186FF] hover:text-[#5B9BFF] underline font-semibold"
+              >
+                <bdi dir="ltr">Google.Ambassadors@grunitech.com</bdi>
+              </a>{' '}
+              | גרוניטק בע"מ, ישראל.
             </p>
           </div>
         </div>

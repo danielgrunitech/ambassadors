@@ -104,7 +104,15 @@ export const AccessibilityModal: React.FC<AccessibilityModalProps> = ({ isOpen, 
             <div className="p-3.5 rounded-xl bg-white/[0.04] border border-white/10 space-y-1 text-xs text-gray-300">
               <p>• <strong>גורם אחראי:</strong> מנהלת תוכנית שגרירי Google בישראל, גרוניטק בע"מ</p>
               <p>• <strong>כתובת:</strong> גרוניטק בע"מ, ישראל</p>
-              <p>• <strong>פניות נגישות בדוא"ל:</strong> פניות יטופלו בהקדם ובהתאם לדרישות החוק.</p>
+              <p>• <strong>פניות נגישות בדוא"ל:</strong>{' '}
+                <a
+                  href="mailto:Google.Ambassadors@grunitech.com"
+                  className="text-[#3186FF] hover:text-[#5B9BFF] underline font-medium"
+                >
+                  <bdi dir="ltr">Google.Ambassadors@grunitech.com</bdi>
+                </a>{' '}
+                (פניות יטופלו בהקדם ובהתאם לדרישות החוק).
+              </p>
             </div>
           </div>
         </div>
