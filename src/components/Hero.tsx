@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowLeft, Sparkles } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
 import { GoogleGIcon } from './GeminiLogo';
 
 interface HeroProps {
@@ -24,12 +24,6 @@ export const Hero: React.FC<HeroProps> = ({ onOpenApply }) => {
       />
 
       <div className="max-w-4xl mx-auto relative z-10">
-        {/* Pill Badge */}
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#131722] border border-[#3186FF]/30 text-[#3186FF] text-xs sm:text-sm font-semibold mb-8 backdrop-blur-md">
-          <Sparkles className="w-3.5 h-3.5 text-[#3186FF]" />
-          <span>תוכנית שגרירי הסטודנטים הרשמית של Google בישראל</span>
-        </div>
-
         {/* Main Title - Google Sans Flex */}
         <h1 className="font-google-heading font-black text-5xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight text-white leading-[1.08] mb-6">
           Google Student<br />

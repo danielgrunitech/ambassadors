@@ -158,7 +158,7 @@ export const PROGRAM_BENEFITS: ProgramBenefit[] = [
       'מנוי Google AI Plus מלא ללא עלות לאורך שנת הפעילות',
       'שליטה בכל הפונקציות של Gemini לניתוח מאמרים, קוד, מסמכים ומחקר',
       'אינטגרציה חלקה עם כלי העבודה של Google Workspace',
-      'יצירת Gems והתאמה אישית של עוזרי AI ללמידה אקדמית'
+      'למידה ושימוש ב-Skills והתאמה אישית של עוזרי AI ללמידה אקדמית'
     ],
     link: {
       url: 'https://gemini.google/students/',
