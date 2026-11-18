@@ -26,7 +26,7 @@ export const RewardsSection: React.FC = () => {
       dotColor: 'bg-[#4285F4] shadow-[0_0_8px_#4285F4]',
       checkColor: 'text-[#4285F4]',
       badgeText: 'הטבת הדגל ✦',
-      categoryCode: '01 // GOOGLE AI PLUS ACCESS',
+      categoryCode: '01 // GEMINI PRO & TRACKS',
       isFeatured: true
     },
     'certification': {
@@ -36,8 +36,8 @@ export const RewardsSection: React.FC = () => {
       hoverBorder: 'hover:border-[#EA4335]/60 hover:shadow-[0_20px_60px_rgba(234,67,53,0.2)]',
       dotColor: 'bg-[#EA4335] shadow-[0_0_8px_#EA4335]',
       checkColor: 'text-[#EA4335]',
-      badgeText: 'הכרה מקצועית',
-      categoryCode: '02 // FORMAL CERTIFICATION'
+      badgeText: 'מקפצה לקריירה',
+      categoryCode: '02 // OFFICIAL TITLE & ALUMNI'
     },
     'weekly-seminars': {
       icon: <GraduationCap className="w-6 h-6 text-[#FBBC04]" />,
@@ -46,8 +46,8 @@ export const RewardsSection: React.FC = () => {
       hoverBorder: 'hover:border-[#FBBC04]/60 hover:shadow-[0_20px_60px_rgba(251,188,4,0.2)]',
       dotColor: 'bg-[#FBBC04] shadow-[0_0_8px_#FBBC04]',
       checkColor: 'text-[#FBBC04]',
-      badgeText: 'סדנאות והרצאות',
-      categoryCode: '03 // HANDS-ON WORKSHOPS & LECTURES'
+      badgeText: '5 מפגשי הכשרה',
+      categoryCode: '03 // 5 MASTERCLASSES'
     },
     'surprises-and-access': {
       icon: <Zap className="w-6 h-6 text-[#34A853]" />,
@@ -56,8 +56,8 @@ export const RewardsSection: React.FC = () => {
       hoverBorder: 'hover:border-[#34A853]/60 hover:shadow-[0_20px_60px_rgba(52,168,83,0.2)]',
       dotColor: 'bg-[#34A853] shadow-[0_0_8px_#34A853]',
       checkColor: 'text-[#34A853]',
-      badgeText: 'נטוורקינג וקהילה',
-      categoryCode: '04 // NETWORKING & ACCESS'
+      badgeText: 'צוותי קמפוס (Pods)',
+      categoryCode: '04 // CAMPUS PODS & FIELD'
     }
   };
 
@@ -70,9 +70,9 @@ export const RewardsSection: React.FC = () => {
         {/* Section Header with Flawless BiDi Formatting & Google Sans Flex */}
         <div className="text-center max-w-3xl mx-auto mb-16">
           <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white/[0.04] border border-white/10 text-gray-200 text-xs font-google-heading font-semibold shadow-xs mb-5 backdrop-blur-md">
-            <span>מה מקבלים השגרירים</span>
+            <span>עמודי התווך של התוכנית</span>
             <span className="w-1.5 h-1.5 rounded-full bg-[#4285F4] shadow-[0_0_6px_#4285F4]" />
-            <span className="text-gray-400">מחזור ישראל 2026</span>
+            <span className="text-gray-400">ספרינט סמסטר ב' 2027</span>
           </div>
 
           <h2 className="font-google-heading font-black text-4xl sm:text-5xl md:text-6xl text-white mb-5 tracking-tight leading-[1.15]">
@@ -80,15 +80,14 @@ export const RewardsSection: React.FC = () => {
             <bdi dir="ltr" className="inline-block whitespace-nowrap">
               <span className="text-white">Google </span>
               <span style={{ backgroundImage: "linear-gradient(to right, #4285F4, #EA4335, #FBBC04, #34A853)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
-                Gemini
+                Student Ambassadors
               </span>
               <span className="text-white">?</span>
             </bdi>
           </h2>
 
           <p className="font-google-body text-gray-300 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto font-normal">
-            שגרירי הנבחרת זוכים במעטפת למידה והכשרה יוקרתית מבית Google:
-            מנוי Plus מלא, סדנאות Hands-on והרצאות עומק ב-Google Campus, נטוורקינג עם מהנדסים ומובילי תחום, ותעודת הסמכה רשמית.
+            ספרינט ממוקד של 15 שבועות שמכין אתכם בול בזמן למשרות הקיץ: מנוי Gemini Pro, 5 מפגשי מאסטר-קלאס (מסלולי Tech ו-Non-Tech), עבודה בצוותי קמפוס (Pods), טייטל רשמי ל-LinkedIn ותעודת הוקרה מ-Google.
           </p>
         </div>
 

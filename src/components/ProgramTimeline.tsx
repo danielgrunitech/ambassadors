@@ -4,11 +4,11 @@ import { PROGRAM_STEPS } from '../data/content';
 
 export const ProgramTimeline: React.FC = () => {
   const stepBadges = [
-    'לפני מילוי השאלון',
-    'הגשה מקוונת',
-    'קבלה והשקה',
-    'הכשרה מעשית',
-    'הסמכה רשמית'
+    'סרטון קצר (עד 2 דק\')',
+    'שאלון קצר (ללא ראיונות)',
+    'אירוע פתיחה במרץ',
+    'ספרינט 15 שבועות (מרץ–יוני)',
+    'סיום ביוני ותעודה'
   ];
 
   const stepIcons = [
@@ -37,7 +37,7 @@ export const ProgramTimeline: React.FC = () => {
             </span>
           </h2>
           <p className="font-google-body text-gray-300 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto font-normal">
-            תהליך קצר, שקוף ומובנה: מהקלטת סרטון ההיכרות ומילוי השאלון, דרך מפגשי יום בחודש ב-Google Campus, סדנאות מעשיות והרצאות, ועד לקבלת תעודת ההסמכה מ-Google.
+            תהליך מיון קצר, מהיר וללא ראיונות או מרכזי הערכה מתישים — מוביל ישירות לספרינט סמסטר ב' (מרץ–יוני 2027) שמסתיים לפני תקופת המבחנים.
           </p>
         </div>
 
@@ -52,10 +52,10 @@ export const ProgramTimeline: React.FC = () => {
               <span>דרישת חובה מקדימה</span>
             </div>
             <h4 className="font-google-heading font-black text-base sm:text-lg text-white mb-1 tracking-tight">
-              הקלטת סרטון היכרות קצר (עד 2 דקות)
+              הקלטת סרטון וידאו קצר (עד 2 דקות)
             </h4>
             <p className="font-google-body text-xs sm:text-sm text-gray-300 leading-relaxed font-normal">
-              לפני מילוי שאלון המועמדות, יש להקליט סרטון קצר של עד 2 דקות שבו אתם מציגים את עצמכם ומסבירים מקרה שימוש מעשי ב-Gemini בלימודים או ביומיום. את הקישור לסרטון תתבקשו לצרף בשאלון.
+              הצגה עצמית קצרה והדגמה פרקטית של טיפ או שימוש ב-Gemini או Gemini Notebook לסטודנטים. את הקישור לסרטון תצרפו בשאלון הקצר (לוקח 3 דקות).
             </p>
           </div>
         </div>

@@ -18,7 +18,7 @@ export const Eligibility: React.FC<EligibilityProps> = ({ onOpenApply }) => {
             </span>
           </h2>
           <p className="font-google-body text-gray-400 text-base">
-            קריטריוני הסף והמאפיינים שיהפכו אתכם לשגרירים מובילים
+            מיועד לסטודנטים לתואר ראשון משנה ב' ומעלה מכלל הפקולטות (טכנולוגיות ולא-טכנולוגיות)
           </p>
         </div>
 
@@ -58,7 +58,7 @@ export const Eligibility: React.FC<EligibilityProps> = ({ onOpenApply }) => {
             onClick={onOpenApply}
             className="bg-[#3186FF] hover:bg-[#2563EB] text-white px-8 py-3.5 rounded-full font-google-heading font-bold text-base transition-all shadow-[0_10px_25px_rgba(49,134,255,0.3)] hover:shadow-[0_12px_30px_rgba(49,134,255,0.45)] cursor-pointer active:scale-95"
           >
-            הגשת מועמדות לשגרירות 2026
+            להגשת מועמדות לנבחרת השגרירים (לוקח 3 דקות)
           </button>
         </div>
       </div>

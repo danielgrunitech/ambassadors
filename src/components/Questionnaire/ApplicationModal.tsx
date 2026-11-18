@@ -944,7 +944,7 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                       </div>
 
                       <p className="font-google-body text-xs text-gray-600 leading-relaxed">
-                        אנחנו רוצים לשנות מהקצה לקצה את הדרך שבה סטודנטים נעזרים ב-AI בקמפוס! תציעו רעיון מפתיע ומחוץ לקופסה לאירוע שטח או פעילות פופ-אפ בקמפוס (בדשא, בספריה, או בין ההרצאות) שתשנה לחלוטין את האופן שבו סטודנטים משתמשים ב-Gemini וב-NotebookLM ביום-יום האקדמי שלהם.
+                        אנחנו רוצים לשנות מהקצה לקצה את הדרך שבה סטודנטים נעזרים ב-AI בקמפוס! תציעו רעיון מפתיע ומחוץ לקופסה לאירוע שטח או פעילות פופ-אפ בקמפוס (בדשא, בספריה, או בין ההרצאות) שתשנה לחלוטין את האופן שבו סטודנטים משתמשים ב-Gemini וב-Gemini Notebook ביום-יום האקדמי שלהם.
                       </p>
 
                       <div>
@@ -1054,7 +1054,7 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                             <strong className="text-gray-900">• חלק א': היכרות מהירה</strong> — מי אתם ומה האנרגיה והוייב שאתם מביאים לשולחן?
                           </div>
                           <div>
-                            <strong className="text-gray-900">• חלק ב': ה-Study Hack שלכם ב-AI</strong> — תספרו לנו על Gemini / NotebookLM Study Hack חכם, פרקטי ומפתיע שפותר משימה אקדמית אמיתית, אתגר לימודי, או באג בקוד.
+                            <strong className="text-gray-900">• חלק ב': ה-Study Hack שלכם ב-AI</strong> — תספרו לנו על Gemini / Gemini Notebook Study Hack חכם, פרקטי ומפתיע שפותר משימה אקדמית אמיתית, אתגר לימודי, או באג בקוד.
                           </div>
                           <div className="text-amber-700 font-semibold pt-1 border-t border-gray-200">
                             💡 טיפ ובונוס למעזים: יתרון למי שישלבו בסרטון גם הדגמה בלייב על המסך!

@@ -72,7 +72,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                 שאלות ותשובות נפוצות
               </h3>
               <p className="font-google-body text-gray-400 text-xs sm:text-sm leading-relaxed mb-4">
-                ריכזנו תשובות מפורטות על שעות ההתחייבות, תנאי הסף, מנוי ה-Plus והמפגשים ב-Google Campus.
+                ריכזנו תשובות מפורטות על שעות ההתחייבות בסמסטר ב', תנאי הסף, מנוי Gemini Pro והעבודה בצוותי קמפוס (Pods).
               </p>
             </div>
 

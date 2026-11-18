@@ -19,16 +19,16 @@ export const MissionBanner: React.FC = () => {
 
         {/* Heading */}
         <h2 className="text-3xl sm:text-4xl font-google-heading font-black mb-6 text-white tracking-tight">
-          מבט אל תוכנית השגרירים{' '}
+          מבט אל תוכנית{' '}
           <span style={{ backgroundImage: "linear-gradient(to right, #4285F4, #EA4335, #FBBC04, #34A853)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
-            2026 בישראל
+            Google Student Ambassadors
           </span>
         </h2>
 
         {/* Text */}
         <p className="font-google-body text-gray-300 max-w-3xl mx-auto mb-10 text-base sm:text-lg leading-relaxed">
-          תוכנית שגרירי הסטודנטים של Google יוצרת דור חדש של מובילי AI באקדמיה הישראלית.<br />
-          מהטכניון ועד בן-גוריון, מאוניברסיטת תל אביב ועד האוניברסיטה העברית והמכללות המובילות — מנהיגי סטודנטים מביאים את Gemini ישירות לכיתות הלימוד, מעבדות המחקר, ההאקתונים וחיי היומיום בקמפוס.
+          נבחרת מצומצמת של <strong>45 סטודנטים מובילים לתואר ראשון (משנה ב' ומעלה)</strong> מכלל הפקולטות שישתתפו בתוכנית ההכשרה והובלת הקהילה הרשמית של Google בישראל.<br />
+          בספרינט ממוקד של <strong>15 שבועות בסמסטר ב' (מרץ עד סוף יוני 2027, לפני תקופת המבחנים)</strong>, תעבדו כצוותי קמפוס (Pods) כדי להפוך את Gemini ו-Gemini Notebook לכלי העבודה של האוניברסיטה — ולבנות נוכחות מקצועית שמלווה אתכם לקראת משרות הקיץ והקריירה.
         </p>
 
         {/* Image Grid */}

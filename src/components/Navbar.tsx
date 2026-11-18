@@ -48,7 +48,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               <GoogleGIcon size={20} />
             </div>
             <span className="font-google-heading font-semibold text-white text-base sm:text-lg tracking-tight">
-              Google Student Ambassador
+              Google Student Ambassadors
             </span>
           </a>
           <span className="bg-[#131722] text-[#3186FF] text-xs font-semibold px-2.5 py-0.5 rounded-full border border-[#3186FF]/30 hidden sm:inline-flex items-center gap-1">

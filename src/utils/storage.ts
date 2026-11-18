@@ -57,11 +57,11 @@ const SAMPLE_SUBMISSIONS: SubmissionRecord[] = [
     viralContentUrl: 'https://tiktok.com/@noa_codes/video/sample123',
     viralContentDescription: 'סרטון טיקטוק קצר (45 שניות) שהראה איך לנתח מאמר אקדמי מורכב ב-10 דקות בעזרת Gemini. הסרטון הגיע ל-35K צפיות והמון סטודנטים כתבו שזה הציל להם את הסמינר.',
     communityLeadershipStory: 'הקמתי קבוצת למידה לפיתוח אפליקציות AI בטכניון עם 80 משתתפים. האתגר היה לשמור על מעורבות לאורך תקופת מבחנים – רתמתי אותם דרך האקתון פנימי קצר של סופ"ש עם חלוקה לצוותים ומנטורינג הדדי.',
-    campusPopUpIdea: 'עמדת "Study Hack בדשא": דוכן פופ-אפ ליד בית הסטודנט עם מסכי מגע, שבו כל סטודנט שמביא סיכום שיעור מקבל בתוך 60 שניות פודקאסט שמע מותאם אישית (Audio Overview מ-NotebookLM) ואוזניות להאזנה במקום.',
+    campusPopUpIdea: 'עמדת "Study Hack בדשא": דוכן פופ-אפ ליד בית הסטודנט עם מסכי מגע, שבו כל סטודנט שמביא סיכום שיעור מקבל בתוך 60 שניות פודקאסט שמע מותאם אישית (Audio Overview מ-Gemini Notebook) ואוזניות להאזנה במקום.',
     whyGoogleGeminiAmbassador: 'אני רוצה להפוך את כלי ה-AI מסתם "טרנד" לחלק בלתי נפרד מארגז הכלים של כל סטודנט וסטודנטית בקמפוס, לחבר קהילה חזקה ולהוביל חדשנות יחד עם Google.',
 
     videoPitchUrl: 'https://loom.com/share/sample-pitch-noa',
-    studyHackSummary: 'יצירת מדריך לימוד אינטראקטיבי עם NotebookLM מתוך סיכומי הרצאות מבולגנים.',
+    studyHackSummary: 'יצירת מדריך לימוד אינטראקטיבי עם Gemini Notebook מתוך סיכומי הרצאות מבולגנים.',
     agreedToTerms: true,
     submittedAt: new Date(Date.now() - 3600000 * 20).toISOString(),
     status: 'shortlisted'

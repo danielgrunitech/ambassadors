@@ -27,20 +27,20 @@ export const Hero: React.FC<HeroProps> = ({ onOpenApply }) => {
         {/* Main Title - Google Sans Flex */}
         <h1 className="font-google-heading font-black text-5xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight text-white leading-[1.08] mb-6">
           Google Student<br />
-          Ambassador <span className="text-[#3186FF]">2026</span>
+          Ambassadors <span className="text-[#3186FF]">2027</span>
           <span className="block text-2xl md:text-4xl text-gray-300 font-bold mt-4 tracking-normal">
-            בישראל
+            ישראל • סמסטר ב'
           </span>
         </h1>
 
         {/* Narrative - Google Sans Regular */}
         <p className="font-google-body text-xl md:text-2xl text-gray-200 mb-4 font-normal leading-relaxed max-w-2xl mx-auto">
-          הקמפוס שלך מוכן למהפכת ה-AI הבאה. כל מה שחסר זה מי שיוביל אותה.
+          להפוך את ה-AI לכלי העבודה של הקמפוס שלך: ההרשמה לנבחרת השגרירים הרשמית של Google נפתחה.
         </p>
 
-        <p className="font-google-body text-base md:text-lg text-gray-400 mb-10 leading-relaxed max-w-xl mx-auto">
-          להביא חדשנות למציאות. להפוך רעיונות לפעולה.<br />
-          לבנות את עתיד הטכנולוגיה יחד עם <span className="font-semibold text-white">Google</span>.
+        <p className="font-google-body text-base md:text-lg text-gray-400 mb-10 leading-relaxed max-w-2xl mx-auto">
+          סמסטר אחד בחזית ה-AI (מרץ–יוני 2027) • נבחרת של 45 סטודנטים לתואר ראשון<br />
+          שמובילים את מהפכת ה-AI של <span className="font-semibold text-white">Google</span> בקמפוס שלכם.
         </p>
 
         {/* Clean Signature Blue Pill Button */}
@@ -49,7 +49,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenApply }) => {
             onClick={onOpenApply}
             className="w-full sm:w-auto bg-[#3186FF] hover:bg-[#2563EB] text-white px-9 py-4 rounded-full font-google-heading text-lg font-bold transition-all shadow-[0_10px_30px_rgba(49,134,255,0.35)] hover:shadow-[0_15px_40px_rgba(49,134,255,0.5)] inline-flex items-center justify-center gap-3 active:scale-95 cursor-pointer"
           >
-            <span>הגשת מועמדות למחזור 2026</span>
+            <span>להגשת מועמדות לנבחרת השגרירים (לוקח 3 דקות)</span>
             <ArrowLeft className="w-5 h-5" />
           </button>
         </div>
