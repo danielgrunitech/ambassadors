@@ -38,6 +38,7 @@ export interface FaqItem {
 export interface ApplicationFormData {
   // חלק 1: נעים להכיר ☕ (קצת עליכם!)
   fullName: string;
+  idNumber: string;
   phone: string;
   email: string;
   institution: string;

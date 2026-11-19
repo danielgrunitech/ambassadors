@@ -8,11 +8,12 @@ const WEBHOOK_KEY = 'gemini_webhook_url';
 export const INITIAL_FORM_DATA: ApplicationFormData = {
   // חלק 1: נעים להכיר ☕
   fullName: '',
+  idNumber: '',
   phone: '',
   email: '',
   institution: '',
   customInstitution: '',
-  currentYear: 'שנה א\'',
+  currentYear: 'שנה ב\'',
   fieldOfStudy: '',
   hobbiesAndInterests: '',
   preferredPlatforms: [],
@@ -40,6 +41,7 @@ const SAMPLE_SUBMISSIONS: SubmissionRecord[] = [
   {
     id: 'IL-GEMINI-2026-8821',
     fullName: 'נועה לוי',
+    idNumber: '123456789',
     phone: '052-8941234',
     email: 'noa.levi@campus.technion.ac.il',
     institution: 'הטכניון - מכון טכנולוגי לישראל',
@@ -73,7 +75,7 @@ export const SUPABASE_ANON_KEY = 'sb_publishable_WHfzg0TuS3ytdpIABKwGUQ_RH544PiT
 
 export const sendToSupabase = async (record: SubmissionRecord): Promise<boolean> => {
   try {
-    const payload = {
+    const basePayload = {
       id: record.id,
       full_name: record.fullName,
       phone: record.phone,
@@ -101,25 +103,50 @@ export const sendToSupabase = async (record: SubmissionRecord): Promise<boolean>
       status: record.status || 'submitted',
     };
 
-    const res = await fetch(`${SUPABASE_URL}/rest/v1/applications`, {
+    const payloadWithId = {
+      ...basePayload,
+      id_number: record.idNumber || '',
+    };
+
+    const headers = {
+      'apikey': SUPABASE_ANON_KEY,
+      'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+      'Content-Type': 'application/json',
+      'Prefer': 'return=minimal',
+    };
+
+    let res = await fetch(`${SUPABASE_URL}/rest/v1/applications`, {
       method: 'POST',
-      headers: {
-        'apikey': SUPABASE_ANON_KEY,
-        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
-        'Content-Type': 'application/json',
-        'Prefer': 'return=minimal',
-      },
-      body: JSON.stringify(payload),
+      headers,
+      body: JSON.stringify(payloadWithId),
     });
 
-    if (res.ok) {
-      console.log('Successfully saved application to Supabase.');
-      return true;
-    } else {
-      const err = await res.text();
-      console.error('Failed to save to Supabase:', err);
+    // If id_number column hasn't been added in Supabase yet, gracefully fall back without losing the lead
+    if (!res.ok) {
+      const errText = await res.text();
+      if (errText.includes('id_number')) {
+        const fallbackPayload = {
+          ...basePayload,
+          hobbies_and_interests: `${basePayload.hobbies_and_interests} | ת"ז: ${record.idNumber || ''}`,
+        };
+        res = await fetch(`${SUPABASE_URL}/rest/v1/applications`, {
+          method: 'POST',
+          headers,
+          body: JSON.stringify(fallbackPayload),
+        });
+        if (!res.ok) {
+          console.error('Failed to save fallback to Supabase:', await res.text());
+          return false;
+        }
+        console.log('Saved application to Supabase (fallback until id_number column is added).');
+        return true;
+      }
+      console.error('Failed to save to Supabase:', errText);
       return false;
     }
+
+    console.log('Successfully saved application to Supabase.');
+    return true;
   } catch (err) {
     console.error('Error sending to Supabase:', err);
     return false;

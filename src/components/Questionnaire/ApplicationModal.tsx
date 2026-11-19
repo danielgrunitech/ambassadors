@@ -128,6 +128,12 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
 
     if (step === 1) {
       if (!formData.fullName.trim()) newErrors.fullName = 'נא להזין שם מלא';
+      const cleanId = (formData.idNumber || '').replace(/\D/g, '');
+      if (!cleanId) {
+        newErrors.idNumber = 'נא להזין מספר תעודת זהות';
+      } else if (cleanId.length < 5 || cleanId.length > 9) {
+        newErrors.idNumber = 'מספר תעודת זהות לא תקין (עד 9 ספרות)';
+      }
       if (!formData.phone.trim()) {
         newErrors.phone = 'נא להזין מספר טלפון נייד (לוואטסאפ)';
       }
@@ -524,7 +530,7 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                         </div>
 
                         {/* Email */}
-                        <div className="sm:col-span-2">
+                        <div>
                           <label className="block text-sm font-google-heading font-medium text-gray-800 mb-1.5">
                             כתובת דוא"ל (עדיפות למייל אקדמי) <span className="text-[#EA4335] font-bold">*</span>
                           </label>
@@ -536,6 +542,23 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                             className="w-full px-4 py-3 rounded-2xl border border-gray-300 hover:border-gray-400 focus:border-[#1a73e8] focus:ring-4 focus:ring-blue-500/10 bg-gray-50/50 hover:bg-white focus:bg-white text-gray-900 text-sm transition-all outline-none font-google-body placeholder-gray-400"
                           />
                           {errors.email && <p className="text-xs text-[#EA4335] mt-1.5 font-medium">{errors.email}</p>}
+                        </div>
+
+                        {/* ID Number */}
+                        <div>
+                          <label className="block text-sm font-google-heading font-medium text-gray-800 mb-1.5">
+                            מספר תעודת זהות <span className="text-[#EA4335] font-bold">*</span>
+                          </label>
+                          <input
+                            type="text"
+                            inputMode="numeric"
+                            maxLength={9}
+                            value={formData.idNumber}
+                            onChange={(e) => handleChange('idNumber', e.target.value.replace(/\D/g, ''))}
+                            placeholder="123456789"
+                            className="w-full px-4 py-3 rounded-2xl border border-gray-300 hover:border-gray-400 focus:border-[#1a73e8] focus:ring-4 focus:ring-blue-500/10 bg-gray-50/50 hover:bg-white focus:bg-white text-gray-900 text-sm transition-all outline-none font-google-body placeholder-gray-400"
+                          />
+                          {errors.idNumber && <p className="text-xs text-[#EA4335] mt-1.5 font-medium">{errors.idNumber}</p>}
                         </div>
                       </div>
                     </div>

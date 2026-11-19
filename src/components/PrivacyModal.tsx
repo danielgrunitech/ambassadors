@@ -73,7 +73,7 @@ export const PrivacyModal: React.FC<PrivacyModalProps> = ({ isOpen, onClose }) =
               <span>2. סוגי המידע הנאספים ומטרות השימוש</span>
             </h4>
             <ul className="list-disc list-inside space-y-1.5 text-xs sm:text-sm text-gray-300">
-              <li><strong>פרטי זיהוי והתקשרות:</strong> שם מלא, מספר נייד (לוואטסאפ), ודוא"ל.</li>
+              <li><strong>פרטי זיהוי והתקשרות:</strong> שם מלא, מספר תעודת זהות, מספר נייד (לוואטסאפ), ודוא"ל.</li>
               <li><strong>פרטים אקדמיים:</strong> מוסד לימודים, שנת לימודים, וחוג/פקולטה.</li>
               <li><strong>פרופיל מקצועי ויצירתי:</strong> תחומי עניין, קישורים לרשתות מקצועיות (LinkedIn, GitHub וכו') ומענה לאתגרי AI ותוכן.</li>
               <li><strong>סרטון היכרות:</strong> קישור לסרטון פיץ' קצר שהועלה על ידכם לענן.</li>
