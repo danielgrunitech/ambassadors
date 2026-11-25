@@ -32,7 +32,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenApply }) => {
 
         {/* Narrative - Google Sans Regular */}
         <p className="font-google-body text-xl md:text-2xl text-gray-200 mb-10 font-normal leading-relaxed max-w-2xl mx-auto">
-          להפוך את ה-AI לכלי העבודה של הקמפוס שלך: ההרשמה לנבחרת השגרירים הרשמית של Google נפתחה.
+          הקול של הקמפוס בעידן ה-AI: בואו ליצור תוכן סוחף, להוביל קהילה ולהפוך את ה-AI לכלי הלמידה היומיומי של הסטודנטים. ההרשמה לנבחרת השגרירים של Google נפתחה
         </p>
 
         {/* Clean Signature Blue Pill Button */}
