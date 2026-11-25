@@ -10,7 +10,7 @@ export const PersonaCards: React.FC<PersonaCardsProps> = ({ onOpenApply }) => {
       <div className="max-w-6xl mx-auto">
         <div className="grid lg:grid-cols-[1fr_2.5fr] gap-8 lg:gap-14 items-start relative z-10 text-right">
           {/* Header Column */}
-          <div className="relative sticky top-24">
+          <div className="relative lg:sticky lg:top-24">
             <h2 className="font-google-heading font-black text-4xl md:text-5xl mb-5 leading-[1.15] tracking-tight text-white">
               האם אתם אלו<br />
               <span style={{ backgroundImage: "linear-gradient(to right, #4285F4, #EA4335, #FBBC04, #34A853)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
@@ -22,10 +22,19 @@ export const PersonaCards: React.FC<PersonaCardsProps> = ({ onOpenApply }) => {
             </p>
             <button
               onClick={onOpenApply}
-              className="hidden lg:inline-flex items-center gap-2 text-sm font-google-heading font-bold text-[#3186FF] hover:text-[#2563EB] transition-colors cursor-pointer"
+              className="hidden lg:inline-flex items-center gap-2 text-sm font-google-heading font-bold text-[#3186FF] hover:text-[#2563EB] transition-colors cursor-pointer mb-6"
             >
               <span>הגשת מועמדות עכשיו &larr;</span>
             </button>
+
+            {/* Vertical Student Photo under Header */}
+            <div className="mt-4 lg:mt-2 rounded-3xl overflow-hidden border border-white/10 shadow-2xl bg-[#111215]">
+              <img
+                src="/persona-student.jpg"
+                alt="Gemini AI Study Buddy on Campus"
+                className="w-full h-auto object-cover"
+              />
+            </div>
           </div>
 
           {/* 2x2 Persona Cards Grid */}
