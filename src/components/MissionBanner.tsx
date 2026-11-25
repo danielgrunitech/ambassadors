@@ -2,9 +2,9 @@ import React from 'react';
 
 export const MissionBanner: React.FC = () => {
   const images = [
-    { src: '/carousel-2.jpg', alt: 'Google AI Workshop' },
-    { src: '/carousel-3.jpg', alt: 'Campus Hackathon' },
-    { src: '/carousel-4.jpg', alt: 'Student Community' }
+    { src: '/carousel-2.jpg', alt: 'Gemini AI Study Buddy on Campus', position: 'object-top' },
+    { src: '/carousel-3.jpg', alt: 'Gemini for University Life', position: 'object-center' },
+    { src: '/carousel-4.jpg', alt: 'Ambassador Influencer Workshop', position: 'object-center' }
   ];
 
   return (
@@ -41,7 +41,7 @@ export const MissionBanner: React.FC = () => {
               <img
                 src={img.src}
                 alt={img.alt}
-                className="w-full h-full object-cover hover:scale-105 transition-transform duration-300 opacity-90 hover:opacity-100"
+                className={`w-full h-full object-cover ${img.position} hover:scale-105 transition-transform duration-300 opacity-90 hover:opacity-100`}
               />
             </div>
           ))}
