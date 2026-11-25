@@ -57,7 +57,7 @@ export const App: React.FC = () => {
           <Hero onOpenApply={() => setIsApplyOpen(true)} />
           <MissionBanner />
           <PersonaCards onOpenApply={() => setIsApplyOpen(true)} />
-          <Eligibility onOpenApply={() => setIsApplyOpen(true)} />
+          <Eligibility />
           <RewardsSection />
           <ProgramTimeline />
           <FaqSection />

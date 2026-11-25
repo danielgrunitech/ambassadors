@@ -1,11 +1,7 @@
 import React from 'react';
 import { ELIGIBILITY_POINTS, WHAT_SETS_YOU_APART } from '../data/content';
 
-interface EligibilityProps {
-  onOpenApply: () => void;
-}
-
-export const Eligibility: React.FC<EligibilityProps> = ({ onOpenApply }) => {
+export const Eligibility: React.FC = () => {
   return (
     <section id="eligibility" className="py-12 px-4 relative z-10">
       <div className="max-w-4xl mx-auto relative z-10 bg-[#111215] rounded-[2.5rem] shadow-2xl border border-white/10 overflow-hidden text-right p-8 md:p-12">
@@ -40,7 +36,7 @@ export const Eligibility: React.FC<EligibilityProps> = ({ onOpenApply }) => {
           {/* What Sets You Apart Box */}
           <div className="bg-[#131722] rounded-2xl p-6 md:p-8 border border-[#3186FF]/30">
             <h3 className="font-google-heading font-bold text-lg mb-4 text-[#3186FF]">
-              What Sets You Apart (מה יבליט אתכם)
+              מה שם אתכם צעד אחד קדימה?
             </h3>
             <ul className="font-google-body space-y-2.5 text-gray-300 list-disc list-inside text-[15px] leading-relaxed">
               {WHAT_SETS_YOU_APART.map((item, idx) => (
@@ -50,16 +46,6 @@ export const Eligibility: React.FC<EligibilityProps> = ({ onOpenApply }) => {
               ))}
             </ul>
           </div>
-        </div>
-
-        {/* CTA Bar */}
-        <div className="mt-8 text-center">
-          <button
-            onClick={onOpenApply}
-            className="bg-[#3186FF] hover:bg-[#2563EB] text-white px-8 py-3.5 rounded-full font-google-heading font-bold text-base transition-all shadow-[0_10px_25px_rgba(49,134,255,0.3)] hover:shadow-[0_12px_30px_rgba(49,134,255,0.45)] cursor-pointer active:scale-95"
-          >
-            להגשת מועמדות לנבחרת השגרירים (לוקח 3 דקות)
-          </button>
         </div>
       </div>
     </section>
