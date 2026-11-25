@@ -26,7 +26,7 @@ export const Eligibility: React.FC<EligibilityProps> = ({ onOpenApply }) => {
           {/* Eligibility Box */}
           <div className="bg-[#16171B] rounded-2xl p-6 md:p-8 border border-white/10">
             <h3 className="font-google-heading font-bold text-lg mb-4 text-white">
-              Eligibility Criteria (קריטריוני סף)
+              קריטריוני סף
             </h3>
             <ul className="font-google-body space-y-2.5 text-gray-300 list-disc list-inside text-[15px] leading-relaxed">
               {ELIGIBILITY_POINTS.map((item, idx) => (
