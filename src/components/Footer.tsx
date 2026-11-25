@@ -76,10 +76,6 @@ export const Footer: React.FC<FooterProps> = ({
             >
               תנאי שימוש
             </button>
-            <span>•</span>
-            <a href="https://gemini.google.com" target="_blank" rel="noreferrer" className="hover:text-white transition-colors">
-              Google Gemini
-            </a>
           </div>
         </div>
       </div>
