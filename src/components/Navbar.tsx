@@ -21,8 +21,8 @@ export const Navbar: React.FC<NavbarProps> = ({
     { label: 'על התוכנית', href: '#about' },
     { label: 'למי זה מתאים?', href: '#personas' },
     { label: 'מה מקבלים?', href: '#benefits' },
-    { label: 'תנאי סף', href: '#eligibility' },
     { label: 'שלבי התוכנית', href: '#timeline' },
+    { label: 'תנאי סף', href: '#eligibility' },
     { label: 'שאלות נפוצות', href: '#faq' },
     { label: 'צור קשר', href: '#contact' },
   ];
