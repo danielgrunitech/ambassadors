@@ -55,7 +55,7 @@ export const ProgramTimeline: React.FC = () => {
               הקלטת סרטון וידאו קצר (עד 2 דקות)
             </h4>
             <p className="font-google-body text-xs sm:text-sm text-gray-300 leading-relaxed font-normal">
-              הצגה עצמית קצרה והדגמה פרקטית של טיפ או שימוש ב-Gemini או Gemini Notebook לסטודנטים. את הקישור לסרטון תצרפו בשאלון הקצר (לוקח 3 דקות).
+              הצגה עצמית קצרה והדגמה פרקטית של טיפ או שימוש בכל כלי AI של Google לסטודנטים. את הקישור לסרטון תצרפו בשאלון הקצר (לוקח 3 דקות).
             </p>
           </div>
         </div>
