@@ -29,7 +29,7 @@ export const Footer: React.FC<FooterProps> = ({
             onClick={onOpenApply}
             className="bg-[#3186FF] hover:bg-[#2563EB] text-white px-8 py-3.5 rounded-full font-google-heading text-base font-bold transition-all shadow-[0_10px_25px_rgba(49,134,255,0.35)] hover:shadow-[0_12px_30px_rgba(49,134,255,0.5)] inline-flex items-center gap-2 cursor-pointer active:scale-95"
           >
-            <span>להגשת מועמדות (לוקח 3 דקות)</span>
+            <span>להגשת מועמדות</span>
             <ArrowLeft className="w-4 h-4" />
           </button>
         </div>
