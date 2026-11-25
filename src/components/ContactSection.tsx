@@ -54,10 +54,10 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
 
             <div className="pt-4 border-t border-white/10">
               <a
-                href="mailto:Google.Ambassadors@grunitech.com"
+                href="mailto:Google.ambassadors@grunitech.com"
                 className="w-full py-2.5 px-3 rounded-xl bg-[#131722] hover:bg-[#1B2335] border border-[#3186FF]/30 hover:border-[#3186FF]/60 text-[#5B9BFF] hover:text-white text-xs font-google-heading font-semibold transition-all inline-flex items-center justify-center gap-2 break-all"
               >
-                <bdi dir="ltr">Google.Ambassadors@grunitech.com</bdi>
+                <bdi dir="ltr">Google.ambassadors@grunitech.com</bdi>
               </a>
             </div>
           </div>

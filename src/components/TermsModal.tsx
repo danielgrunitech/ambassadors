@@ -132,10 +132,10 @@ export const TermsModal: React.FC<TermsModalProps> = ({ isOpen, onClose, onOpenP
             <p className="text-xs text-gray-400 pt-1 border-t border-white/10">
               לשאלות ובירורים:{' '}
               <a
-                href="mailto:Google.Ambassadors@grunitech.com"
+                href="mailto:Google.ambassadors@grunitech.com"
                 className="text-[#3186FF] hover:text-[#5B9BFF] underline font-semibold"
               >
-                <bdi dir="ltr">Google.Ambassadors@grunitech.com</bdi>
+                <bdi dir="ltr">Google.ambassadors@grunitech.com</bdi>
               </a>{' '}
               | גרוניטק בע"מ, ישראל.
             </p>

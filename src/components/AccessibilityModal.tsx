@@ -106,10 +106,10 @@ export const AccessibilityModal: React.FC<AccessibilityModalProps> = ({ isOpen, 
               <p>• <strong>כתובת:</strong> גרוניטק בע"מ, ישראל</p>
               <p>• <strong>פניות נגישות בדוא"ל:</strong>{' '}
                 <a
-                  href="mailto:Google.Ambassadors@grunitech.com"
+                  href="mailto:Google.ambassadors@grunitech.com"
                   className="text-[#3186FF] hover:text-[#5B9BFF] underline font-medium"
                 >
-                  <bdi dir="ltr">Google.Ambassadors@grunitech.com</bdi>
+                  <bdi dir="ltr">Google.ambassadors@grunitech.com</bdi>
                 </a>{' '}
                 (פניות יטופלו בהקדם ובהתאם לדרישות החוק).
               </p>
