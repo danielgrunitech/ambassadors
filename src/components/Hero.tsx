@@ -58,7 +58,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenApply }) => {
             <GoogleGIcon size={14} />
           </div>
           <span className="font-google-heading text-gray-300 font-medium">
-            Google Student Ambassador Program • Israel Chapter
+            Google Student Ambassador Program
           </span>
         </div>
       </div>
