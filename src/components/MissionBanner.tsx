@@ -26,9 +26,12 @@ export const MissionBanner: React.FC = () => {
         </h2>
 
         {/* Text */}
-        <p className="font-google-body text-gray-300 max-w-3xl mx-auto mb-10 text-base sm:text-lg leading-relaxed">
-          נבחרת מצומצמת של <strong>45 סטודנטים מובילים לתואר ראשון (משנה ב' ומעלה)</strong> מכלל הפקולטות שישתתפו בתוכנית ההכשרה והובלת הקהילה הרשמית של Google בישראל.<br />
-          בספרינט ממוקד של <strong>15 שבועות בסמסטר ב' (מרץ עד סוף יוני 2027, לפני תקופת המבחנים)</strong>, תעבדו כצוותי קמפוס (Pods) כדי להפוך את Gemini ו-Gemini Notebook לכלי העבודה של האוניברסיטה — ולבנות נוכחות מקצועית שמלווה אתכם לקראת משרות הקיץ והקריירה.
+        <p className="font-google-body text-gray-300 max-w-3xl mx-auto mb-4 text-base sm:text-lg leading-relaxed">
+          Google Student Ambassadors היא תוכנית הכשרה והובלה קהילתית רשמית של Google בישראל, המיועדת לסטודנטים וסטודנטיות לתואר ראשון (משנה ב' ומעלה) המבקשים להוביל חדשנות דיגיטלית בקמפוס שלהם. התוכנית מחברת בין עולמות הבינה המלאכותית לבין יצירת תוכן, סטוריטלינג והובלת קהילה – בספרינט ממוקד של 15 שבועות רצופים לאורך סמסטר ב' של שנת הלימודים תשפ"ז (ממרץ עד סוף יוני 2027, לפני תקופת המבחנים).
+        </p>
+
+        <p className="font-google-heading font-semibold text-sm sm:text-base text-[#3186FF] mb-10">
+          מספר המקומות בתוכנית מוגבל
         </p>
 
         {/* Image Grid */}
