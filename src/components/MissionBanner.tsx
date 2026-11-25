@@ -2,7 +2,6 @@ import React from 'react';
 
 export const MissionBanner: React.FC = () => {
   const images = [
-    { src: '/carousel-2.jpg', alt: 'Gemini AI Study Buddy on Campus', position: 'object-top' },
     { src: '/carousel-3.jpg', alt: 'Gemini for University Life', position: 'object-center' },
     { src: '/carousel-4.jpg', alt: 'Ambassador Influencer Workshop', position: 'object-center' }
   ];
@@ -35,7 +34,7 @@ export const MissionBanner: React.FC = () => {
         </p>
 
         {/* Image Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           {images.map((img, idx) => (
             <div key={idx} className="aspect-[4/3] rounded-2xl overflow-hidden shadow-md border border-white/10 bg-[#16171B]">
               <img
