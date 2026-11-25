@@ -28,19 +28,11 @@ export const Hero: React.FC<HeroProps> = ({ onOpenApply }) => {
         <h1 className="font-google-heading font-black text-5xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight text-white leading-[1.08] mb-6">
           Google Student<br />
           Ambassadors <span className="text-[#3186FF]">2027</span>
-          <span className="block text-2xl md:text-4xl text-gray-300 font-bold mt-4 tracking-normal">
-            ישראל • סמסטר ב'
-          </span>
         </h1>
 
         {/* Narrative - Google Sans Regular */}
-        <p className="font-google-body text-xl md:text-2xl text-gray-200 mb-4 font-normal leading-relaxed max-w-2xl mx-auto">
+        <p className="font-google-body text-xl md:text-2xl text-gray-200 mb-10 font-normal leading-relaxed max-w-2xl mx-auto">
           להפוך את ה-AI לכלי העבודה של הקמפוס שלך: ההרשמה לנבחרת השגרירים הרשמית של Google נפתחה.
-        </p>
-
-        <p className="font-google-body text-base md:text-lg text-gray-400 mb-10 leading-relaxed max-w-2xl mx-auto">
-          סמסטר אחד בחזית ה-AI (מרץ–יוני 2027) • נבחרת של 45 סטודנטים לתואר ראשון<br />
-          שמובילים את מהפכת ה-AI של <span className="font-semibold text-white">Google</span> בקמפוס שלכם.
         </p>
 
         {/* Clean Signature Blue Pill Button */}
@@ -49,7 +41,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenApply }) => {
             onClick={onOpenApply}
             className="w-full sm:w-auto bg-[#3186FF] hover:bg-[#2563EB] text-white px-9 py-4 rounded-full font-google-heading text-lg font-bold transition-all shadow-[0_10px_30px_rgba(49,134,255,0.35)] hover:shadow-[0_15px_40px_rgba(49,134,255,0.5)] inline-flex items-center justify-center gap-3 active:scale-95 cursor-pointer"
           >
-            <span>להגשת מועמדות לנבחרת השגרירים (לוקח 3 דקות)</span>
+            <span>להגשת מועמדות לנבחרת השגרירים</span>
             <ArrowLeft className="w-5 h-5" />
           </button>
         </div>
@@ -57,7 +49,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenApply }) => {
         {/* Deadline Urgency Banner */}
         <div className="mt-5 inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-950/40 border border-amber-500/30 text-amber-200 text-xs sm:text-sm font-google-heading font-medium">
           <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
-          <span>מועד אחרון להגשת מועמדות: 1 בפברואר 2027 (23:59)</span>
+          <span>מועד אחרון להגשת מועמדות: 1 בפברואר 2027</span>
         </div>
 
         {/* Dark Mode Bottom Sub-Lockup */}
